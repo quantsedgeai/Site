@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>QuantsEdge - Onchain AI Quant Trading &amp; Fund-Grade Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Sofia+Pro:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --brand-teal: #00FFC6;
+        }
+        body {
+            font-family: 'Sofia Pro', sans-serif;
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+        .font-sofia {
+            font-family: 'Sofia Pro', sans-serif;
+        }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 700;
+        }
+        p,
+        a,
+        span,
+        div {
+            font-weight: 400;
+        }
+        .bg-dark-gray {
+            background-color: #121212;
+        }
+        .text-light-gray {
+            color: #A0A0A0;
+        }
+        .brand-teal-button {
+            background-color: var(--brand-teal);
+            color: #000000;
+            transition: all 0.3s ease;
+        }
+        .brand-teal-button:hover {
+            box-shadow: 0 0 20px 5px rgba(0, 255, 198, 0.5);
+            transform: translateY(-2px);
+        }
+        .ghost-button {
+            border: 1px solid #FFFFFF;
+            color: #FFFFFF;
+            transition: all 0.3s ease;
+        }
+        .ghost-button:hover {
+            background-color: #FFFFFF;
+            border-color: #FFFFFF;
+            color: #000;
+            transform: translateY(-2px);
+        }
+        .hero-bg {
+            position: relative;
+            overflow: hidden;
+            background-color: #050807;
+        }
+        .q-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50rem;
+            height: 50rem;
+            color: rgba(0, 255, 198, 0.04);
+            z-index: 1;
+        }
+        .grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(0, 255, 198, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 198, 0.07) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+            z-index: 0;
+        }
+        .data-waves {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 1440 300" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="wave-gradient" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:rgba(0, 255, 198, 0.1);" /><stop offset="100%" style="stop-color:rgba(0, 255, 198, 0);" /></linearGradient></defs><path fill="url(%23wave-gradient)" d="M0,160 C240,110 480,110 720,160 S1200,210 1440,160 V300 H0 Z"></path><path fill="url(%23wave-gradient)" opacity="0.5" d="M0,192 C288,256 576,128 864,192 S1440,128 1440,128 V300 H0 Z"></path></svg>') center bottom/100% no-repeat;
+            z-index: 0;
+            animation: wave 15s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+        }
+        @keyframes wave {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(-20px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+        .glowing-border {
+            border: 1px solid #2a2a2a;
+            transition: box-shadow 0.3s ease;
+        }
+        .glowing-border:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 198, 0.2);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 48;
+            color: var(--brand-teal);
+            font-size: 36px;
+        }
+        .footer-gradient {
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0, 255, 198, 0.05) 100%);
+        }
+        .footer-grid-bg {
+            background-image: linear-gradient(rgba(0, 255, 198, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 198, 0.07) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.2;
+        }
+    </style>
+</head>
+<body class="bg-black font-sofia">
+<header class="absolute top-0 left-0 right-0 z-30 py-6 px-4 sm:px-6 lg:px-8">
+<div class="container mx-auto flex justify-between items-center">
+<div class="flex items-center space-x-3">
+<svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M21 42C32.598 42 42 32.598 42 21C42 9.40202 32.598 0 21 0C9.40202 0 0 9.40202 0 21C0 32.598 9.40202 42 21 42Z" fill="white"></path>
+<path clip-rule="evenodd" d="M21 38C30.3888 38 38 30.3888 38 21C38 11.6112 30.3888 4 21 4C11.6112 4 4 11.6112 4 21C4 30.3888 11.6112 38 21 38Z" fill="#000000"></path>
+<path d="M15.4287 31.5L25.2144 10.5L31.5001 19.3286" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+<path d="M10.5 21L15.4286 21" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+<span class="text-3xl font-bold text-white font-sofia">QuantsEdge</span>
+</div>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-light-gray hover:text-white transition" href="#">Platform</a>
+<a class="text-light-gray hover:text-white transition" href="#">Solutions</a>
+<a class="text-light-gray hover:text-white transition" href="#">Resources</a>
+<a class="text-light-gray hover:text-white transition" href="#">Company</a>
+</nav>
+<a class="brand-teal-button text-black font-bold py-2 px-6 rounded-md hidden md:block" href="#">
+            Request Access
+        </a>
+</div>
+</header>
+<section class="hero-bg min-h-screen flex items-center justify-center text-center py-20 px-4 sm:px-6 lg:px-8 relative">
+<div class="grid-bg"></div>
+<div class="data-waves"></div>
+<div class="q-watermark">
+<svg class="h-full w-full opacity-30" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M21 42C32.598 42 42 32.598 42 21C42 9.40202 32.598 0 21 0C9.40202 0 0 9.40202 0 21C0 32.598 9.40202 42 21 42Z" fill="none"></path>
+<path d="M21 38C30.3888 38 38 30.3888 38 21C38 11.6112 30.3888 4 21 4C11.6112 4 4 11.6112 4 21C4 30.3888 11.6112 38 21 38Z" stroke="var(--brand-teal)" stroke-width="1.5"></path>
+<path d="M15.4287 31.5L25.2144 10.5L31.5001 19.3286" stroke="var(--brand-teal)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+<path d="M10.5 21L15.4286 21" stroke="var(--brand-teal)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<div class="relative z-10">
+<h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight max-w-4xl mx-auto drop-shadow-lg">
+            Onchain AI Quant Trading &amp;<br/>Fund-Grade Analytics
+        </h1>
+<p class="mt-6 text-lg sm:text-xl text-light-gray max-w-3xl mx-auto">
+            Non-custodial AI strategies for spot and perps, combining institutional grade backtesting with fund-grade execution.
+        </p>
+<div class="mt-10 flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+<a class="brand-teal-button font-bold py-4 px-10 rounded-lg text-lg w-full sm:w-auto" href="#">Explore the Platform</a>
+<a class="ghost-button font-bold py-4 px-10 rounded-lg text-lg w-full sm:w-auto" href="#">Learn More</a>
+</div>
+</div>
+</section>
+<section class="py-24 bg-black">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center max-w-3xl mx-auto">
+<h2 class="text-4xl font-bold text-white">Built for Funds, Traders, and Token Teams.</h2>
+<p class="mt-4 text-lg text-light-gray">QuantsEdge provides institutional-grade infrastructure for liquidity, execution, and systematic strategy deployment.</p>
+</div>
+<div class="mt-16 grid md:grid-cols-3 gap-8 lg:gap-12">
+<div class="bg-dark-gray p-8 rounded-lg glowing-border text-center">
+<h3 class="text-2xl font-bold text-white">Token Teams</h3>
+<p class="mt-3 text-light-gray">Stabilize liquidity and trading volume on launch without third-party market makers.</p>
+</div>
+<div class="bg-dark-gray p-8 rounded-lg glowing-border text-center">
+<h3 class="text-2xl font-bold text-white">Quant Traders</h3>
+<p class="mt-3 text-light-gray">Backtest, optimize, and deploy systematic spot + perp strategies with AI parameter sweeps.</p>
+</div>
+<div class="bg-dark-gray p-8 rounded-lg glowing-border text-center">
+<h3 class="text-2xl font-bold text-white">Funds</h3>
+<p class="mt-3 text-light-gray">Secure, non-custodial execution with institutional-grade latency, risk modeling, and compliance-ready transparency.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 bg-dark-gray">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid md:grid-cols-3 gap-12 lg:gap-16">
+<div class="text-center">
+<div class="inline-block p-4 mb-4">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<h3 class="text-2xl font-bold text-white">AI-Driven Trading</h3>
+<p class="mt-2 text-light-gray max-w-xs mx-auto">Adaptive AI models optimize strategy parameters in real time, aligning execution with dynamic market conditions.</p>
+</div>
+<div class="text-center">
+<div class="inline-block p-4 mb-4">
+<span class="material-symbols-outlined">query_stats</span>
+</div>
+<h3 class="text-2xl font-bold text-white">Fund-Grade Backtesting</h3>
+<p class="mt-2 text-light-gray max-w-xs mx-auto">High-fidelity simulations using historical onchain data, modeling slippage, fees, and latency for realistic results.</p>
+</div>
+<div class="text-center">
+<div class="inline-block p-4 mb-4">
+<span class="material-symbols-outlined">security</span>
+</div>
+<h3 class="text-2xl font-bold text-white">Onchain Security</h3>
+<p class="mt-2 text-light-gray max-w-xs mx-auto">Audited, non-custodial smart contracts ensure full asset control and institutional-grade security.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-12 bg-black">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+<div class="flex flex-col items-center">
+<p class="text-3xl md:text-4xl font-bold text-white">$1B+</p>
+<p class="text-sm text-light-gray uppercase tracking-wider mt-2">Simulated Volume</p>
+<p class="text-sm text-light-gray mt-1">Extensively tested across large-scale simulations.</p>
+</div>
+<div class="flex flex-col items-center">
+<p class="text-3xl md:text-4xl font-bold text-white">&lt;100ms</p>
+<p class="text-sm text-light-gray uppercase tracking-wider mt-2">Execution Latency</p>
+<p class="text-sm text-light-gray mt-1">Low-latency execution engineered for institutional use.</p>
+</div>
+<div class="flex flex-col items-center">
+<p class="text-3xl md:text-4xl font-bold text-white">Multi-Chain</p>
+<p class="text-sm text-light-gray uppercase tracking-wider mt-2">Support</p>
+<p class="text-sm text-light-gray mt-1">Supports ETH, Base, Arbitrum, BNB, and more.</p>
+</div>
+<div class="flex flex-col items-center">
+<p class="text-3xl md:text-4xl font-bold text-white">99.9%</p>
+<p class="text-sm text-light-gray uppercase tracking-wider mt-2">Uptime</p>
+<p class="text-sm text-light-gray mt-1">Reliable onchain infrastructure with near-perfect uptime.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 bg-dark-gray">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="bg-black p-8 sm:p-12 rounded-lg glowing-border grid md:grid-cols-2 gap-12 items-center">
+<div class="max-w-md">
+<h2 class="text-3xl font-bold text-white">Perp Strategy Optimization</h2>
+<p class="mt-4 text-light-gray">AI-driven parameter sweeps improved baseline perp strategies in backtesting — optimizing leverage thresholds, reducing drawdowns, and outperforming static models.</p>
+<div class="mt-6">
+<a class="ghost-button font-bold py-3 px-6 rounded-lg text-base" href="#">View Full Case Study</a>
+</div>
+</div>
+<div class="relative rounded-lg p-4" style="background-image: linear-gradient(rgba(0, 255, 198, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 198, 0.07) 1px, transparent 1px); background-size: 30px 30px;">
+<svg class="w-full" viewBox="0 0 400 200">
+<defs>
+<linearGradient id="chart-gradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="var(--brand-teal)" stop-opacity="0.4"></stop>
+<stop offset="100%" stop-color="var(--brand-teal)" stop-opacity="0"></stop>
+</linearGradient>
+</defs>
+<polyline fill="none" points="0,160 20,165 40,155 60,160 80,150 100,140 120,145 140,135 160,130 180,140 200,135 220,125 240,130 260,120 280,115 300,120 320,110 340,115 360,105 380,110 400,100" stroke="#4A5568" stroke-width="2"></polyline>
+<path d="M 0,150 20,140 40,120 60,130 80,110 100,90 120,100 140,80 160,70 180,90 200,80 220,60 240,70 260,50 280,40 300,50 320,30 340,40 360,20 380,30 400,10 V 200 H 0 Z" fill="url(#chart-gradient)"></path>
+<polyline fill="none" points="0,150 20,140 40,120 60,130 80,110 100,90 120,100 140,80 160,70 180,90 200,80 220,60 240,70 260,50 280,40 300,50 320,30 340,40 360,20 380,30 400,10" stroke="var(--brand-teal)" stroke-width="2.5"></polyline>
+</svg>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 bg-black">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<h2 class="text-4xl font-bold text-white text-center">Our Leadership</h2>
+<p class="text-lg text-light-gray mt-4 text-center max-w-3xl mx-auto">Our leadership brings deep expertise across quantitative finance, AI research, and blockchain engineering — with proven experience at top institutions.</p>
+<div class="mt-16 grid sm:grid-cols-1 md:grid-cols-3 gap-12 justify-center">
+<div class="text-center flex flex-col items-center">
+<img alt="Headshot of Harrison V" class="w-32 h-32 rounded-full mx-auto filter grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkUk5cMTmyKwnYRSZWsyVaYGqoQ13U_FBXtTu8sSJWYk-5JUoLkDCKviCYOmtMfxHXgCflruoPmr0zFvE-rtei25GhkwUo9wawH-wOBwhpqKgGmv2QSImuYfGPgZ9Ycyb0tPvPLXla83O0yrSWt6NhYMPsLBLE7A-Hx6yZAMCbNtPjT0_UEtTFktYIKtDf6AbANHmurXhqxiTS66JH3RNQHOS3ivyO2UJErIo6IFwmxzCC5_gS1NHL94wE-9eMHnhrBaeFIo46qPK8"/>
+<h4 class="text-xl font-bold text-white mt-4">Harrison V</h4>
+<p class="text-[var(--brand-teal)] text-sm font-bold">Founder</p>
+<p class="mt-2 text-light-gray text-sm max-w-xs">Ex-quant strategist with TradFi and onchain experience. Focused on building institutional-grade infrastructure for digital assets.</p>
+</div>
+<div class="text-center flex flex-col items-center">
+<img alt="Headshot of Dr. Dan He" class="w-32 h-32 rounded-full mx-auto filter grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcvcrDYzKwAHa6FLBluF52bDdJ7ufBNy4Z2KUZgEZyiCBEYe_u8ORGm-7do5vgtIeNsETjgn7UNttt38B6M6j6Vic2PUm5_1NOiM7YdTHdQ8fSgAwzAiCYO3TgZwMfoM5w-DVRjoBfTBai6_mF0ZZrfd9Y2DW0nJ6ISQVg0hbqNSArPBp6_Xz_quWFcXYnNpDPOjttWpNw6JG-WIPGusrYoyq6ru8PVqLWj4JdVAsoKTKw8mgs6pMzkJGirW0hlGhNza1lGnN2pQ7t"/>
+<h4 class="text-xl font-bold text-white mt-4">Dr. Dan He</h4>
+<p class="text-[var(--brand-teal)] text-sm font-bold">Chief Quant &amp; AI Strategist</p>
+<p class="mt-2 text-light-gray text-sm max-w-xs">PhD UCLA, ex-IBM T.J. Watson. Award-winning AI/ML researcher specializing in reinforcement learning for financial modeling.</p>
+</div>
+<div class="text-center flex flex-col items-center">
+<div class="w-32 h-32 rounded-full mx-auto bg-dark-gray flex items-center justify-center filter grayscale">
+<svg class="w-20 h-20 text-gray-600" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
+</div>
+<h4 class="text-xl font-bold text-white mt-4">Core Engineering Team</h4>
+<p class="text-[var(--brand-teal)] text-sm font-bold">Distributed Systems &amp; Security</p>
+<p class="mt-2 text-light-gray text-sm max-w-xs">Veterans from top tech firms and DeFi protocols. Specializing in secure, scalable onchain infrastructure and low-latency execution.</p>
+</div>
+</div>
+</div>
+</section>
+<footer class="relative footer-gradient">
+<div class="absolute inset-0 footer-grid-bg -z-10"></div>
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center relative z-10">
+<h2 class="text-3xl sm:text-4xl font-bold text-white max-w-3xl mx-auto">Ready to deploy fund-grade AI trading strategies?</h2>
+<p class="mt-4 text-lg text-light-gray max-w-xl mx-auto">Join the waitlist today and trade with institutional precision.</p>
+<div class="mt-8">
+<a class="brand-teal-button font-bold py-4 px-10 rounded-lg text-lg inline-block" href="#">Request Access</a>
+</div>
+</div>
+<div class="border-t border-gray-800">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row justify-between items-center text-sm">
+<p class="text-light-gray">© 2024 QuantsEdge. All rights reserved.</p>
+<div class="flex space-x-6 mt-4 sm:mt-0">
+<a class="text-light-gray hover:text-white transition" href="#">Terms</a>
+<a class="text-light-gray hover:text-white transition" href="#">Privacy</a>
+<a class="text-light-gray hover:text-white transition" href="#">Contact</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
