@@ -1,0 +1,97 @@
+/* Mobile Navigation Styles */
+
+#mobile-menu-button {
+  position: relative;
+  z-index: 60;
+  transition: all 0.2s ease;
+}
+
+#mobile-menu-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+#mobile-menu-button svg {
+  transition: transform 0.3s ease;
+}
+
+#mobile-menu-button.active svg {
+  transform: rotate(90deg);
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.mobile-menu.show {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
+}
+
+.mobile-nav-link {
+  display: block;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.mobile-nav-link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  padding-left: 12px;
+  transform: translateX(4px);
+}
+
+/* Ensure mobile menu is hidden on desktop */
+@media (min-width: 1024px) {
+  .mobile-menu {
+    display: none !important;
+  }
+  
+  #mobile-menu-button {
+    display: none !important;
+  }
+}
+
+/* Mobile specific adjustments */
+@media (max-width: 1023px) {
+  .mobile-menu {
+    display: block;
+  }
+  
+  #mobile-menu-button {
+    display: flex !important;
+  }
+  
+  /* Adjust header height for mobile menu positioning */
+  header nav {
+    height: 64px;
+  }
+  
+  /* Make sure mobile menu appears correctly */
+  .mobile-menu {
+    top: 64px;
+  }
+}
+
+/* Animation classes for smooth transitions */
+.mobile-menu-enter {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+}
+
+.mobile-menu-exit {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+}

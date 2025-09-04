@@ -215,141 +215,84 @@ function enhanceChartAnimations() {
   }
 }
 
-// Mobile Navigation Enhancement
+// Mobile Navigation
 function initMobileNavigation() {
-  console.log('Initializing mobile navigation...');
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
   
-  const nav = document.querySelector('header nav');
-  const desktopNavContainer = document.querySelector('nav.hidden.lg\\:flex.items-center.space-x-8');
-  let navLinks = [];
-  
-  console.log('Nav element:', nav);
-  console.log('Desktop nav container:', desktopNavContainer);
-  
-  if (desktopNavContainer) {
-    navLinks = desktopNavContainer.querySelectorAll('a.nav-link');
-    console.log('Found nav links in desktop container:', navLinks.length);
-  } else {
-    // Fallback: find nav links directly
-    navLinks = document.querySelectorAll('a.nav-link');
-    console.log('Found nav links via fallback:', navLinks.length);
-  }
-  
-  if (!nav || navLinks.length === 0) {
-    console.log('Mobile nav init failed: nav element or nav links not found');
+  if (!mobileMenuButton || !mobileMenu) {
+    console.log('Mobile navigation elements not found');
     return;
   }
   
-  // Check if mobile button already exists
-  if (nav.querySelector('.mobile-nav-button')) {
-    console.log('Mobile nav already initialized');
-    return;
+  let isMenuOpen = false;
+  
+  // Toggle mobile menu
+  function toggleMobileMenu() {
+    isMenuOpen = !isMenuOpen;
+    
+    if (isMenuOpen) {
+      // Open menu
+      mobileMenu.classList.remove('opacity-0', 'invisible', '-translate-y-2');
+      mobileMenu.classList.add('show');
+      mobileMenuButton.classList.add('active');
+      mobileMenuButton.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    } else {
+      // Close menu
+      mobileMenu.classList.add('opacity-0', 'invisible', '-translate-y-2');
+      mobileMenu.classList.remove('show');
+      mobileMenuButton.classList.remove('active');
+      mobileMenuButton.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = ''; // Restore scrolling
+    }
   }
   
-  console.log('Creating mobile navigation elements...');
-  
-  // Create mobile menu button
-  const mobileButton = document.createElement('button');
-  mobileButton.className = 'mobile-nav-button lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors';
-  mobileButton.setAttribute('aria-label', 'Toggle mobile menu');
-  mobileButton.innerHTML = `
-    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-    </svg>
-  `;
-  
-  // Create mobile menu
-  const mobileMenu = document.createElement('div');
-  mobileMenu.className = 'mobile-menu absolute top-full left-0 right-0 glass border-t border-white/5 lg:hidden opacity-0 invisible transition-all duration-300 transform -translate-y-2 z-40';
-  mobileMenu.innerHTML = `
-    <div class="px-6 py-4 space-y-3">
-      ${Array.from(navLinks).map(link => `
-        <a href="${link.getAttribute('href')}" class="mobile-nav-link block py-2 text-text-secondary hover:text-accent transition-colors">
-          ${link.textContent.trim()}
-        </a>
-      `).join('')}
-      <div class="pt-4 border-t border-white/10">
-        <button class="btn btn-secondary w-full mb-3 py-2 rounded-lg">
-          Sign In
-        </button>
-        <button class="btn btn-primary w-full py-2 rounded-lg">
-          Get Access
-        </button>
-      </div>
-    </div>
-  `;
-  
-  // Insert elements
-  const rightActions = nav.querySelector('.flex.items-center.space-x-4');
-  if (rightActions) {
-    rightActions.insertBefore(mobileButton, rightActions.firstChild);
-    console.log('Mobile button inserted');
-  } else {
-    console.log('Right actions container not found');
-    return;
+  // Close mobile menu
+  function closeMobileMenu() {
+    if (isMenuOpen) {
+      isMenuOpen = false;
+      mobileMenu.classList.add('opacity-0', 'invisible', '-translate-y-2');
+      mobileMenu.classList.remove('show');
+      mobileMenuButton.classList.remove('active');
+      mobileMenuButton.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
   }
   
-  // Append mobile menu to nav
-  const navContainer = nav.querySelector('.max-w-7xl');
-  if (navContainer) {
-    navContainer.appendChild(mobileMenu);
-    console.log('Mobile menu appended');
-  } else {
-    nav.appendChild(mobileMenu);
-    console.log('Mobile menu appended to nav directly');
-  }
-  
-  // Toggle functionality
-  let isOpen = false;
-  
-  mobileButton.addEventListener('click', (e) => {
+  // Event listeners
+  mobileMenuButton.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
-    
-    isOpen = !isOpen;
-    console.log('Mobile menu toggled:', isOpen);
-    
-    if (isOpen) {
-      mobileMenu.classList.remove('opacity-0', 'invisible', '-translate-y-2');
-      mobileMenu.classList.add('opacity-100', 'visible', 'translate-y-0');
-      mobileButton.setAttribute('aria-expanded', 'true');
-    } else {
-      mobileMenu.classList.add('opacity-0', 'invisible', '-translate-y-2');
-      mobileMenu.classList.remove('opacity-100', 'visible', 'translate-y-0');
-      mobileButton.setAttribute('aria-expanded', 'false');
-    }
+    toggleMobileMenu();
   });
   
-  // Close on mobile link click
-  mobileMenu.addEventListener('click', (e) => {
-    if (e.target.classList.contains('mobile-nav-link')) {
-      console.log('Mobile nav link clicked, closing menu');
-      isOpen = false;
-      mobileMenu.classList.add('opacity-0', 'invisible', '-translate-y-2');
-      mobileMenu.classList.remove('opacity-100', 'visible', 'translate-y-0');
-      mobileButton.setAttribute('aria-expanded', 'false');
-    }
+  // Close menu when clicking on navigation links
+  mobileNavLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      closeMobileMenu();
+    });
   });
   
-  // Close on outside click
+  // Close menu when clicking outside
   document.addEventListener('click', (e) => {
-    if (!nav.contains(e.target) && isOpen) {
-      console.log('Outside click detected, closing menu');
-      isOpen = false;
-      mobileMenu.classList.add('opacity-0', 'invisible', '-translate-y-2');
-      mobileMenu.classList.remove('opacity-100', 'visible', 'translate-y-0');
-      mobileButton.setAttribute('aria-expanded', 'false');
+    if (isMenuOpen && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+      closeMobileMenu();
     }
   });
   
-  // Close on escape key
+  // Close menu on escape key
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && isOpen) {
-      console.log('Escape key pressed, closing menu');
-      isOpen = false;
-      mobileMenu.classList.add('opacity-0', 'invisible', '-translate-y-2');
-      mobileMenu.classList.remove('opacity-100', 'visible', 'translate-y-0');
-      mobileButton.setAttribute('aria-expanded', 'false');
+    if (e.key === 'Escape' && isMenuOpen) {
+      closeMobileMenu();
+    }
+  });
+  
+  // Close menu when window is resized to desktop size
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1024 && isMenuOpen) {
+      closeMobileMenu();
     }
   });
   
