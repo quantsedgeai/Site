@@ -1043,7 +1043,7 @@
     opts.scales.x.display = false;
     opts.scales.y.display = false;
     opts.elements.point.radius = 0;
-    new Chart(dctx, { type: 'line', data: ddata, options: opts });
+    new Chart(dctx, { type: 'line', data: ddata, options: opts, plugins:[glow] });
   }
 })();
   </script>
