@@ -254,6 +254,222 @@
     </div>
   </section>
   
+  <!-- Interactive Demo Section -->
+  <section id="demo" class="py-24 px-6 relative">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-3">
+      <div class="absolute inset-0" style="background-image: radial-gradient(circle at 25% 25%, rgba(0,255,198,0.1) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(0,212,170,0.1) 0%, transparent 50%)"></div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto relative">
+      <div class="text-center mb-16">
+        <p class="label text-accent mb-4">Interactive Demo</p>
+        <h2 class="display text-4xl sm:text-5xl lg:text-6xl mb-4">
+          Test Drive Our Platform
+        </h2>
+        <p class="text-lg text-text-secondary max-w-2xl mx-auto">
+          Experience institutional-grade tools with real market data simulation.
+        </p>
+      </div>
+      
+      <!-- Demo Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        <!-- Paper Trading Interface -->
+        <div class="glass rounded-2xl p-8 card-hover">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-xl font-semibold">Paper Trading Simulator</h3>
+            <span class="label text-accent bg-accent/10 px-2 py-1 rounded">LIVE</span>
+          </div>
+          
+          <!-- Mock Trading Interface -->
+          <div class="bg-grey/10 rounded-xl p-4 mb-6">
+            <div class="flex justify-between items-center mb-4">
+              <div>
+                <p class="text-sm text-text-tertiary">Portfolio Value</p>
+                <p class="text-2xl font-bold text-green-400">$10,247,832</p>
+                <p class="text-xs text-green-400">+2.34% Today</p>
+              </div>
+              <div class="text-right">
+                <p class="text-sm text-text-tertiary">Active Positions</p>
+                <p class="text-lg font-semibold">23</p>
+              </div>
+            </div>
+            
+            <!-- Mock Order Book -->
+            <div class="grid grid-cols-2 gap-4 text-xs">
+              <div>
+                <p class="text-text-tertiary mb-2">Recent Orders</p>
+                <div class="space-y-1">
+                  <div class="flex justify-between">
+                    <span class="text-green-400">BUY ETH</span>
+                    <span>$2,341</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-red-400">SELL BTC</span>
+                    <span>$43,567</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-green-400">BUY SOL</span>
+                    <span>$89.23</span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <p class="text-text-tertiary mb-2">P&L Today</p>
+                <div class="space-y-1">
+                  <div class="flex justify-between">
+                    <span>Realized</span>
+                    <span class="text-green-400">+$24,567</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Unrealized</span>
+                    <span class="text-green-400">+$8,902</span>
+                  </div>
+                  <div class="flex justify-between font-semibold">
+                    <span>Total</span>
+                    <span class="text-green-400">+$33,469</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <button class="btn btn-primary w-full py-3 rounded-lg">
+            Launch Paper Trading →
+          </button>
+        </div>
+        
+        <!-- Backtesting Tool -->
+        <div class="glass rounded-2xl p-8 card-hover">
+          <h3 class="text-xl font-semibold mb-6">Historical Backtesting</h3>
+          
+          <!-- Mock Backtest Results -->
+          <div class="bg-grey/10 rounded-xl p-4 mb-6">
+            <div class="flex justify-between items-center mb-4">
+              <div>
+                <p class="text-sm text-text-tertiary">Strategy: Mean Reversion</p>
+                <p class="text-sm text-text-tertiary">Period: Jan 2023 - Dec 2023</p>
+              </div>
+              <span class="text-xs text-accent bg-accent/10 px-2 py-1 rounded">COMPLETED</span>
+            </div>
+            
+            <!-- Performance Metrics -->
+            <div class="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <p class="text-text-tertiary">Total Return</p>
+                <p class="text-lg font-bold text-green-400">+127.3%</p>
+              </div>
+              <div>
+                <p class="text-text-tertiary">Sharpe Ratio</p>
+                <p class="text-lg font-bold">2.84</p>
+              </div>
+              <div>
+                <p class="text-text-tertiary">Max Drawdown</p>
+                <p class="text-lg font-bold text-red-400">-8.2%</p>
+              </div>
+              <div>
+                <p class="text-text-tertiary">Win Rate</p>
+                <p class="text-lg font-bold">68.4%</p>
+              </div>
+            </div>
+            
+            <!-- Mini Chart -->
+            <div class="mt-4 h-20 bg-grey/20 rounded relative overflow-hidden">
+              <svg class="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path fill="none" stroke="#00FFC6" stroke-width="2" d="M 0 80 L 20 75 L 40 60 L 60 45 L 80 35 L 100 25" />
+                <path fill="url(#chart-gradient)" d="M 0 100 L 0 80 L 20 75 L 40 60 L 60 45 L 80 35 L 100 25 L 100 100 Z" />
+              </svg>
+            </div>
+          </div>
+          
+          <button class="btn btn-secondary w-full py-3 rounded-lg">
+            Run Custom Backtest →
+          </button>
+        </div>
+      </div>
+      
+      <!-- Strategy Customization -->
+      <div class="glass rounded-2xl p-8">
+        <h3 class="text-xl font-semibold mb-6 text-center">Strategy Configuration Wizard</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Risk Parameters -->
+          <div>
+            <h4 class="font-semibold mb-4 text-accent">Risk Parameters</h4>
+            <div class="space-y-4">
+              <div>
+                <label class="text-sm text-text-tertiary block mb-2">Max Drawdown</label>
+                <div class="relative">
+                  <input type="range" class="w-full h-2 bg-grey rounded-lg appearance-none cursor-pointer" min="1" max="20" value="8">
+                  <span class="absolute right-0 -top-6 text-xs text-accent">8%</span>
+                </div>
+              </div>
+              <div>
+                <label class="text-sm text-text-tertiary block mb-2">Portfolio Heat</label>
+                <div class="relative">
+                  <input type="range" class="w-full h-2 bg-grey rounded-lg appearance-none cursor-pointer" min="1" max="10" value="3">
+                  <span class="absolute right-0 -top-6 text-xs text-accent">30%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Asset Universe -->
+          <div>
+            <h4 class="font-semibold mb-4 text-purple-400">Asset Universe</h4>
+            <div class="space-y-2">
+              <label class="flex items-center">
+                <input type="checkbox" class="mr-2" checked>
+                <span class="text-sm">Large Cap Crypto</span>
+              </label>
+              <label class="flex items-center">
+                <input type="checkbox" class="mr-2" checked>
+                <span class="text-sm">DeFi Tokens</span>
+              </label>
+              <label class="flex items-center">
+                <input type="checkbox" class="mr-2">
+                <span class="text-sm">Layer 1s</span>
+              </label>
+              <label class="flex items-center">
+                <input type="checkbox" class="mr-2">
+                <span class="text-sm">Derivatives</span>
+              </label>
+            </div>
+          </div>
+          
+          <!-- Execution Settings -->
+          <div>
+            <h4 class="font-semibold mb-4 text-blue-400">Execution</h4>
+            <div class="space-y-4">
+              <div>
+                <label class="text-sm text-text-tertiary block mb-2">Rebalance Frequency</label>
+                <select class="w-full bg-grey/20 border border-white/10 rounded-lg px-3 py-2 text-sm">
+                  <option>Daily</option>
+                  <option>Weekly</option>
+                  <option>Monthly</option>
+                </select>
+              </div>
+              <div>
+                <label class="text-sm text-text-tertiary block mb-2">Slippage Tolerance</label>
+                <select class="w-full bg-grey/20 border border-white/10 rounded-lg px-3 py-2 text-sm">
+                  <option>0.1%</option>
+                  <option>0.5%</option>
+                  <option>1.0%</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-8">
+          <button class="btn btn-primary px-8 py-3 rounded-lg">
+            Generate Custom Strategy →
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  
   <!-- Technology Section -->
   <section id="technology" class="py-24 px-6 relative">
     <!-- Background Pattern -->
@@ -343,6 +559,293 @@
               <span class="text-accent mr-2">•</span>
               <span class="text-text-secondary">Non-custodial</span>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Technical Deep Dive Section -->
+  <section id="technical" class="py-24 px-6 relative">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%2300FFC6" fill-opacity="0.4"%3E%3Cpath d="m0 0h80v80h-80z" opacity=".1"/%3E%3Cpath d="M20 20h40v40H20z" opacity=".2"/%3E%3Cpath d="M40 0v80M0 40h80" stroke="%2300FFC6" stroke-width="1" opacity=".3"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"></div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto relative">
+      <div class="text-center mb-16">
+        <p class="label text-accent mb-4">Technical Deep Dive</p>
+        <h2 class="display text-4xl sm:text-5xl lg:text-6xl mb-4">
+          Infrastructure & Architecture
+        </h2>
+        <p class="text-lg text-text-secondary max-w-2xl mx-auto">
+          Enterprise-grade technology stack powering institutional trading at scale.
+        </p>
+      </div>
+      
+      <!-- Architecture Overview -->
+      <div class="glass rounded-2xl p-8 mb-12">
+        <h3 class="text-xl font-semibold mb-6 text-center">System Architecture</h3>
+        
+        <!-- Architecture Diagram -->
+        <div class="bg-grey/10 rounded-xl p-6 mb-6">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Client Layer -->
+            <div class="text-center">
+              <div class="bg-accent/20 rounded-lg p-4 mb-3">
+                <h4 class="font-semibold text-accent mb-2">Client Layer</h4>
+                <div class="space-y-2 text-sm">
+                  <div class="bg-white/10 rounded p-2">Web Dashboard</div>
+                  <div class="bg-white/10 rounded p-2">Mobile App</div>
+                  <div class="bg-white/10 rounded p-2">REST API</div>
+                  <div class="bg-white/10 rounded p-2">WebSocket</div>
+                </div>
+              </div>
+              <div class="flex justify-center">
+                <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+              </div>
+            </div>
+            
+            <!-- Processing Layer -->
+            <div class="text-center">
+              <div class="bg-purple-400/20 rounded-lg p-4 mb-3">
+                <h4 class="font-semibold text-purple-400 mb-2">Processing Layer</h4>
+                <div class="space-y-2 text-sm">
+                  <div class="bg-white/10 rounded p-2">ML Engine</div>
+                  <div class="bg-white/10 rounded p-2">Risk Manager</div>
+                  <div class="bg-white/10 rounded p-2">Order Router</div>
+                  <div class="bg-white/10 rounded p-2">Portfolio Engine</div>
+                </div>
+              </div>
+              <div class="flex justify-center">
+                <svg class="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+              </div>
+            </div>
+            
+            <!-- Data Layer -->
+            <div class="text-center">
+              <div class="bg-blue-400/20 rounded-lg p-4 mb-3">
+                <h4 class="font-semibold text-blue-400 mb-2">Data Layer</h4>
+                <div class="space-y-2 text-sm">
+                  <div class="bg-white/10 rounded p-2">Market Data</div>
+                  <div class="bg-white/10 rounded p-2">Time Series DB</div>
+                  <div class="bg-white/10 rounded p-2">Redis Cache</div>
+                  <div class="bg-white/10 rounded p-2">Blockchain Nodes</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Performance Metrics -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div class="text-center">
+            <p class="text-2xl font-bold text-accent">12ms</p>
+            <p class="text-sm text-text-tertiary">Average Latency</p>
+          </div>
+          <div class="text-center">
+            <p class="text-2xl font-bold text-green-400">99.98%</p>
+            <p class="text-sm text-text-tertiary">Uptime SLA</p>
+          </div>
+          <div class="text-center">
+            <p class="text-2xl font-bold text-blue-400">1M+</p>
+            <p class="text-sm text-text-tertiary">TPS Capacity</p>
+          </div>
+          <div class="text-center">
+            <p class="text-2xl font-bold text-purple-400">24/7</p>
+            <p class="text-sm text-text-tertiary">Global Coverage</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Technical Specifications Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        <!-- API Documentation Preview -->
+        <div class="glass rounded-2xl p-8 card-hover">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500/20 to-green-500/10 flex items-center justify-center mr-4">
+              <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold">API Documentation</h3>
+          </div>
+          
+          <!-- Code Example -->
+          <div class="bg-black/50 rounded-lg p-4 mb-6 font-mono text-sm">
+            <div class="text-green-400"># Get Portfolio Performance</div>
+            <div class="text-blue-400">GET</div> <span class="text-white">/api/v2/portfolio/performance</span><br>
+            <div class="text-yellow-400">Authorization:</div> <span class="text-text-secondary">Bearer {api_key}</span><br><br>
+            <div class="text-purple-400">{</div><br>
+            <div class="ml-4 text-text-secondary">"total_return": 0.234,</div><br>
+            <div class="ml-4 text-text-secondary">"sharpe_ratio": 2.34,</div><br>
+            <div class="ml-4 text-text-secondary">"max_drawdown": -0.082</div><br>
+            <div class="text-purple-400">}</div>
+          </div>
+          
+          <div class="space-y-2 text-sm text-text-secondary mb-4">
+            <p>• RESTful API with OpenAPI 3.0 spec</p>
+            <p>• WebSocket real-time streams</p>
+            <p>• Rate limiting: 1000 req/min</p>
+            <p>• SDKs: Python, JavaScript, Go</p>
+          </div>
+          
+          <button class="btn btn-secondary w-full py-3 rounded-lg">
+            View Full API Docs →
+          </button>
+        </div>
+        
+        <!-- Security Audit Results -->
+        <div class="glass rounded-2xl p-8 card-hover">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500/20 to-red-500/10 flex items-center justify-center mr-4">
+              <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold">Security Audit Summary</h3>
+          </div>
+          
+          <!-- Audit Results -->
+          <div class="space-y-4 mb-6">
+            <div class="flex items-center justify-between p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
+              <span class="text-sm">Trail of Bits - Smart Contracts</span>
+              <span class="text-xs text-green-400 bg-green-400/10 px-2 py-1 rounded">PASSED</span>
+            </div>
+            <div class="flex items-center justify-between p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
+              <span class="text-sm">Quantstamp - Protocol Security</span>
+              <span class="text-xs text-green-400 bg-green-400/10 px-2 py-1 rounded">PASSED</span>
+            </div>
+            <div class="flex items-center justify-between p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
+              <span class="text-sm">CertiK - Infrastructure</span>
+              <span class="text-xs text-green-400 bg-green-400/10 px-2 py-1 rounded">PASSED</span>
+            </div>
+          </div>
+          
+          <!-- Security Features -->
+          <div class="text-sm text-text-secondary space-y-1 mb-4">
+            <p>• Multi-signature wallet architecture</p>
+            <p>• Hardware Security Modules (HSM)</p>
+            <p>• End-to-end encryption (AES-256)</p>
+            <p>• Zero-knowledge proof systems</p>
+            <p>• SOC 2 Type II certified</p>
+          </div>
+          
+          <button class="btn btn-secondary w-full py-3 rounded-lg">
+            Download Audit Reports →
+          </button>
+        </div>
+      </div>
+      
+      <!-- Latency Benchmarks & Disaster Recovery -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Latency Benchmarks -->
+        <div class="glass rounded-2xl p-8">
+          <h3 class="text-xl font-semibold mb-6">Latency Benchmarks</h3>
+          
+          <!-- Comparison Chart -->
+          <div class="space-y-4 mb-6">
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-sm font-medium text-accent">QuantsEdge</span>
+                <span class="text-sm">12ms</span>
+              </div>
+              <div class="w-full bg-grey/20 rounded-full h-2">
+                <div class="bg-accent h-2 rounded-full" style="width: 15%"></div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-sm text-text-secondary">Competitor A</span>
+                <span class="text-sm">45ms</span>
+              </div>
+              <div class="w-full bg-grey/20 rounded-full h-2">
+                <div class="bg-red-400/60 h-2 rounded-full" style="width: 56%"></div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-sm text-text-secondary">Competitor B</span>
+                <span class="text-sm">78ms</span>
+              </div>
+              <div class="w-full bg-grey/20 rounded-full h-2">
+                <div class="bg-orange-400/60 h-2 rounded-full" style="width: 97%"></div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-sm text-text-secondary">Industry Average</span>
+                <span class="text-sm">125ms</span>
+              </div>
+              <div class="w-full bg-grey/20 rounded-full h-2">
+                <div class="bg-grey/60 h-2 rounded-full" style="width: 100%"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="text-xs text-text-secondary">
+            <p>*Order routing latency measured from signal generation to exchange execution</p>
+            <p>**Benchmarks updated quarterly by third-party testing firm</p>
+          </div>
+        </div>
+        
+        <!-- Disaster Recovery -->
+        <div class="glass rounded-2xl p-8">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500/20 to-orange-500/10 flex items-center justify-center mr-4">
+              <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold">Disaster Recovery</h3>
+          </div>
+          
+          <!-- Recovery Metrics -->
+          <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="bg-white/5 rounded-lg p-3 text-center">
+              <p class="text-lg font-bold text-green-400">15s</p>
+              <p class="text-xs text-text-tertiary">Recovery Time Objective</p>
+            </div>
+            <div class="bg-white/5 rounded-lg p-3 text-center">
+              <p class="text-lg font-bold text-blue-400">1s</p>
+              <p class="text-xs text-text-tertiary">Recovery Point Objective</p>
+            </div>
+          </div>
+          
+          <!-- DR Features -->
+          <div class="space-y-3 mb-6">
+            <div class="flex items-start space-x-3">
+              <div class="w-2 h-2 bg-accent rounded-full mt-2"></div>
+              <div>
+                <p class="font-medium text-sm">Multi-Region Failover</p>
+                <p class="text-xs text-text-secondary">Automatic failover across AWS regions</p>
+              </div>
+            </div>
+            <div class="flex items-start space-x-3">
+              <div class="w-2 h-2 bg-accent rounded-full mt-2"></div>
+              <div>
+                <p class="font-medium text-sm">Real-time Replication</p>
+                <p class="text-xs text-text-secondary">Continuous data sync to backup systems</p>
+              </div>
+            </div>
+            <div class="flex items-start space-x-3">
+              <div class="w-2 h-2 bg-accent rounded-full mt-2"></div>
+              <div>
+                <p class="font-medium text-sm">Circuit Breakers</p>
+                <p class="text-xs text-text-secondary">Automatic risk-off in extreme scenarios</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="text-center">
+            <span class="text-xs text-text-tertiary">Last DR Test: Passed - Dec 2024</span>
           </div>
         </div>
       </div>
@@ -499,6 +1002,319 @@
         <p class="text-xs text-text-tertiary mt-6">
           * Minimum AUM requirement: $10M
         </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust & Transparency Section -->
+  <section id="trust" class="py-24 px-6 relative">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="label text-accent mb-4">Trust & Transparency</p>
+        <h2 class="display text-4xl sm:text-5xl lg:text-6xl mb-4">
+          Verifiable & Auditable
+        </h2>
+        <p class="text-lg text-text-secondary max-w-2xl mx-auto">
+          Every trade, metric, and operation is transparent and independently verified.
+        </p>
+      </div>
+      
+      <!-- Real-time System Health -->
+      <div class="glass rounded-2xl p-8 mb-12">
+        <h3 class="text-xl font-semibold mb-6 text-center">Real-Time System Health</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <!-- System Status -->
+          <div class="text-center">
+            <div class="relative w-20 h-20 mx-auto mb-4">
+              <svg class="w-20 h-20 transform -rotate-90">
+                <circle cx="40" cy="40" r="36" stroke="currentColor" stroke-width="8" fill="none" class="text-grey/20"/>
+                <circle cx="40" cy="40" r="36" stroke="currentColor" stroke-width="8" fill="none" stroke-linecap="round" class="text-green-400" stroke-dasharray="226" stroke-dashoffset="4"/>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-lg font-bold text-green-400">99.9%</span>
+              </div>
+            </div>
+            <p class="text-sm font-medium">System Uptime</p>
+            <p class="text-xs text-text-tertiary">Last 30 days</p>
+          </div>
+          
+          <!-- API Health -->
+          <div class="text-center">
+            <div class="relative w-20 h-20 mx-auto mb-4">
+              <svg class="w-20 h-20 transform -rotate-90">
+                <circle cx="40" cy="40" r="36" stroke="currentColor" stroke-width="8" fill="none" class="text-grey/20"/>
+                <circle cx="40" cy="40" r="36" stroke="currentColor" stroke-width="8" fill="none" stroke-linecap="round" class="text-blue-400" stroke-dasharray="226" stroke-dashoffset="11"/>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-lg font-bold text-blue-400">95%</span>
+              </div>
+            </div>
+            <p class="text-sm font-medium">API Success Rate</p>
+            <p class="text-xs text-text-tertiary">Last hour</p>
+          </div>
+          
+          <!-- Trading Health -->
+          <div class="text-center">
+            <div class="relative w-20 h-20 mx-auto mb-4">
+              <svg class="w-20 h-20 transform -rotate-90">
+                <circle cx="40" cy="40" r="36" stroke="currentColor" stroke-width="8" fill="none" class="text-grey/20"/>
+                <circle cx="40" cy="40" r="36" stroke="currentColor" stroke-width="8" fill="none" stroke-linecap="round" class="text-accent" stroke-dasharray="226" stroke-dashoffset="0"/>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-lg font-bold text-accent">100%</span>
+              </div>
+            </div>
+            <p class="text-sm font-medium">Order Fill Rate</p>
+            <p class="text-xs text-text-tertiary">Today</p>
+          </div>
+          
+          <!-- Data Feed -->
+          <div class="text-center">
+            <div class="relative w-20 h-20 mx-auto mb-4">
+              <svg class="w-20 h-20 transform -rotate-90">
+                <circle cx="40" cy="40" r="36" stroke="currentColor" stroke-width="8" fill="none" class="text-grey/20"/>
+                <circle cx="40" cy="40" r="36" stroke="currentColor" stroke-width="8" fill="none" stroke-linecap="round" class="text-purple-400" stroke-dasharray="226" stroke-dashoffset="7"/>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-lg font-bold text-purple-400">97%</span>
+              </div>
+            </div>
+            <p class="text-sm font-medium">Data Quality</p>
+            <p class="text-xs text-text-tertiary">Real-time</p>
+          </div>
+        </div>
+        
+        <!-- Live Status Feed -->
+        <div class="bg-grey/10 rounded-xl p-4">
+          <h4 class="font-semibold mb-3">Live Status Feed</h4>
+          <div class="space-y-2 text-sm max-h-32 overflow-y-auto">
+            <div class="flex items-center space-x-3">
+              <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+              <span class="text-text-tertiary text-xs">14:23:01</span>
+              <span>All systems operational - 23 active strategies</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+              <span class="text-text-tertiary text-xs">14:22:45</span>
+              <span>Order execution successful - 47ms latency</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
+              <span class="text-text-tertiary text-xs">14:22:12</span>
+              <span>Market data sync completed - 0.2s lag</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+              <span class="text-text-tertiary text-xs">14:21:58</span>
+              <span>Risk checks passed - Portfolio within limits</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Audit Trail & Compliance -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        <!-- Audit Trail Example -->
+        <div class="glass rounded-2xl p-8 card-hover">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500/20 to-green-500/10 flex items-center justify-center mr-4">
+              <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold">Immutable Audit Trail</h3>
+          </div>
+          
+          <!-- Sample Audit Log -->
+          <div class="bg-black/40 rounded-lg p-4 mb-6 font-mono text-xs">
+            <div class="space-y-2">
+              <div class="text-green-400">2024-01-15T14:23:01.234Z</div>
+              <div class="text-blue-400">TRADE_EXECUTED</div>
+              <div class="text-text-secondary">{
+  "strategy_id": "ms_arb_001",
+  "asset": "ETH/USDC",
+  "quantity": 15.7834,
+  "price": 2341.56,
+  "exchange": "binance",
+  "tx_hash": "0xa1b2c3...",
+  "block": 18945672
+}</div>
+            </div>
+          </div>
+          
+          <div class="space-y-3 mb-4">
+            <div class="flex justify-between text-sm">
+              <span class="text-text-tertiary">Total Records</span>
+              <span class="font-mono">2,847,293</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-text-tertiary">Blockchain Anchored</span>
+              <span class="text-green-400">✓ Every 10 minutes</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-text-tertiary">Data Retention</span>
+              <span>7 years minimum</span>
+            </div>
+          </div>
+          
+          <button class="btn btn-secondary w-full py-3 rounded-lg">
+            Export Audit Logs →
+          </button>
+        </div>
+        
+        <!-- Regulatory Compliance -->
+        <div class="glass rounded-2xl p-8 card-hover">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-500/10 flex items-center justify-center mr-4">
+              <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold">Regulatory Status</h3>
+          </div>
+          
+          <div class="space-y-4 mb-6">
+            <div class="flex items-center justify-between p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
+              <div class="flex items-center space-x-3">
+                <span class="text-green-400">🇺🇸</span>
+                <span class="text-sm font-medium">SEC Registration</span>
+              </div>
+              <span class="text-xs text-green-400 bg-green-400/10 px-2 py-1 rounded">ACTIVE</span>
+            </div>
+            
+            <div class="flex items-center justify-between p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
+              <div class="flex items-center space-x-3">
+                <span class="text-green-400">🏛️</span>
+                <span class="text-sm font-medium">FINRA Member</span>
+              </div>
+              <span class="text-xs text-green-400 bg-green-400/10 px-2 py-1 rounded">CURRENT</span>
+            </div>
+            
+            <div class="flex items-center justify-between p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
+              <div class="flex items-center space-x-3">
+                <span class="text-green-400">🛡️</span>
+                <span class="text-sm font-medium">SIPC Protection</span>
+              </div>
+              <span class="text-xs text-green-400 bg-green-400/10 px-2 py-1 rounded">INSURED</span>
+            </div>
+            
+            <div class="flex items-center justify-between p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+              <div class="flex items-center space-x-3">
+                <span class="text-blue-400">🇪🇺</span>
+                <span class="text-sm font-medium">MiFID II Compliance</span>
+              </div>
+              <span class="text-xs text-blue-400 bg-blue-400/10 px-2 py-1 rounded">COMPLIANT</span>
+            </div>
+          </div>
+          
+          <div class="text-sm text-text-secondary mb-4">
+            <p>• Annual compliance audits by Ernst & Young</p>
+            <p>• Real-time regulatory reporting</p>
+            <p>• Automated KYC/AML screening</p>
+          </div>
+          
+          <button class="btn btn-secondary w-full py-3 rounded-lg">
+            View Compliance Reports →
+          </button>
+        </div>
+      </div>
+      
+      <!-- Insurance & Third-Party Attestations -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Insurance Coverage -->
+        <div class="glass rounded-2xl p-8">
+          <h3 class="text-xl font-semibold mb-6">Insurance Coverage</h3>
+          
+          <div class="space-y-4 mb-6">
+            <div class="bg-white/5 rounded-lg p-4">
+              <div class="flex justify-between items-center mb-2">
+                <span class="font-medium">Professional Liability</span>
+                <span class="text-accent">$50M</span>
+              </div>
+              <p class="text-sm text-text-secondary">Lloyd's of London • Policy #PL-2024-QE-001</p>
+            </div>
+            
+            <div class="bg-white/5 rounded-lg p-4">
+              <div class="flex justify-between items-center mb-2">
+                <span class="font-medium">Cyber Security</span>
+                <span class="text-blue-400">$25M</span>
+              </div>
+              <p class="text-sm text-text-secondary">AIG • Policy #CY-2024-QE-002</p>
+            </div>
+            
+            <div class="bg-white/5 rounded-lg p-4">
+              <div class="flex justify-between items-center mb-2">
+                <span class="font-medium">Directors & Officers</span>
+                <span class="text-purple-400">$10M</span>
+              </div>
+              <p class="text-sm text-text-secondary">Chubb • Policy #DO-2024-QE-003</p>
+            </div>
+          </div>
+          
+          <p class="text-xs text-text-tertiary mb-4">All policies current through December 2025</p>
+          
+          <div class="flex space-x-2">
+            <span class="text-xs text-accent bg-accent/10 px-2 py-1 rounded">AM Best A+ Rated</span>
+            <span class="text-xs text-blue-400 bg-blue-400/10 px-2 py-1 rounded">Annual Review</span>
+          </div>
+        </div>
+        
+        <!-- Third-Party Attestations -->
+        <div class="glass rounded-2xl p-8">
+          <h3 class="text-xl font-semibold mb-6">Third-Party Attestations</h3>
+          
+          <div class="space-y-4">
+            <div class="flex items-center space-x-4 p-3 bg-white/5 rounded-lg">
+              <div class="w-12 h-8 bg-white/10 rounded flex items-center justify-center">
+                <span class="text-xs font-bold">PwC</span>
+              </div>
+              <div class="flex-1">
+                <p class="font-medium text-sm">Performance Verification</p>
+                <p class="text-xs text-text-secondary">Monthly attestation of returns</p>
+              </div>
+              <span class="text-xs text-green-400">Current</span>
+            </div>
+            
+            <div class="flex items-center space-x-4 p-3 bg-white/5 rounded-lg">
+              <div class="w-12 h-8 bg-white/10 rounded flex items-center justify-center">
+                <span class="text-xs font-bold">EY</span>
+              </div>
+              <div class="flex-1">
+                <p class="font-medium text-sm">SOC 2 Audit</p>
+                <p class="text-xs text-text-secondary">Annual security controls review</p>
+              </div>
+              <span class="text-xs text-green-400">2024</span>
+            </div>
+            
+            <div class="flex items-center space-x-4 p-3 bg-white/5 rounded-lg">
+              <div class="w-12 h-8 bg-white/10 rounded flex items-center justify-center">
+                <span class="text-xs font-bold">KPMG</span>
+              </div>
+              <div class="flex-1">
+                <p class="font-medium text-sm">Risk Assessment</p>
+                <p class="text-xs text-text-secondary">Quarterly risk framework review</p>
+              </div>
+              <span class="text-xs text-accent">Q1 2024</span>
+            </div>
+            
+            <div class="flex items-center space-x-4 p-3 bg-white/5 rounded-lg">
+              <div class="w-12 h-8 bg-white/10 rounded flex items-center justify-center">
+                <span class="text-xs font-bold">TOB</span>
+              </div>
+              <div class="flex-1">
+                <p class="font-medium text-sm">Security Audit</p>
+                <p class="text-xs text-text-secondary">Smart contract & infrastructure</p>
+              </div>
+              <span class="text-xs text-blue-400">2024</span>
+            </div>
+          </div>
+          
+          <div class="mt-6 p-3 bg-accent/10 rounded-lg">
+            <p class="text-sm font-medium text-accent">Next Audit: March 2025</p>
+            <p class="text-xs text-text-secondary">Comprehensive third-party security review by Zellic</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
