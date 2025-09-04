@@ -957,10 +957,32 @@
     grad.addColorStop(1, 'rgba(0,255,198,0)');
     return grad;
   }
+  // simple glow plugin
+  const glow = {
+    id:'glow',
+    afterDatasetsDraw(chart,args,pluginOptions){
+      const {ctx, chartArea:{left,right,top,bottom}} = chart;
+      chart.data.datasets.forEach((ds,i)=>{
+        const meta = chart.getDatasetMeta(i);
+        if (!meta.data.length) return;
+        ctx.save();
+        ctx.shadowColor = 'rgba(20,184,166,.45)';
+        ctx.shadowBlur = 12;
+        ctx.lineWidth = 2.5;
+        ctx.strokeStyle = '#00FFC6';
+        ctx.beginPath();
+        meta.data.forEach((pt,idx)=>{ const {x,y}=pt.getProps(['x','y'], true); idx?ctx.lineTo(x,y):ctx.moveTo(x,y); });
+        ctx.stroke();
+        ctx.restore();
+      });
+    }
+  };
+
   function makeOptions(){
     return {
       responsive:true, maintainAspectRatio:false,
       interaction:{ intersect:false, mode:'index' },
+      animation:{ duration:900, easing:'easeOutCubic' },
       plugins:{
         legend:{ display:false },
         tooltip:{
@@ -974,7 +996,7 @@
         y:{ grid:{ color:'rgba(255,255,255,0.06)' }, ticks:{ color:'rgba(255,255,255,0.6)', callback:v=>v+'%' } }
       },
       elements:{
-        point:{ radius:3, hoverRadius:4, hitRadius:8, backgroundColor:'#00FFC6', borderWidth:0 },
+        point:{ radius:0, hoverRadius:4, hitRadius:8, backgroundColor:'#00FFC6', borderWidth:0 },
         line:{ borderColor:'#00FFC6', borderWidth:2, tension:0.35 }
       }
     };
