@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>QuantsEdge - Onchain AI Quant Trading & Fund-Grade Analytics</title>
@@ -87,19 +88,178 @@
                 linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
             opacity: 0.5;
+            animation: grid-float 20s linear infinite;
+        }
+        
+        @keyframes grid-float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(40px, 40px); }
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes glow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes scroll {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+            40% {
+                opacity: 1;
+            }
+            80% {
+                transform: translateY(8px);
+                opacity: 0;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        
+        @keyframes fade-in-up {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-delayed {
+            animation: float 6s ease-in-out infinite 2s;
+        }
+        
+        .gradient-animate {
+            background-size: 200% 200%;
+            animation: gradient-shift 3s ease infinite;
+        }
+        
+        .pulse-dot::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: inherit;
+            animation: pulse-ring 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            cursor: pointer;
+        }
+        
+        .scroll-indicator::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: var(--brand-teal);
+            border-radius: 2px;
+            animation: scroll 2s infinite;
+        }
+        
+        .animate-fade-in-up {
+            animation: fade-in-up 0.8s ease-out forwards;
+        }
+        
+        .animation-delay-200 {
+            animation-delay: 200ms;
+            opacity: 0;
+        }
+        
+        .animation-delay-400 {
+            animation-delay: 400ms;
+            opacity: 0;
+        }
+        
+        .animation-delay-600 {
+            animation-delay: 600ms;
+            opacity: 0;
         }
         
         .stats-card {
             background: linear-gradient(135deg, var(--card-bg) 0%, rgba(0, 255, 198, 0.02) 100%);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 198, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .stats-card:hover::before {
+            opacity: 1;
         }
         
         .stats-card:hover {
             border-color: rgba(0, 255, 198, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 255, 198, 0.1);
+        }
+        
+        .stats-card:hover .metric-value {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
         }
         
         .feature-card {
@@ -161,11 +321,6 @@
             height: 100%;
             background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
             animation: shimmer 2s infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
         }
         
         .metric-value {
@@ -278,25 +433,48 @@
 
 <section class="hero-bg min-h-screen flex items-center justify-center text-center py-32 px-4 sm:px-6 lg:px-8 relative">
 <div class="grid-overlay"></div>
+<div class="absolute inset-0 overflow-hidden">
+<div class="absolute top-20 left-10 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl floating"></div>
+<div class="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl floating-delayed"></div>
+<div class="absolute top-1/2 left-1/3 w-48 h-48 bg-purple-500/5 rounded-full blur-2xl floating"></div>
+</div>
 <div class="relative z-10 max-w-6xl mx-auto">
-<div class="mb-8">
-<span class="inline-flex items-center px-4 py-2 bg-card border border-gray-800 rounded-full text-sm text-muted">
-<span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+<div class="mb-8 animate-fade-in-up">
+<span class="inline-flex items-center px-4 py-2 bg-card border border-gray-800 rounded-full text-sm text-muted relative">
+<span class="w-2 h-2 bg-green-400 rounded-full mr-2 pulse-dot relative"></span>
 All systems operational
 </span>
 </div>
-<h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight max-w-5xl mx-auto mb-8">
+<h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight max-w-5xl mx-auto mb-8 animate-fade-in-up animation-delay-200">
 Onchain AI Quant Trading &<br/>
-<span class="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Fund-Grade Analytics</span>
+<span class="bg-gradient-to-r from-white via-teal-200 to-white bg-clip-text text-transparent gradient-animate">Fund-Grade Analytics</span>
 </h1>
-<p class="text-xl sm:text-2xl text-muted max-w-3xl mx-auto mb-12 leading-relaxed">
+<p class="text-xl sm:text-2xl text-muted max-w-3xl mx-auto mb-12 leading-relaxed animate-fade-in-up animation-delay-400">
 Non-custodial AI strategies for spot and perps, combining institutional grade backtesting with fund-grade execution.
 </p>
-<div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-<a class="brand-teal-button py-4 px-8 text-lg w-full sm:w-auto" href="#">Explore the Platform</a>
+<div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 animate-fade-in-up animation-delay-600">
+<a class="brand-teal-button py-4 px-8 text-lg w-full sm:w-auto relative overflow-hidden group" href="#">
+<span class="relative z-10">Explore the Platform</span>
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+</a>
 <a class="ghost-button py-4 px-8 text-lg w-full sm:w-auto" href="#">View Live Demo</a>
 </div>
+<div class="mt-20 grid grid-cols-3 gap-4 max-w-2xl mx-auto">
+<div class="text-center">
+<div class="text-2xl font-bold text-teal-400 mb-1">24/7</div>
+<div class="text-xs text-muted uppercase tracking-wider">Trading Active</div>
 </div>
+<div class="text-center">
+<div class="text-2xl font-bold text-blue-400 mb-1">&lt;100ms</div>
+<div class="text-xs text-muted uppercase tracking-wider">Latency</div>
+</div>
+<div class="text-center">
+<div class="text-2xl font-bold text-purple-400 mb-1">99.9%</div>
+<div class="text-xs text-muted uppercase tracking-wider">Uptime</div>
+</div>
+</div>
+</div>
+<div class="scroll-indicator"></div>
 </section>
 
 <section class="section-spacing bg-black">
@@ -436,24 +614,53 @@ View Full Case Study
 
 <div class="grid md:grid-cols-3 gap-8">
 <div class="team-card p-8 text-center">
-<img alt="Harrison V" class="w-24 h-24 rounded-2xl mx-auto mb-6 filter grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkUk5cMTmyKwnYRSZWsyVaYGqoQ13U_FBXtTu8sSJWYk-5JUoLkDCKviCYOmtMfxHXgCflruoPmr0zFvE-rtei25GhkwUo9wawH-wOBwhpqKgGmv2QSImuYfGPgZ9Ycyb0tPvPLXla83O0yrSWt6NhYMPsLBLE7A-Hx6yZAMCbNtPjT0_UEtTFktYIKtDf6AbANHmurXhqxiTS66JH3RNQHOS3ivyO2UJErIo6IFwmxzCC5_gS1NHL94wE-9eMHnhrBaeFIo46qPK8"/>
+<div class="w-24 h-24 rounded-2xl mx-auto mb-6 bg-gradient-to-br from-teal-400 to-blue-500 flex items-center justify-center relative overflow-hidden group">
+<div class="absolute inset-0 bg-black/20"></div>
+<span class="text-3xl font-bold text-white relative z-10">HV</span>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+</div>
 <h4 class="text-xl font-semibold text-white mb-2">Harrison V</h4>
 <div class="inline-flex items-center px-3 py-1 bg-teal-500/20 text-teal-300 rounded-full text-sm font-medium mb-4">Founder</div>
 <p class="text-muted text-sm leading-relaxed">Ex-quant strategist with TradFi and onchain experience. Focused on building institutional-grade infrastructure for digital assets.</p>
+<div class="flex justify-center space-x-3 mt-4">
+<a href="#" class="text-gray-500 hover:text-teal-400 transition-colors">
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+</a>
+<a href="#" class="text-gray-500 hover:text-teal-400 transition-colors">
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+</a>
+</div>
 </div>
 <div class="team-card p-8 text-center">
-<img alt="Dr. Dan He" class="w-24 h-24 rounded-2xl mx-auto mb-6 filter grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcvcrDYzKwAHa6FLBluF52bDdJ7ufBNy4Z2KUZgEZyiCBEYe_u8ORGm-7do5vgtIeNsETjgn7UNttt38B6M6j6Vic2PUm5_1NOiM7YdTHdQ8fSgAwzAiCYO3TgZwMfoM5w-DVRjoBfTBai6_mF0ZZrfd9Y2DW0nJ6ISQVg0hbqNSArPBp6_Xz_quWFcXYnNpDPOjttWpNw6JG-WIPGusrYoyq6ru8PVqLWj4JdVAsoKTKw8mgs6pMzkJGirW0hlGhNza1lGnN2pQ7t"/>
+<div class="w-24 h-24 rounded-2xl mx-auto mb-6 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center relative overflow-hidden group">
+<div class="absolute inset-0 bg-black/20"></div>
+<span class="text-3xl font-bold text-white relative z-10">DH</span>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+</div>
 <h4 class="text-xl font-semibold text-white mb-2">Dr. Dan He</h4>
 <div class="inline-flex items-center px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm font-medium mb-4">Chief Quant & AI</div>
 <p class="text-muted text-sm leading-relaxed">PhD UCLA, ex-IBM T.J. Watson. Award-winning AI/ML researcher specializing in reinforcement learning for financial modeling.</p>
+<div class="flex justify-center space-x-3 mt-4">
+<a href="#" class="text-gray-500 hover:text-blue-400 transition-colors">
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+</a>
+<a href="#" class="text-gray-500 hover:text-blue-400 transition-colors">
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+</a>
+</div>
 </div>
 <div class="team-card p-8 text-center">
-<div class="w-24 h-24 rounded-2xl mx-auto mb-6 bg-gradient-to-br from-gray-600/20 to-gray-700/20 flex items-center justify-center">
-<span class="material-symbols-outlined text-gray-400 text-3xl">group</span>
+<div class="w-24 h-24 rounded-2xl mx-auto mb-6 bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center relative overflow-hidden group">
+<div class="absolute inset-0 bg-black/20"></div>
+<span class="material-symbols-outlined text-white text-4xl relative z-10">group</span>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 </div>
 <h4 class="text-xl font-semibold text-white mb-2">Core Engineering</h4>
 <div class="inline-flex items-center px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm font-medium mb-4">Infrastructure</div>
 <p class="text-muted text-sm leading-relaxed">Veterans from top tech firms and DeFi protocols. Specializing in secure, scalable onchain infrastructure and low-latency execution.</p>
+<div class="flex justify-center space-x-3 mt-4">
+<span class="text-xs text-gray-500">5+ Engineers</span>
+</div>
 </div>
 </div>
 </div>
@@ -521,4 +728,5 @@ Launch Bot
 </div>
 </div>
 </footer>
-</body></html>
+</body>
+</html>
