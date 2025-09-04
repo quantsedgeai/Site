@@ -1,0 +1,13 @@
+Host github.com
+  HostName github.com
+  User git
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/SKEY
+
+Host gitlab.com
+  HostName gitlab.com
+  User gitx
+  AddKeysToAgent yesx
+  UseKeychain yes
+  IdentityFile ~/.ssh/SKEY
