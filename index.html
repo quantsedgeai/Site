@@ -15,7 +15,7 @@
   <meta name="twitter:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630' viewBox='0 0 1200 630'%3E%3Crect width='1200' height='630' fill='%230b1020'/%3E%3Crect x='450' y='165' width='300' height='300' rx='24' fill='%2314B8A6' transform='rotate(45 600 315)'/%3E%3Ctext x='600' y='520' font-family='Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif' font-size='46' fill='%23e5f1ff' text-anchor='middle'%3EQuantsEdge%3C/text%3E%3C/svg%3E" />
   
   <!-- Favicon (small inline SVG diamond) -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='10' fill='%230b1020'/%3E%3Crect x='8' y='8' width='32' height='32' rx='6' fill='%2314B8A6' transform='rotate(45 24 24)'/%3E%3C/svg%3E" />
+  <link rel="icon" type="image/png" href="https://cdn.builder.io/api/v1/image/assets%2Fa3ea07ea56cd4088a16a9fe470b52776%2Fb6c35856f9f24d8cb31738f76590c55e?format=webp&width=64" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,6 +32,7 @@
       --muted: #8FA3B8;
       --teal: #14B8A6;         /* accent */
       --teal-2: #2DD4BF;       /* hover */
+      --blue: #0EA5E9;         /* brand blue */
       --outline: #1b2733;
       --success: #22c55e;
       --danger: #f43f5e;
@@ -57,10 +58,10 @@
     .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; clip: rect(0,0,0,0); overflow: hidden; }
 
     /* BUTTONS */
-    .btn { display:inline-flex; align-items:center; gap:.6rem; padding:.9rem 1.1rem; border-radius:10px; border:1px solid transparent; font-weight:600; letter-spacing:.01em; transition:background .2s, border-color .2s, color .2s, transform .2s; }
+    .btn { display:inline-flex; align-items:center; gap:.6rem; padding:.9rem 1.1rem; border-radius:14px; border:1px solid transparent; font-weight:600; letter-spacing:.01em; transition:background .2s, border-color .2s, color .2s, transform .2s; }
     .btn:focus-visible { outline: 2px solid var(--teal-2); outline-offset: 2px; }
-    .btn-primary { background: linear-gradient(180deg, var(--teal), #19c9b9); color:#031310; border-color: rgba(20,184,166,.35); box-shadow: 0 8px 24px rgba(20,184,166,.28); }
-    .btn-primary:hover { background: linear-gradient(180deg, var(--teal-2), #44e1d2); transform: translateY(-1px); }
+    .btn-primary { background: linear-gradient(90deg, var(--teal) 0%, var(--blue) 100%); color:#f8ffff; border-color: rgba(46, 164, 240, .35); box-shadow: 0 8px 24px rgba(14,165,233,.25); }
+    .btn-primary:hover { background: linear-gradient(90deg, var(--teal-2) 0%, #38bdf8 100%); transform: translateY(-1px); }
     .btn-ghost { background: transparent; color: var(--text); border-color: var(--outline); }
     .btn-ghost:hover { border-color: var(--teal); color: var(--teal-2); transform: translateY(-1px); }
 
@@ -73,7 +74,7 @@
     .brand { display:flex; align-items:center; gap:.8rem; }
     .brand-logo { width: 36px; height: 36px; border-radius: 10px; display:grid; place-items:center; background: transparent; }
     .brand-wordmark { font-weight: 700; font-size: 1.15rem; letter-spacing:.02em; }
-    .brand svg { filter: drop-shadow(0 4px 14px rgba(20,184,166,.35)); }
+    .brand-logo img { filter: drop-shadow(0 4px 14px rgba(20,184,166,.35)); }
 
     nav.main-nav { display:flex; align-items:center; gap:1.2rem; }
     .nav-link { position:relative; color: var(--muted); font-weight: 600; padding:.6rem .5rem; border-radius: 8px; }
@@ -175,10 +176,7 @@
     <div class="container header-inner">
       <a href="#top" class="brand" aria-label="QuantsEdge — Back to top">
         <span class="brand-logo" aria-hidden="true">
-          <!-- Inline SVG diamond icon -->
-          <svg width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect x="8" y="8" width="32" height="32" rx="8" fill="var(--teal)" transform="rotate(45 24 24)"/>
-          </svg>
+          <img src="https://cdn.builder.io/api/v1/image/assets%2Fa3ea07ea56cd4088a16a9fe470b52776%2Fb6c35856f9f24d8cb31738f76590c55e?format=webp&width=256" alt="" width="24" height="24" />
         </span>
         <!-- Inline wordmark -->
         <span class="brand-wordmark" aria-hidden="false">QuantsEdge</span>
@@ -386,7 +384,7 @@ feed.on('tick', (t) => {
     <div class="container footer-inner">
       <span style="color:var(--muted);">© <span id="yr"></span> QuantsEdge. All rights reserved.</span>
       <div class="social" aria-label="Social links">
-        <a class="back-top" href="#top">Back to top ���</a>
+        <a class="back-top" href="#top">Back to top ↑</a>
         <a class="back-top" href="#x" aria-label="X / Twitter" title="X / Twitter">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4l8 9.5L9.5 20M20 20l-8-9.5L14.5 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         </a>
