@@ -120,21 +120,21 @@
       </div>
       
       <!-- Stats -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 fade-in stagger-4">
-        <div class="glass rounded-xl p-6">
-          <p class="mono text-2xl font-bold text-accent">$1.2B+</p>
+      <div class="hero-stats grid grid-cols-2 md:grid-cols-4 gap-6 fade-in stagger-4">
+        <div class="glass rounded-xl p-6 hover:scale-105 transition-transform duration-300">
+          <p class="mono text-2xl font-bold text-accent" data-counter="volume">$0.0B+</p>
           <p class="label text-text-tertiary mt-1">Volume Traded</p>
         </div>
-        <div class="glass rounded-xl p-6">
-          <p class="mono text-2xl font-bold">2.34</p>
+        <div class="glass rounded-xl p-6 hover:scale-105 transition-transform duration-300">
+          <p class="mono text-2xl font-bold" data-counter="sharpe">0.00</p>
           <p class="label text-text-tertiary mt-1">Sharpe Ratio</p>
         </div>
-        <div class="glass rounded-xl p-6">
-          <p class="mono text-2xl font-bold">287</p>
+        <div class="glass rounded-xl p-6 hover:scale-105 transition-transform duration-300">
+          <p class="mono text-2xl font-bold" data-counter="institutions">0</p>
           <p class="label text-text-tertiary mt-1">Institutions</p>
         </div>
-        <div class="glass rounded-xl p-6">
-          <p class="mono text-2xl font-bold text-green-400">99.98%</p>
+        <div class="glass rounded-xl p-6 hover:scale-105 transition-transform duration-300">
+          <p class="mono text-2xl font-bold text-green-400" data-counter="uptime">0.00%</p>
           <p class="label text-text-tertiary mt-1">Uptime</p>
         </div>
       </div>
@@ -364,7 +364,7 @@
       
       <!-- Team Grid -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="text-center">
+        <div class="text-center group/card">
           <div class="relative w-40 h-40 mx-auto mb-6 group">
             <!-- Subtle glow effect on hover -->
             <div class="absolute inset-0 rounded-full bg-gradient-to-r from-accent/20 to-accent/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -378,6 +378,20 @@
                 <span class="text-4xl text-accent/50">HV</span>
               </div>
             </div>
+            
+            <!-- Social Links Overlay -->
+            <div class="absolute inset-0 rounded-full bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
+              <a href="https://linkedin.com/in/harrisonvance" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-white/20 hover:bg-accent/30 flex items-center justify-center transition-colors group/link">
+                <svg class="w-5 h-5 text-white group-hover/link:text-accent transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </a>
+              <a href="https://twitter.com/harrisonvance" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-white/20 hover:bg-accent/30 flex items-center justify-center transition-colors group/link">
+                <svg class="w-5 h-5 text-white group-hover/link:text-accent transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                </svg>
+              </a>
+            </div>
           </div>
           <h3 class="text-lg font-semibold">Harrison Vance</h3>
           <p class="text-accent text-sm mb-2">Founder & CEO</p>
@@ -386,7 +400,7 @@
           </p>
         </div>
         
-        <div class="text-center">
+        <div class="text-center group/card">
           <div class="relative w-40 h-40 mx-auto mb-6 group">
             <!-- Subtle glow effect on hover -->
             <div class="absolute inset-0 rounded-full bg-gradient-to-r from-accent/20 to-accent/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -400,6 +414,20 @@
                 <span class="text-4xl text-purple-400/50">DH</span>
               </div>
             </div>
+            
+            <!-- Social Links Overlay -->
+            <div class="absolute inset-0 rounded-full bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
+              <a href="https://linkedin.com/in/drdanhe" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-white/20 hover:bg-purple-400/30 flex items-center justify-center transition-colors group/link">
+                <svg class="w-5 h-5 text-white group-hover/link:text-purple-400 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </a>
+              <a href="https://twitter.com/drdanhe" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-white/20 hover:bg-purple-400/30 flex items-center justify-center transition-colors group/link">
+                <svg class="w-5 h-5 text-white group-hover/link:text-purple-400 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                </svg>
+              </a>
+            </div>
           </div>
           <h3 class="text-lg font-semibold">Dr. Dan He</h3>
           <p class="text-purple-400 text-sm mb-2">Chief Technology Officer</p>
@@ -408,7 +436,7 @@
           </p>
         </div>
         
-        <div class="text-center">
+        <div class="text-center group/card">
           <div class="relative w-40 h-40 mx-auto mb-6 group">
             <!-- Subtle glow effect on hover -->
             <div class="absolute inset-0 rounded-full bg-gradient-to-r from-accent/20 to-accent/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -421,6 +449,20 @@
               <div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-blue-500/10 hidden items-center justify-center">
                 <span class="text-4xl text-blue-400/50">DM</span>
               </div>
+            </div>
+            
+            <!-- Social Links Overlay -->
+            <div class="absolute inset-0 rounded-full bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
+              <a href="https://linkedin.com/in/dmitrymotora" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-white/20 hover:bg-blue-400/30 flex items-center justify-center transition-colors group/link">
+                <svg class="w-5 h-5 text-white group-hover/link:text-blue-400 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </a>
+              <a href="https://twitter.com/dmitrymotora" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-white/20 hover:bg-blue-400/30 flex items-center justify-center transition-colors group/link">
+                <svg class="w-5 h-5 text-white group-hover/link:text-blue-400 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                </svg>
+              </a>
             </div>
           </div>
           <h3 class="text-lg font-semibold">Dmitry Motora</h3>
@@ -457,6 +499,63 @@
         <p class="text-xs text-text-tertiary mt-6">
           * Minimum AUM requirement: $10M
         </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="py-24 px-6">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-10">
+        <p class="label text-accent mb-4">Questions</p>
+        <h2 class="display text-4xl sm:text-5xl mb-4">Frequently Asked Questions</h2>
+        <p class="text-text-secondary">Answers to common questions from institutional partners.</p>
+      </div>
+      
+      <div class="space-y-4" id="faq-accordion">
+        <!-- Item 1 -->
+        <div class="glass rounded-xl overflow-hidden">
+          <button class="w-full text-left px-6 py-4 flex justify-between items-center faq-toggle">
+            <span class="font-medium">How do you ensure non-custodial execution?</span>
+            <span class="text-text-tertiary">+</span>
+          </button>
+          <div class="px-6 pb-4 hidden faq-content text-text-secondary">
+            We never take custody. Strategies execute via your whitelisted wallets with MPC authorization and on-chain audit trails.
+          </div>
+        </div>
+        
+        <!-- Item 2 -->
+        <div class="glass rounded-xl overflow-hidden">
+          <button class="w-full text-left px-6 py-4 flex justify-between items-center faq-toggle">
+            <span class="font-medium">What are your fees and minimum AUM?</span>
+            <span class="text-text-tertiary">+</span>
+          </button>
+          <div class="px-6 pb-4 hidden faq-content text-text-secondary">
+            Minimum AUM is $10M. Fees are performance-aligned and vary by strategy and integration level.
+          </div>
+        </div>
+        
+        <!-- Item 3 -->
+        <div class="glass rounded-xl overflow-hidden">
+          <button class="w-full text-left px-6 py-4 flex justify-between items-center faq-toggle">
+            <span class="font-medium">Do you offer custom mandates?</span>
+            <span class="text-text-tertiary">+</span>
+          </button>
+          <div class="px-6 pb-4 hidden faq-content text-text-secondary">
+            Yes. We support mandate customization including risk constraints, asset universe, and venue preferences.
+          </div>
+        </div>
+        
+        <!-- Item 4 -->
+        <div class="glass rounded-xl overflow-hidden">
+          <button class="w-full text-left px-6 py-4 flex justify-between items-center faq-toggle">
+            <span class="font-medium">How is performance verified?</span>
+            <span class="text-text-tertiary">+</span>
+          </button>
+          <div class="px-6 pb-4 hidden faq-content text-text-secondary">
+            All trades are on-chain. We provide verifiable proofs, third-party attestations, and downloadable audit logs.
+          </div>
+        </div>
       </div>
     </div>
   </section>
