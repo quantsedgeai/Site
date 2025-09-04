@@ -1,732 +1,1073 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>QuantsEdge - Onchain AI Quant Trading & Fund-Grade Analytics</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-<style type="text/tailwindcss">
-        :root {
-            --brand-teal: #00FFC6;
-            --brand-blue: #3B82F6;
-            --card-bg: #0A0A0A;
-            --border-color: #1F1F1F;
-            --text-muted: #6B7280;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #000000;
-            color: #FFFFFF;
-            font-weight: 400;
-        }
-        
-        .font-inter {
-            font-family: 'Inter', sans-serif;
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 600;
-            letter-spacing: -0.025em;
-        }
-        
-        .bg-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-        }
-        
-        .text-muted {
-            color: var(--text-muted);
-        }
-        
-        .brand-teal-button {
-            background-color: var(--brand-teal);
-            color: #000000;
-            font-weight: 600;
-            transition: all 0.2s ease;
-            border-radius: 8px;
-        }
-        
-        .brand-teal-button:hover {
-            background-color: #00E5B3;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 255, 198, 0.3);
-        }
-        
-        .ghost-button {
-            border: 1px solid var(--border-color);
-            color: #FFFFFF;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            border-radius: 8px;
-            background: transparent;
-        }
-        
-        .ghost-button:hover {
-            background-color: rgba(255, 255, 255, 0.05);
-            border-color: var(--brand-teal);
-            transform: translateY(-1px);
-        }
-        
-        .hero-bg {
-            position: relative;
-            overflow: hidden;
-            background: radial-gradient(ellipse at center top, rgba(0, 255, 198, 0.08) 0%, transparent 70%),
-                        linear-gradient(180deg, #000000 0%, #050505 100%);
-        }
-        
-        .grid-overlay {
-            position: absolute;
-            inset: 0;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px;
-            opacity: 0.5;
-            animation: grid-float 20s linear infinite;
-        }
-        
-        @keyframes grid-float {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(40px, 40px); }
-        }
-        
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        @keyframes glow {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-        
-        @keyframes gradient-shift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        @keyframes pulse-ring {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1.5);
-                opacity: 0;
-            }
-        }
-        
-        @keyframes scroll {
-            0% {
-                transform: translateY(0);
-                opacity: 0;
-            }
-            40% {
-                opacity: 1;
-            }
-            80% {
-                transform: translateY(8px);
-                opacity: 0;
-            }
-            100% {
-                opacity: 0;
-            }
-        }
-        
-        @keyframes fade-in-up {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .floating-delayed {
-            animation: float 6s ease-in-out infinite 2s;
-        }
-        
-        .gradient-animate {
-            background-size: 200% 200%;
-            animation: gradient-shift 3s ease infinite;
-        }
-        
-        .pulse-dot::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: inherit;
-            animation: pulse-ring 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
-        }
-        
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 24px;
-            height: 40px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 12px;
-            cursor: pointer;
-        }
-        
-        .scroll-indicator::after {
-            content: '';
-            position: absolute;
-            top: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 8px;
-            background: var(--brand-teal);
-            border-radius: 2px;
-            animation: scroll 2s infinite;
-        }
-        
-        .animate-fade-in-up {
-            animation: fade-in-up 0.8s ease-out forwards;
-        }
-        
-        .animation-delay-200 {
-            animation-delay: 200ms;
-            opacity: 0;
-        }
-        
-        .animation-delay-400 {
-            animation-delay: 400ms;
-            opacity: 0;
-        }
-        
-        .animation-delay-600 {
-            animation-delay: 600ms;
-            opacity: 0;
-        }
-        
-        .stats-card {
-            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(0, 255, 198, 0.02) 100%);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .stats-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0, 255, 198, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .stats-card:hover::before {
-            opacity: 1;
-        }
-        
-        .stats-card:hover {
-            border-color: rgba(0, 255, 198, 0.3);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 255, 198, 0.1);
-        }
-        
-        .stats-card:hover .metric-value {
-            transform: scale(1.05);
-            transition: transform 0.3s ease;
-        }
-        
-        .feature-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent 0%, var(--brand-teal) 50%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .feature-card:hover::before {
-            opacity: 1;
-        }
-        
-        .feature-card:hover {
-            border-color: rgba(0, 255, 198, 0.2);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
-        }
-        
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            color: var(--brand-teal);
-            font-size: 28px;
-        }
-        
-        .live-badge {
-            background: linear-gradient(135deg, var(--brand-teal) 0%, #00E5B3 100%);
-            color: #000;
-            font-weight: 600;
-            font-size: 0.75rem;
-            padding: 4px 8px;
-            border-radius: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .live-badge::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
-            animation: shimmer 2s infinite;
-        }
-        
-        .metric-value {
-            font-weight: 700;
-            font-size: 2.5rem;
-            line-height: 1;
-            background: linear-gradient(135deg, #FFFFFF 0%, var(--brand-teal) 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .chart-container {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .team-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .team-card:hover {
-            border-color: rgba(0, 255, 198, 0.3);
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-        
-        .cta-section {
-            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(0, 255, 198, 0.03) 100%);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, transparent 0%, rgba(0, 255, 198, 0.1) 100%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-        
-        .cta-section:hover::before {
-            opacity: 1;
-        }
-        
-        .nav-link {
-            color: var(--text-muted);
-            transition: all 0.2s ease;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-        
-        .nav-link:hover {
-            color: var(--brand-teal);
-        }
-        
-        .section-spacing {
-            padding: 6rem 0;
-        }
-        
-        @media (max-width: 768px) {
-            .section-spacing {
-                padding: 4rem 0;
-            }
-            .metric-value {
-                font-size: 2rem;
-            }
-        }
-    </style>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>QuantsEdge – AI-Powered On-Chain Quant Trading & Fund-Grade Analytics</title>
+  <meta name="description"
+    content="QuantsEdge is an AI-powered, non-custodial quant trading platform. Backtest, optimize, and deploy institutional-grade strategies across Ethereum, Base, Arbitrum, Avalanche, and BNB Chain.">
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <link rel="canonical" href="https://quantsedge.ai/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="QuantsEdge – AI-Powered On-Chain Quant Trading" />
+  <meta property="og:description"
+    content="Backtest, optimize, and deploy AI strategies with non-custodial execution and fund-grade analytics." />
+  <meta property="og:url" content="https://quantsedge.ai/" />
+  <meta property="og:site_name" content="QuantsEdge" />
+  <meta property="og:image" content="https://quantsedge.ai/assets/images/og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="QuantsEdge – AI-Powered On-Chain Quant Trading" />
+  <meta name="twitter:description"
+    content="Backtest, optimize, and deploy AI strategies with non-custodial execution and fund-grade analytics." />
+  <meta name="twitter:image" content="https://quantsedge.ai/assets/images/og.jpg" />
+  <meta name="twitter:site" content="@quantsedge" />
+
+  <!-- Language/alternates -->
+  <link rel="alternate" href="https://quantsedge.ai/" hreflang="en" />
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+
+  <!-- Favicons / PWA -->
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/images/favicon-48.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/favicon-192.png">
+  <link rel="alternate icon" type="image/png" sizes="512x512" href="/assets/images/favicon-512.png">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon-180.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#0a0a0a">
+
+  <!-- Tailwind + Fonts -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <style>
+    :root {
+      --brand-teal: #00FFC6;
+      --brand-teal-dark: #00E6B3;
+      --dark-bg: #0a0a0a;
+      --card-bg: #111111;
+      --border-color: #1a1a1a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--dark-bg);
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--brand-teal) 0%, #ffffff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .glass-card {
+      background: rgba(17, 17, 17, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      transition: all .3s ease;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(0, 255, 198, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 255, 198, 0.1);
+      transform: translateY(-4px);
+    }
+
+    /* Feature polish */
+    .feature-card { position: relative; overflow: hidden; }
+    .feature-card::before { content:""; position:absolute; left:0; right:0; top:0; height:2px; background:linear-gradient(90deg, rgba(0,255,198,.4), rgba(0,255,198,0)); opacity:.6; }
+    .feature-card::after { content:""; position:absolute; width:160px; height:160px; right:-60px; top:-60px; border-radius:50%; background: radial-gradient(circle at 60% 40%, rgba(0,255,198,.15), rgba(0,255,198,0) 60%); filter: blur(8px); animation: drift 8s ease-in-out infinite alternate; }
+    @keyframes drift { from { transform: translateY(0); } to { transform: translateY(12px); } }
+
+    .feature-icon { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:10px; background: radial-gradient(circle at 30% 30%, rgba(0,255,198,.18), rgba(0,255,198,.05)); border:1px solid rgba(255,255,255,.08); box-shadow: 0 4px 18px rgba(0,255,198,.08); transition: transform .2s ease; }
+    .group:hover .feature-icon { transform: translateY(-2px); }
+
+    .feature-bullet { transition: transform .2s ease, color .2s ease; }
+    .group:hover .feature-bullet { transform: translateX(3px); color: #2dd4bf; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand-teal) 0%, var(--brand-teal-dark) 100%);
+      color: #000;
+      font-weight: 600;
+      transition: all .3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .2), transparent);
+      transition: left .5s;
+    }
+
+    .btn-primary:hover:before {
+      left: 100%;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 255, 198, 0.4);
+    }
+
+    .btn-ghost {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-weight: 500;
+      backdrop-filter: blur(10px);
+      transition: all .3s ease;
+    }
+
+    .btn-ghost:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: var(--brand-teal);
+      color: var(--brand-teal);
+      transform: translateY(-2px);
+    }
+
+    .hero-gradient {
+      background: radial-gradient(ellipse at center, rgba(0, 255, 198, 0.08) 0%, transparent 70%);
+    }
+
+    .floating-animation {
+      animation: floating 6s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    .tech-grid {
+      background-image: linear-gradient(rgba(0, 255, 198, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 198, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: grid-flow 20s linear infinite;
+    }
+
+    @keyframes grid-flow {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 40px 40px;
+      }
+    }
+
+    .pulse-glow {
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+
+      0%,
+      100% {
+        box-shadow: 0 0 20px rgba(0, 255, 198, 0.1);
+      }
+
+      50% {
+        box-shadow: 0 0 40px rgba(0, 255, 198, 0.3);
+      }
+    }
+
+    .typewriter {
+      overflow: hidden;
+      border-right: 3px solid var(--brand-teal);
+      white-space: nowrap;
+      animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+
+      to {
+        width: 100%;
+      }
+    }
+
+    @keyframes blink-caret {
+
+      from,
+      to {
+        border-color: transparent;
+      }
+
+      50% {
+        border-color: var(--brand-teal);
+      }
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      40% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+
+      60% {
+        transform: translateX(-50%) translateY(-5px);
+      }
+    }
+
+    .interactive-demo {
+      cursor: pointer;
+      transition: all .3s ease;
+    }
+
+    .interactive-demo:hover { transform: scale(1.02); }
+
+    .reveal{opacity:0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease}
+    .reveal.visible{opacity:1; transform:none}
+    #hero-particles{position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.35}
+
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform .3s ease;
+    }
+
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    .nav-item {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-item::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: var(--brand-teal);
+      transition: width .3s ease;
+    }
+
+    .nav-item:hover::before {
+      width: 100%;
+    }
+
+    .feature-icon {
+      background: linear-gradient(135deg, var(--brand-teal) 0%, rgba(0, 255, 198, 0.3) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 3rem;
+    }
+
+    .testimonial-card {
+      background: linear-gradient(145deg, rgba(17, 17, 17, .8), rgba(26, 26, 26, .6));
+      border: 1px solid rgba(255, 255, 255, .05);
+    }
+
+    .cta-section {
+      background: linear-gradient(135deg, rgba(0, 255, 198, .1) 0%, rgba(0, 255, 198, .05) 50%, transparent 100%);
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    #menu-overlay {
+      transition: opacity .3s ease;
+    }
+
+    #menu-overlay.opacity-0 {
+      pointer-events: none !important;
+    }
+
+    /* NEW: robust scroll lock + iOS momentum scrolling */
+    html.menu-open,
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    #mobile-menu {
+      -webkit-overflow-scrolling: touch;
+    }
+
+    @media (max-width: 768px) {
+      .typewriter {
+        animation: none;
+        border-right: none;
+        white-space: normal;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition: none !important;
+      }
+    }
+    /* Header/Footer gradient accent bars */
+    #navbar{position:fixed;}
+    #navbar::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#14B8A6,#0EA5E9);opacity:.95}
+    footer{position:relative;}
+    footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#14B8A6,#0EA5E9);opacity:.9}
+  </style>
 </head>
-<body class="bg-black font-inter">
-<header class="absolute top-0 left-0 right-0 z-50 py-4 px-4 sm:px-6 lg:px-8">
-<div class="container mx-auto">
-<div class="bg-card rounded-2xl px-6 py-4 backdrop-blur-sm">
-<div class="flex justify-between items-center">
-<div class="flex items-center space-x-3">
-<div class="w-10 h-10 bg-gradient-to-br from-white to-gray-300 rounded-xl flex items-center justify-center">
-<svg class="h-6 w-6 text-black" fill="currentColor" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
-<path d="M15.4287 31.5L25.2144 10.5L31.5001 19.3286" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
-<path d="M10.5 21L15.4286 21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
-</svg>
-</div>
-<span class="text-2xl font-bold text-white font-inter">QuantsEdge</span>
-<div class="live-badge ml-3">Live</div>
-</div>
-<nav class="hidden md:flex items-center space-x-8">
-<a class="nav-link" href="#">Platform</a>
-<a class="nav-link" href="#">Markets</a>
-<a class="nav-link" href="#">Analytics</a>
-<a class="nav-link" href="#">Support</a>
-</nav>
-<div class="flex items-center space-x-4">
-<a class="ghost-button py-2 px-4 text-sm hidden md:block" href="#">Dashboard</a>
-<a class="brand-teal-button py-2 px-6 text-sm" href="#">Launch Bot</a>
-</div>
-</div>
-</div>
-</div>
-</header>
 
-<section class="hero-bg min-h-screen flex items-center justify-center text-center py-32 px-4 sm:px-6 lg:px-8 relative">
-<div class="grid-overlay"></div>
-<div class="absolute inset-0 overflow-hidden">
-<div class="absolute top-20 left-10 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl floating"></div>
-<div class="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl floating-delayed"></div>
-<div class="absolute top-1/2 left-1/3 w-48 h-48 bg-purple-500/5 rounded-full blur-2xl floating"></div>
-</div>
-<div class="relative z-10 max-w-6xl mx-auto">
-<div class="mb-8 animate-fade-in-up">
-<span class="inline-flex items-center px-4 py-2 bg-card border border-gray-800 rounded-full text-sm text-muted relative">
-<span class="w-2 h-2 bg-green-400 rounded-full mr-2 pulse-dot relative"></span>
-All systems operational
-</span>
-</div>
-<h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight max-w-5xl mx-auto mb-8 animate-fade-in-up animation-delay-200">
-Onchain AI Quant Trading &<br/>
-<span class="bg-gradient-to-r from-white via-teal-200 to-white bg-clip-text text-transparent gradient-animate">Fund-Grade Analytics</span>
-</h1>
-<p class="text-xl sm:text-2xl text-muted max-w-3xl mx-auto mb-12 leading-relaxed animate-fade-in-up animation-delay-400">
-Non-custodial AI strategies for spot and perps, combining institutional grade backtesting with fund-grade execution.
-</p>
-<div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 animate-fade-in-up animation-delay-600">
-<a class="brand-teal-button py-4 px-8 text-lg w-full sm:w-auto relative overflow-hidden group" href="#">
-<span class="relative z-10">Explore the Platform</span>
-<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-</a>
-<a class="ghost-button py-4 px-8 text-lg w-full sm:w-auto" href="#">View Live Demo</a>
-</div>
-<div class="mt-20 grid grid-cols-3 gap-4 max-w-2xl mx-auto">
-<div class="text-center">
-<div class="text-2xl font-bold text-teal-400 mb-1">24/7</div>
-<div class="text-xs text-muted uppercase tracking-wider">Trading Active</div>
-</div>
-<div class="text-center">
-<div class="text-2xl font-bold text-blue-400 mb-1">&lt;100ms</div>
-<div class="text-xs text-muted uppercase tracking-wider">Latency</div>
-</div>
-<div class="text-center">
-<div class="text-2xl font-bold text-purple-400 mb-1">99.9%</div>
-<div class="text-xs text-muted uppercase tracking-wider">Uptime</div>
-</div>
-</div>
-</div>
-<div class="scroll-indicator"></div>
-</section>
+<body>
+  <nav
+    class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-black/60 md:backdrop-blur shadow-[0_1px_0_0_rgba(255,255,255,0.06)] pt-[env(safe-area-inset-top)]"
+    id="navbar">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div class="flex justify-between items-center">
+        <a class="flex items-center space-x-2" href="#">
+          <img class="h-8 w-8 object-contain" src="https://cdn.builder.io/api/v1/image/assets%2Fa3ea07ea56cd4088a16a9fe470b52776%2F1057cb999f8b48b5bb0e2e55d82f5232?format=webp&width=128" alt="QuantsEdge logo" width="32" height="32" />
+          <span class="text-2xl font-bold text-white">QuantsEdge</span>
+        </a>
+        <div class="hidden lg:flex items-center space-x-8">
+          <a class="nav-item text-gray-300 hover:text-white transition px-2 py-1" href="#platform">Platform</a>
+          <a class="nav-item text-gray-300 hover:text-white transition px-2 py-1" href="#features">Features</a>
+          <a class="nav-item text-gray-300 hover:text-white transition px-2 py-1" href="#performance">Performance</a>
+          <a class="nav-item text-gray-300 hover:text-white transition px-2 py-1" href="#team">Team</a>
+          <a class="nav-item text-gray-300 hover:text-white transition px-2 py-1"
+            href="https://quantsedge.gitbook.io/quantsedge-docs/">Documentation</a>
+        </div>
+        <div class="flex items-center space-x-4">
+          <button class="btn-ghost px-4 py-2 rounded-lg hidden lg:block">Sign In</button>
+          <button class="btn-primary hidden md:inline-flex px-4 py-2 text-sm rounded-lg">Request Access</button>
+          <button class="lg:hidden text-white" id="mobile-menu-btn" aria-label="Open menu">
+          <span class="material-icons">menu</span>
+        </button>
+        </div>
+      </div>
+    </div>
 
-<section class="section-spacing bg-black">
-<div class="container mx-auto px-4 sm:px-6 lg:px-8">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
-<div class="stats-card p-6 text-center">
-<div class="metric-value mb-2">$124.5K</div>
-<div class="text-sm text-muted uppercase tracking-wider mb-1">Total Equity</div>
-<div class="text-sm text-green-400">+3.1% 24h</div>
-</div>
-<div class="stats-card p-6 text-center">
-<div class="metric-value mb-2">&lt;100ms</div>
-<div class="text-sm text-muted uppercase tracking-wider mb-1">Execution Latency</div>
-<div class="text-sm text-blue-400">Institutional Grade</div>
-</div>
-<div class="stats-card p-6 text-center">
-<div class="metric-value mb-2">28</div>
-<div class="text-sm text-muted uppercase tracking-wider mb-1">Active Bots</div>
-<div class="text-sm text-green-400">12.4% avg performance</div>
-</div>
-<div class="stats-card p-6 text-center">
-<div class="metric-value mb-2">99.9%</div>
-<div class="text-sm text-muted uppercase tracking-wider mb-1">Uptime</div>
-<div class="text-sm text-green-400">24/7 Coverage</div>
-</div>
-</div>
+    <!-- NEW: overlay starts hidden and is removed from hit-testing when closed -->
+    <div id="menu-overlay"
+      class="fixed inset-0 bg-black/60 opacity-0 pointer-events-none transition-opacity duration-300 z-40 hidden"></div>
 
-<div class="text-center max-w-4xl mx-auto mb-16">
-<h2 class="text-4xl sm:text-5xl font-bold text-white mb-6">Built for Funds, Traders, and Token Teams</h2>
-<p class="text-xl text-muted leading-relaxed">QuantsEdge provides institutional-grade infrastructure for liquidity, execution, and systematic strategy deployment.</p>
-</div>
+    <!-- NEW: drawer uses dynamic viewport height and its own scroll -->
+    <div id="mobile-menu"
+      class="mobile-menu fixed top-0 right-0 h-dvh w-[88vw] max-w-sm bg-black/95 backdrop-blur-xl border-l border-white/10 z-50 lg:hidden translate-x-full transition-transform duration-300 overflow-y-auto">
+      <div class="p-6 h-full flex flex-col">
+        <button class="ml-auto text-white/80 hover:text-white mb-4" id="close-menu" aria-label="Close">
+        <span class="material-icons text-2xl">close</span>
+      </button>
+        <nav class="flex-1">
+          <ul class="space-y-3 text-xl">
+            <li><a class="block px-2 py-2 rounded hover:bg-white/5" href="#platform">Platform</a></li>
+            <li><a class="block px-2 py-2 rounded hover:bg-white/5" href="#features">Features</a></li>
+            <li><a class="block px-2 py-2 rounded hover:bg-white/5" href="#performance">Performance</a></li>
+            <li><a class="block px-2 py-2 rounded hover:bg-white/5" href="#team">Team</a></li>
+          </ul>
+          <div class="my-6 border-t border-white/10"></div>
+          <div class="space-y-3">
+            <a href="#" class="btn-ghost block w-full h-12 rounded-lg text-center leading-[48px]">Sign In</a>
+            <a href="#"
+              class="btn-primary block w-full h-12 rounded-lg text-center leading-[48px] font-semibold">Request
+              Access</a>
+          </div>
+        </nav>
+        <div class="mt-auto text-xs text-white/40">© QuantsEdge</div>
+      </div>
+    </div>
+  </nav>
 
-<div class="grid md:grid-cols-3 gap-8">
-<div class="feature-card p-8 text-center">
-<div class="w-16 h-16 bg-gradient-to-br from-blue-500/20 to-blue-600/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-<span class="material-symbols-outlined text-blue-400">trending_up</span>
-</div>
-<h3 class="text-2xl font-semibold text-white mb-4">Token Teams</h3>
-<p class="text-muted leading-relaxed">Stabilize liquidity and trading volume on launch without third-party market makers. Maintain healthy price action.</p>
-</div>
-<div class="feature-card p-8 text-center">
-<div class="w-16 h-16 bg-gradient-to-br from-teal-500/20 to-green-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-<span class="material-symbols-outlined">auto_awesome</span>
-</div>
-<h3 class="text-2xl font-semibold text-white mb-4">Quant Traders</h3>
-<p class="text-muted leading-relaxed">Backtest, optimize, and deploy systematic spot + perp strategies with AI parameter sweeps and real-time optimization.</p>
-</div>
-<div class="feature-card p-8 text-center">
-<div class="w-16 h-16 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-<span class="material-symbols-outlined text-purple-400">security</span>
-</div>
-<h3 class="text-2xl font-semibold text-white mb-4">Funds</h3>
-<p class="text-muted leading-relaxed">Secure, non-custodial execution with institutional-grade latency, risk modeling, and compliance-ready transparency.</p>
-</div>
-</div>
-</div>
-</section>
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden" id="hero">
+    <div class="absolute inset-0 hero-gradient"></div>
+    <div class="absolute inset-0 tech-grid opacity-30"></div>
+    <canvas id="hero-particles" aria-hidden="true"></canvas>
+    <div class="absolute top-20 left-10 w-2 h-2 bg-teal-400 rounded-full floating-animation"
+      style="animation-delay: 0s;"></div>
+    <div class="absolute top-40 right-20 w-3 h-3 bg-teal-400 rounded-full floating-animation"
+      style="animation-delay: 1s;"></div>
+    <div class="absolute bottom-40 left-20 w-2 h-2 bg-teal-400 rounded-full floating-animation"
+      style="animation-delay: 2s;"></div>
+    <div class="absolute bottom-20 right-10 w-3 h-3 bg-teal-400 rounded-full floating-animation"
+      style="animation-delay: 3s;"></div>
+    <div class="relative z-10 text-center px-6 max-w-6xl mx-auto reveal">
+      <div class="mb-6">
+        <span class="inline-flex items-center px-4 py-2 rounded-full border border-teal-400/20 bg-teal-400/5 text-teal-400 text-sm font-medium">
+        <span class="material-icons text-sm mr-2">auto_awesome</span>
+        The Future of Quantitative Trading is Here
+        </span>
+      </div>
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold mb-6 leading-tight">
+        <span class="gradient-text typewriter">Outperform the Market</span><br/>
+        <span class="text-white">with AI-Powered Alpha</span>
+      </h1>
+      <p class="text-base sm:text-lg md:text-xl text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed">
+        QuantsEdge is an AI-powered, non-custodial quant trading platform. Backtest, optimize, and deploy
+        institutional-grade strategies across Ethereum, Base, Arbitrum, Avalanche, and BNB Chain.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+        <a href="https://quantsedge.gitbook.io/quantsedge-docs/" target="_blank" rel="noopener noreferrer"
+          class="btn-primary px-8 py-4 rounded-lg text-lg font-semibold w-full sm:w-auto">
+          Unlock Your Trading Edge
+        </a>
 
-<section class="section-spacing bg-card">
-<div class="container mx-auto px-4 sm:px-6 lg:px-8">
-<div class="text-center max-w-4xl mx-auto mb-16">
-<h2 class="text-4xl sm:text-5xl font-bold text-white mb-6">Advanced Trading Infrastructure</h2>
-<p class="text-xl text-muted leading-relaxed">Professional-grade tools and analytics built for institutional success.</p>
-</div>
+        <a href="https://www.youtube.com/channel/UCToVP-sm5mIXUTIvZ6z9ZwA" target="_blank" rel="noopener noreferrer"
+          class="btn-ghost px-8 py-4 rounded-lg text-lg font-medium w-full sm:w-auto flex items-center justify-center">
+          <span class="material-icons mr-2">play_circle</span>
+          See How It Works
+        </a>
+      </div>
+      <div class="flex justify-center items-center space-x-8 text-sm text-gray-400">
+        <div class="flex items-center">
+          <span class="material-icons text-teal-400 mr-1">shield</span>
+          Non-Custodial
+        </div>
+        <div class="flex items-center">
+          <span class="material-icons text-teal-400 mr-1">model_training</span>
+          Battle-Tested AI Models
+        </div>
+        <div class="flex items-center">
+          <span class="material-icons text-teal-400 mr-1">analytics</span>
+          Transparent Performance
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span class="material-icons text-teal-400 text-2xl">keyboard_arrow_down</span>
+    </div>
+  </section>
 
-<div class="grid md:grid-cols-3 gap-8 mb-16">
-<div class="text-center group">
-<div class="w-16 h-16 bg-gradient-to-br from-teal-500/20 to-green-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-<span class="material-symbols-outlined">auto_awesome</span>
-</div>
-<h3 class="text-2xl font-semibold text-white mb-4">AI-Driven Trading</h3>
-<p class="text-muted leading-relaxed">Adaptive AI models optimize strategy parameters in real time, aligning execution with dynamic market conditions.</p>
-</div>
-<div class="text-center group">
-<div class="w-16 h-16 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-<span class="material-symbols-outlined text-blue-400">query_stats</span>
-</div>
-<h3 class="text-2xl font-semibold text-white mb-4">Fund-Grade Backtesting</h3>
-<p class="text-muted leading-relaxed">High-fidelity simulations using historical onchain data, modeling slippage, fees, and latency for realistic results.</p>
-</div>
-<div class="text-center group">
-<div class="w-16 h-16 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-<span class="material-symbols-outlined text-purple-400">security</span>
-</div>
-<h3 class="text-2xl font-semibold text-white mb-4">Onchain Security</h3>
-<p class="text-muted leading-relaxed">Audited, non-custodial smart contracts ensure full asset control and institutional-grade security standards.</p>
-</div>
-</div>
+  <section class="py-20 bg-gradient-to-b from-black to-gray-900" id="performance">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4">Verifiable On-Chain Performance</h2>
+        <p class="text-xl text-gray-400">Real-time, transparent data from our production trading systems.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div class="glass-card p-6 text-center pulse-glow">
+          <div class="text-3xl font-bold text-teal-400 mb-2" id="volume-counter">$1.2B+</div>
+          <div class="text-sm text-gray-400 uppercase tracking-wide">Trading Volume</div>
+          <div class="text-xs text-gray-500 mt-1">Outperforming 95% of DEX aggregators</div>
+        </div>
+        <div class="glass-card p-6 text-center">
+          <div class="text-3xl font-bold text-green-400 mb-2" id="sharpe-counter">2.34</div>
+          <div class="text-sm text-gray-400 uppercase tracking-wide">Avg. Sharpe Ratio</div>
+          <div class="text-xs text-gray-500 mt-1">vs. 0.5 industry average</div>
+        </div>
+        <div class="glass-card p-6 text-center">
+          <div class="text-3xl font-bold text-blue-400 mb-2" id="uptime-counter">99.98%</div>
+          <div class="text-sm text-gray-400 uppercase tracking-wide">System Uptime</div>
+          <div class="text-xs text-gray-500 mt-1">Ensuring zero missed opportunities</div>
+        </div>
+        <div class="glass-card p-6 text-center">
+          <div class="text-3xl font-bold text-purple-400 mb-2" id="strategies-counter">47</div>
+          <div class="text-sm text-gray-400 uppercase tracking-wide">Live Strategies</div>
+          <div class="text-xs text-gray-500 mt-1">Covering diverse market conditions</div>
+        </div>
+      </div>
+      <div class="glass-card p-8 interactive-demo relative z-10">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-2xl font-bold">Strategy Performance</h3>
+          <div class="flex space-x-2">
+            <button class="px-3 py-1 rounded text-sm bg-teal-400 text-black font-medium">1D</button>
+            <button class="px-3 py-1 rounded text-sm text-gray-400 hover:text-white">7D</button>
+            <button class="px-3 py-1 rounded text-sm text-gray-400 hover:text-white">1M</button>
+            <button class="px-3 py-1 rounded text-sm text-gray-400 hover:text-white">1Y</button>
+          </div>
+        </div>
+        <div class="h-64 relative">
+          <canvas class="w-full h-full" id="performance-chart"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<div class="chart-container p-8 grid md:grid-cols-2 gap-12 items-center">
-<div>
-<h3 class="text-3xl font-semibold text-white mb-6">Perp Strategy Optimization</h3>
-<p class="text-lg text-muted mb-8 leading-relaxed">AI-driven parameter sweeps improved baseline perp strategies in backtesting — optimizing leverage thresholds, reducing drawdowns, and outperforming static models.</p>
-<div class="space-y-4 mb-8">
-<div class="flex justify-between items-center p-4 bg-black/50 rounded-lg border border-gray-800">
-<span class="text-muted">Sharpe Ratio</span>
-<span class="text-white font-semibold">1.42</span>
-</div>
-<div class="flex justify-between items-center p-4 bg-black/50 rounded-lg border border-gray-800">
-<span class="text-muted">Max Drawdown</span>
-<span class="text-red-400 font-semibold">-8.9%</span>
-</div>
-<div class="flex justify-between items-center p-4 bg-black/50 rounded-lg border border-gray-800">
-<span class="text-muted">Win Rate</span>
-<span class="text-green-400 font-semibold">57.3%</span>
-</div>
-</div>
-<a class="ghost-button py-3 px-6 inline-flex items-center" href="#">
-View Full Case Study
-<span class="material-symbols-outlined ml-2 text-lg">arrow_forward</span>
-</a>
-</div>
-<div class="relative">
-<div class="chart-container p-6">
-<svg class="w-full h-64" viewBox="0 0 400 200">
-<defs>
-<linearGradient id="chart-gradient" x1="0%" x2="0%" y1="0%" y2="100%">
-<stop offset="0%" stop-color="var(--brand-teal)" stop-opacity="0.3"></stop>
-<stop offset="100%" stop-color="var(--brand-teal)" stop-opacity="0"></stop>
-</linearGradient>
-</defs>
-<path d="M 0,150 20,140 40,120 60,130 80,110 100,90 120,100 140,80 160,70 180,90 200,80 220,60 240,70 260,50 280,40 300,50 320,30 340,40 360,20 380,30 400,10 V 200 H 0 Z" fill="url(#chart-gradient)"></path>
-<polyline fill="none" points="0,150 20,140 40,120 60,130 80,110 100,90 120,100 140,80 160,70 180,90 200,80 220,60 240,70 260,50 280,40 300,50 320,30 340,40 360,20 380,30 400,10" stroke="var(--brand-teal)" stroke-width="2.5"></polyline>
-</svg>
-</div>
-</div>
-</div>
-</div>
-</section>
+  <section class="py-20 bg-black" id="features">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4">An Unfair Advantage in Your Favor</h2>
+        <p class="text-xl text-gray-400 max-w-3xl mx-auto">Our institutional-grade infrastructure translates complex
+          data into profitable outcomes.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="glass-card feature-card p-8 group">
+          <div class="feature-icon mb-6"><span class="material-icons">psychology</span></div>
+          <h3 class="text-2xl font-bold mb-4">Adaptive AI Engine</h3>
+          <p class="text-gray-400 mb-6">Go beyond static strategies. Our AI continuously learns from live market data to
+            optimize your trading for higher returns and lower risk.</p>
+          <ul class="text-sm text-gray-300 space-y-2">
+            <li class="flex items-start">
+              <span class="material-icons text-teal-400 mr-2 text-base feature-bullet">arrow_right_alt</span>Automatically adapt to
+              changing market conditions.</li>
+            <li class="flex items-start">
+              <span class="material-icons text-teal-400 mr-2 text-base feature-bullet">arrow_right_alt</span>Maximize profit by
+              dynamically adjusting parameters.</li>
+            <li class="flex items-start">
+              <span class="material-icons text-teal-400 mr-2 text-base feature-bullet">arrow_right_alt</span>Stay ahead of market
+              shifts with predictive analytics.</li>
+          </ul>
+        </div>
+        <div class="glass-card feature-card p-8 group">
+          <div class="feature-icon mb-6"><span class="material-icons">analytics</span></div>
+          <h3 class="text-2xl font-bold mb-4">Hyper-Realistic Backtesting</h3>
+          <p class="text-gray-400 mb-6">Deploy with confidence. Our backtester simulates real-world conditions using
+            historical data with unparalleled accuracy, so you know how a strategy will perform before risking capital.
+          </p>
+          <ul class="text-sm text-gray-300 space-y-2">
+            <li class="flex items-start">
+              <span class="material-icons text-teal-400 mr-2 text-base feature-bullet">arrow_right_alt</span>Eliminate surprises with
+              99% live performance accuracy.</li>
+            <li class="flex items-start">
+              <span class="material-icons text-teal-400 mr-2 text-base feature-bullet">arrow_right_alt</span>Account for slippage,
+              fees, and latency.</li>
+            <li class="flex items-start">
+              <span class="material-icons text-teal-400 mr-2 text-base feature-bullet">arrow_right_alt</span>Validate strategy
+              robustness across historical data.</li>
+          </ul>
+        </div>
+        <div class="glass-card feature-card p-8 group">
+          <div class="feature-icon mb-6"><span class="material-icons">security</span></div>
+          <h3 class="text-2xl font-bold mb-4">Fortress-Grade Security</h3>
+          <p class="text-gray-400 mb-6">Trade with peace of mind. Our non-custodial architecture via Turnkey is
+            rigorously audited to ensure your funds are always secure and under your control.</p>
+          <ul class="text-sm text-gray-300 space-y-2">
+            <li class="flex items-start">
+              <span class="material-icons text-teal-400 mr-2 text-base feature-bullet">arrow_right_alt</span>Connect your wallet and
+              trade directly, funds never leave.</li>
+            <li class="flex items-start">
+              <span class="material-icons text-teal-400 mr-2 text-base feature-bullet">arrow_right_alt</span>Protect capital with
+              multi-layer smart contract security.</li>
+            <li class="flex items-start">
+              <span class="material-icons text-teal-400 mr-2 text-base feature-bullet">arrow_right_alt</span>Rely on SOC2 compliant,
+              24/7 monitored infrastructure.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="section-spacing bg-black">
-<div class="container mx-auto px-4 sm:px-6 lg:px-8">
-<div class="text-center max-w-4xl mx-auto mb-16">
-<h2 class="text-4xl sm:text-5xl font-bold text-white mb-6">Our Leadership</h2>
-<p class="text-xl text-muted leading-relaxed">Deep expertise across quantitative finance, AI research, and blockchain engineering — with proven experience at top institutions.</p>
-</div>
+  <section class="py-20 bg-gradient-to-b from-gray-900 to-black" id="platform">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div
+            class="inline-flex items-center px-4 py-2 rounded-full border border-teal-400/20 bg-teal-400/5 text-teal-400 text-sm font-medium mb-6">
+            <span class="material-icons text-sm mr-2">trending_up</span>
+            Intuitive Trading Terminal
+          </div>
+          <h2 class="text-4xl font-bold mb-6">Hedge Fund Power, Retail Accessibility</h2>
+          <p class="text-xl text-gray-400 mb-8">We've democratized access to elite quantitative tools. Our intuitive
+            platform empowers you to build, test, and deploy sophisticated strategies in minutes, not months.</p>
+          <div class="space-y-4">
+            <div class="flex items-center">
+              <span class="material-icons text-teal-400 mr-3">check_circle</span><span>Strategy builder with 10+ technical indicators</span>
+            </div>
+            <div class="flex items-center">
+              <span class="material-icons text-teal-400 mr-3">check_circle</span><span>AI-powered parameter optimization</span>
+            </div>
+            <div class="flex items-center">
+              <span class="material-icons text-teal-400 mr-3">check_circle</span><span>Cross-chain execution across EVM networks</span>
+            </div>
+            <div class="flex items-center">
+              <span class="material-icons text-teal-400 mr-3">check_circle</span><span>Real-time P&amp;L and risk monitoring</span>
+            </div>
+          </div>
+          <div class="mt-8">
+            <button class="btn-primary px-8 py-4 rounded-lg text-lg font-semibold mr-4">Launch Platform</button>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="glass-card p-6 interactive-demo">
+            <div class="bg-black rounded-lg p-4 mb-4">
+              <div class="flex justify-between items-center mb-4">
+                <h4 class="font-semibold">Strategy Dashboard</h4>
+                <div class="flex items-center text-green-400 text-sm">
+                  <span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
+                  Live
+                </div>
+              </div>
+              <div class="grid grid-cols-3 gap-4 text-center">
+                <div>
+                  <div class="text-2xl font-bold text-green-400">+12.4%</div>
+                  <div class="text-xs text-gray-400">24h PnL</div>
+                </div>
+                <div>
+                  <div class="text-2xl font-bold text-teal-400">1.89</div>
+                  <div class="text-xs text-gray-400">Sharpe Ratio</div>
+                </div>
+                <div>
+                  <div class="text-2xl font-bold text-blue-400">-5.2%</div>
+                  <div class="text-xs text-gray-400">Max DD</div>
+                </div>
+              </div>
+            </div>
+            <div class="h-32 relative"><canvas id="dashboard-chart" class="absolute inset-0 w-full h-full"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<div class="grid md:grid-cols-3 gap-8">
-<div class="team-card p-8 text-center">
-<div class="w-24 h-24 rounded-2xl mx-auto mb-6 bg-gradient-to-br from-teal-400 to-blue-500 flex items-center justify-center relative overflow-hidden group">
-<div class="absolute inset-0 bg-black/20"></div>
-<span class="text-3xl font-bold text-white relative z-10">HV</span>
-<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-</div>
-<h4 class="text-xl font-semibold text-white mb-2">Harrison V</h4>
-<div class="inline-flex items-center px-3 py-1 bg-teal-500/20 text-teal-300 rounded-full text-sm font-medium mb-4">Founder</div>
-<p class="text-muted text-sm leading-relaxed">Ex-quant strategist with TradFi and onchain experience. Focused on building institutional-grade infrastructure for digital assets.</p>
-<div class="flex justify-center space-x-3 mt-4">
-<a href="#" class="text-gray-500 hover:text-teal-400 transition-colors">
-<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-</a>
-<a href="#" class="text-gray-500 hover:text-teal-400 transition-colors">
-<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
-</a>
-</div>
-</div>
-<div class="team-card p-8 text-center">
-<div class="w-24 h-24 rounded-2xl mx-auto mb-6 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center relative overflow-hidden group">
-<div class="absolute inset-0 bg-black/20"></div>
-<span class="text-3xl font-bold text-white relative z-10">DH</span>
-<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-</div>
-<h4 class="text-xl font-semibold text-white mb-2">Dr. Dan He</h4>
-<div class="inline-flex items-center px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm font-medium mb-4">Chief Quant & AI</div>
-<p class="text-muted text-sm leading-relaxed">PhD UCLA, ex-IBM T.J. Watson. Award-winning AI/ML researcher specializing in reinforcement learning for financial modeling.</p>
-<div class="flex justify-center space-x-3 mt-4">
-<a href="#" class="text-gray-500 hover:text-blue-400 transition-colors">
-<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-</a>
-<a href="#" class="text-gray-500 hover:text-blue-400 transition-colors">
-<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-</a>
-</div>
-</div>
-<div class="team-card p-8 text-center">
-<div class="w-24 h-24 rounded-2xl mx-auto mb-6 bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center relative overflow-hidden group">
-<div class="absolute inset-0 bg-black/20"></div>
-<span class="material-symbols-outlined text-white text-4xl relative z-10">group</span>
-<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-</div>
-<h4 class="text-xl font-semibold text-white mb-2">Core Engineering</h4>
-<div class="inline-flex items-center px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm font-medium mb-4">Infrastructure</div>
-<p class="text-muted text-sm leading-relaxed">Veterans from top tech firms and DeFi protocols. Specializing in secure, scalable onchain infrastructure and low-latency execution.</p>
-<div class="flex justify-center space-x-3 mt-4">
-<span class="text-xs text-gray-500">5+ Engineers</span>
-</div>
-</div>
-</div>
-</div>
-</section>
+  <section class="py-20 bg-gray-900">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4">Proven Results from Professional Traders</h2>
+        <p class="text-xl text-gray-400">Hear directly from traders who use QuantsEdge to gain their edge.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="testimonial-card p-8 rounded-lg">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-teal-400 to-cyan-300 rounded-full mr-4"></div>
+            <div>
+              <h4 class="font-bold">Alex Chen</h4>
+              <p class="text-sm text-gray-400">Fund Manager, Crypto Capital</p>
+            </div>
+          </div>
+          <p class="text-gray-300">"QuantsEdge boosted our main strategy's Sharpe Ratio from 1.5 to 2.5 within three
+            months. The AI's risk management is second to none, cutting our max drawdown by half."</p>
+        </div>
+        <div class="testimonial-card p-8 rounded-lg">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-300 rounded-full mr-4"></div>
+            <div>
+              <h4 class="font-bold">Sarah Kim</h4>
+              <p class="text-sm text-gray-400">Head of Quant, DeFi Innovations</p>
+            </div>
+          </div>
+          <p class="text-gray-300">"The backtester is a game-changer. We stress-tested a new strategy that showed a 150%
+            annual return; in live trading, it's hitting 145%. That level of accuracy is unheard of."</p>
+        </div>
+        <div class="testimonial-card p-8 rounded-lg">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-blue-300 rounded-full mr-4"></div>
+            <div>
+              <h4 class="font-bold">Marcus Rodriguez</h4>
+              <p class="text-sm text-gray-400">CTO, TokenFlow Protocol</p>
+            </div>
+          </div>
+          <p class="text-gray-300">"As a protocol, maintaining deep, stable liquidity is crucial. QuantsEdge's automated
+            strategies reduced our slippage on key pairs by over 60%, saving us thousands daily."</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="section-spacing bg-black">
-<div class="container mx-auto px-4 sm:px-6 lg:px-8">
-<div class="cta-section p-12 text-center relative">
-<div class="relative z-10">
-<h2 class="text-4xl sm:text-5xl font-bold text-white mb-6">Ready to deploy fund-grade AI trading strategies?</h2>
-<p class="text-xl text-muted mb-10 max-w-2xl mx-auto leading-relaxed">Join the waitlist today and trade with institutional precision. Start your journey to professional-grade trading.</p>
-<div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-<a class="brand-teal-button py-4 px-10 text-lg w-full sm:w-auto inline-flex items-center justify-center" href="#">
-Launch Bot
-<span class="material-symbols-outlined ml-2">rocket_launch</span>
-</a>
-<a class="ghost-button py-4 px-10 text-lg w-full sm:w-auto" href="#">View Dashboard</a>
-</div>
-</div>
-</div>
-</div>
-</section>
+  <section class="py-20 bg-black" id="team">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4">Built by Quants, for Traders</h2>
+        <p class="text-xl text-gray-400">A fusion of Wall Street expertise and Silicon Valley innovation.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 justify-center">
+        <div class="glass-card p-8 rounded-lg text-center group">
+          <div class="relative mb-6 inline-block">
+            <div class="w-32 h-32 rounded-full overflow-hidden transition-all duration-300 ring-1 ring-teal-400/80 hover:ring-2 hover:ring-teal-400 hover:shadow-lg hover:shadow-teal-400/20">
+              <img src="https://cdn.builder.io/api/v1/image/assets%2Fa3ea07ea56cd4088a16a9fe470b52776%2Fcd47ffd9b3634fceae264bf49bc734f5?format=webp&width=256" alt="Harrison Vance" class="w-full h-full object-cover rounded-full" width="128" height="128" loading="lazy"/>
+            </div>
+          </div>
+          <h3 class="text-2xl font-bold text-white">Harrison Vance</h3>
+          <div class="inline-block px-3 py-1 rounded-full bg-teal-400/10 text-teal-300 text-sm font-medium mt-2">Founder</div>
+          <p class="text-gray-400 mt-2">Founder of QuantsEdge and long-time Ethereum builder, known for early work on
+            account abstraction.</p>
+          <div class="flex items-center justify-center gap-4 mt-3 text-gray-400">
+            <a href="#" class="hover:text-teal-400" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.94 8.5H4V20h2.94V8.5ZM5.47 7.2a1.7 1.7 0 1 0 0-3.4 1.7 1.7 0 0 0 0 3.4ZM20 20h-2.94v-6.22c0-1.93-.8-2.83-2.05-2.83-1.27 0-2.19.86-2.19 2.83V20H9.88V8.5h2.77v1.56h.04c.38-.72 1.62-1.76 3.34-1.76 2.22 0 3.98 1.35 3.98 4.37V20Z"/></svg></a>
+            <a href="#" class="hover:text-teal-400" aria-label="Website"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 4a8 8 0 100 16 8 8 0 000-16Zm0 14a6 6 0 110-12 6 6 0 010 12Z"/></svg></a>
+          </div>
+        </div>
+        <div class="glass-card p-8 rounded-lg text-center group">
+          <div class="relative mb-6 inline-block">
+            <div class="w-32 h-32 rounded-full overflow-hidden transition-all duration-300 ring-1 ring-teal-400/80 hover:ring-2 hover:ring-teal-400 hover:shadow-lg hover:shadow-teal-400/20">
+              <img src="https://cdn.builder.io/api/v1/image/assets%2Fa3ea07ea56cd4088a16a9fe470b52776%2Fddc22cdb33f04e94b0f14fa640a252ba?format=webp&width=256" alt="Dr. Dan He" class="w-full h-full object-cover rounded-full" width="128" height="128" loading="lazy"/>
+            </div>
+          </div>
+          <h3 class="text-2xl font-bold text-white">Dr. Dan He</h3>
+          <div class="inline-block px-3 py-1 rounded-full bg-indigo-400/10 text-indigo-300 text-sm font-medium mt-2">Chief Quant &amp; AI</div>
+          <p class="text-gray-400 mt-2">PhD in AI/ML with 10+ years building high-performance trading models and
+            research systems for hedge funds.</p>
+          <div class="flex items-center justify-center gap-4 mt-3 text-gray-400">
+            <a href="#" class="hover:text-teal-400" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.94 8.5H4V20h2.94V8.5ZM5.47 7.2a1.7 1.7 0 1 0 0-3.4 1.7 1.7 0 0 0 0 3.4ZM20 20h-2.94v-6.22c0-1.93-.8-2.83-2.05-2.83-1.27 0-2.19.86-2.19 2.83V20H9.88V8.5h2.77v1.56h.04c.38-.72 1.62-1.76 3.34-1.76 2.22 0 3.98 1.35 3.98 4.37V20Z"/></svg></a>
+            <a href="#" class="hover:text-teal-400" aria-label="GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.46-1.2-1.13-1.52-1.13-1.52-.93-.65.07-.64.07-.64 1.03.07 1.57 1.09 1.57 1.09.91 1.6 2.39 1.14 2.98.87.09-.68.36-1.14.65-1.4-2.22-.26-4.56-1.14-4.56-5.08 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.32.1-2.75 0 0 .85-.28 2.78 1.05A9.3 9.3 0 0 1 12 7.3c.86 0 1.73.12 2.55.34 1.92-1.33 2.77-1.05 2.77-1.05.56 1.43.21 2.49.1 2.75.64.72 1.02 1.64 1.02 2.76 0 3.95-2.35 4.82-4.59 5.07.37.33.7.97.7 1.96 0 1.41-.01 2.54-.01 2.88 0 .27.18.59.69.49A10 10 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/></svg></a>
+          </div>
+        </div>
+        <div class="glass-card p-8 rounded-lg text-center group">
+          <div class="relative mb-6 inline-block">
+            <div class="w-32 h-32 rounded-full overflow-hidden transition-all duration-300 ring-1 ring-teal-400/80 hover:ring-2 hover:ring-teal-400 hover:shadow-lg hover:shadow-teal-400/20">
+              <img src="https://cdn.builder.io/api/v1/image/assets%2Fa3ea07ea56cd4088a16a9fe470b52776%2Fd00331f4a7f541abbba9a63fe92f1787?format=webp&width=256" alt="Dmitry Motora" class="w-full h-full object-cover rounded-full" width="128" height="128" loading="lazy"/>
+            </div>
+          </div>
+          <h3 class="text-2xl font-bold text-white">Dmitry Motora</h3>
+          <div class="inline-block px-3 py-1 rounded-full bg-purple-400/10 text-purple-300 text-sm font-medium mt-2">Infrastructure</div>
+          <p class="text-gray-400 mt-2">Engineering lead with a track record delivering blockchain platforms for
+            venture-funded teams.</p>
+          <div class="flex items-center justify-center gap-4 mt-3 text-gray-400">
+            <a href="#" class="hover:text-teal-400" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.94 8.5H4V20h2.94V8.5ZM5.47 7.2a1.7 1.7 0 1 0 0-3.4 1.7 1.7 0 0 0 0 3.4ZM20 20h-2.94v-6.22c0-1.93-.8-2.83-2.05-2.83-1.27 0-2.19.86-2.19 2.83V20H9.88V8.5h2.77v1.56h.04c.38-.72 1.62-1.76 3.34-1.76 2.22 0 3.98 1.35 3.98 4.37V20Z"/></svg></a>
+            <a href="#" class="hover:text-teal-400" aria-label="GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.46-1.2-1.13-1.52-1.13-1.52-.93-.65.07-.64.07-.64 1.03.07 1.57 1.09 1.57 1.09.91 1.6 2.39 1.14 2.98.87.09-.68.36-1.14.65-1.4-2.22-.26-4.56-1.14-4.56-5.08 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.32.1-2.75 0 0 .85-.28 2.78 1.05A9.3 9.3 0 0 1 12 7.3c.86 0 1.73.12 2.55.34 1.92-1.33 2.77-1.05 2.77-1.05.56 1.43.21 2.49.1 2.75.64.72 1.02 1.64 1.02 2.76 0 3.95-2.35 4.82-4.59 5.07.37.33.7.97.7 1.96 0 1.41-.01 2.54-.01 2.88 0 .27.18.59.69.49A10 10 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<footer class="border-t border-gray-800 bg-black">
-<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-<div class="grid md:grid-cols-4 gap-8 mb-8">
-<div class="md:col-span-2">
-<div class="flex items-center space-x-3 mb-4">
-<div class="w-8 h-8 bg-gradient-to-br from-white to-gray-300 rounded-lg flex items-center justify-center">
-<svg class="h-5 w-5 text-black" fill="currentColor" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
-<path d="M15.4287 31.5L25.2144 10.5L31.5001 19.3286" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
-<path d="M10.5 21L15.4286 21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
-</svg>
-</div>
-<span class="text-xl font-bold text-white">QuantsEdge</span>
-</div>
-<p class="text-muted leading-relaxed max-w-md">Professional trading platform powered by cutting-edge quantitative strategies and secure custody solutions.</p>
-</div>
-<div>
-<h4 class="text-white font-semibold mb-4">Platform</h4>
-<div class="space-y-2">
-<a href="#" class="block text-muted hover:text-white transition-colors">Dashboard</a>
-<a href="#" class="block text-muted hover:text-white transition-colors">Markets</a>
-<a href="#" class="block text-muted hover:text-white transition-colors">Trading Bots</a>
-<a href="#" class="block text-muted hover:text-white transition-colors">Analytics</a>
-</div>
-</div>
-<div>
-<h4 class="text-white font-semibold mb-4">Support</h4>
-<div class="space-y-2">
-<a href="#" class="block text-muted hover:text-white transition-colors">Help Center</a>
-<a href="#" class="block text-muted hover:text-white transition-colors">Documentation</a>
-<a href="#" class="block text-muted hover:text-white transition-colors">Contact</a>
-<a href="#" class="block text-muted hover:text-white transition-colors">Status</a>
-</div>
-</div>
-</div>
-<div class="border-t border-gray-800 pt-8 flex flex-col sm:flex-row justify-between items-center">
-<p class="text-muted text-sm">© 2024 QuantsEdge. All rights reserved.</p>
-<div class="flex space-x-6 mt-4 sm:mt-0">
-<a href="#" class="text-muted hover:text-white transition-colors text-sm">Terms</a>
-<a href="#" class="text-muted hover:text-white transition-colors text-sm">Privacy</a>
-<a href="#" class="text-muted hover:text-white transition-colors text-sm">Security</a>
-</div>
-</div>
-</div>
-</footer>
+  <section class="py-20 bg-gradient-to-t from-gray-900 to-black" id="faq">
+    <div class="container mx-auto px-6 max-w-4xl">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+        <p class="text-xl text-gray-400">Your most common questions, answered.</p>
+      </div>
+      <div class="space-y-4">
+        <details class="faq-item glass-card p-6 rounded-lg group" open>
+          <summary class="flex justify-between items-center cursor-pointer font-bold text-lg">
+            Is this platform for beginners?
+            <span class="material-icons transform group-open:rotate-45 transition-transform">add</span>
+          </summary>
+          <div class="mt-4 text-gray-400">
+            While our platform is powerful enough for seasoned quants, it's designed with an intuitive interface. If you
+            have a solid understanding of trading concepts, you'll be able to leverage our tools. We also provide
+            extensive documentation and tutorials to get you started.
+          </div>
+        </details>
+        <details class="faq-item glass-card p-6 rounded-lg group">
+          <summary class="flex justify-between items-center cursor-pointer font-bold text-lg">
+            How do you ensure my funds are safe?
+            <span class="material-icons transform group-open:rotate-45 transition-transform">add</span>
+          </summary>
+          <div class="mt-4 text-gray-400">
+            Your security is our highest priority. QuantsEdge is non-custodial via Turnkey, meaning we never have access
+            to your funds. You connect your wallet (e.g., MetaMask, Ledger) and all trades are executed via our heavily
+            audited smart contracts directly from your wallet.
+          </div>
+        </details>
+        <details class="faq-item glass-card p-6 rounded-lg group">
+          <summary class="flex justify-between items-center cursor-pointer font-bold text-lg">
+            What kind of AI do you use?
+            <span class="material-icons transform group-open:rotate-45 transition-transform">add</span>
+          </summary>
+          <div class="mt-4 text-gray-400">
+            Our core is a proprietary suite of machine learning models, primarily focusing on reinforcement learning and
+            predictive analytics. These models analyze vast datasets of market activity, liquidity, and on-chain data to
+            identify patterns and adapt strategies in real-time for optimal performance.
+          </div>
+        </details>
+        <details class="faq-item glass-card p-6 rounded-lg group">
+          <summary class="flex justify-between items-center cursor-pointer font-bold text-lg">
+            Which blockchains and DEXs are supported?
+            <span class="material-icons transform group-open:rotate-45 transition-transform">add</span>
+          </summary>
+          <div class="mt-4 text-gray-400">
+            We support all major EVM-compatible chains, including Ethereum, Arbitrum, Base, Avalanche, and BNB Chain.
+            Our smart router aggregates liquidity from dozens of DEXs like Uniswap, Sushiswap, Curve, and more to ensure
+            best-price execution.
+          </div>
+        </details>
+        <details class="faq-item glass-card p-6 rounded-lg group">
+          <summary class="flex justify-between items-center cursor-pointer font-bold text-lg">
+            What is the pricing model?
+            <span class="material-icons transform group-open:rotate-45 transition-transform">add</span>
+          </summary>
+          <div class="mt-4 text-gray-400">
+            QuantsEdge operates on a performance-based fee model.
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-black border-t border-gray-800/50 pt-16 pb-8">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-12 text-gray-400">
+        <div class="lg:col-span-2">
+          <a class="flex items-center space-x-2 mb-4" href="#">
+            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="url(#grad1-footer)"></path>
+              <path d="M2 17L12 22L22 17L12 12L2 17Z" fill="url(#grad2-footer)"></path>
+              <path d="M2 7L12 12L22 7L12 2Z" opacity="0.6" stroke="white" stroke-width="0.5"></path>
+              <defs>
+                <linearGradient gradientUnits="userSpaceOnUse" id="grad1-footer" x1="12" x2="12" y1="2" y2="12">
+                  <stop stop-color="#00FFC6"></stop>
+                  <stop offset="1" stop-color="#00E6B3"></stop>
+                </linearGradient>
+                <linearGradient gradientUnits="userSpaceOnUse" id="grad2-footer" x1="12" x2="12" y1="12" y2="22">
+                  <stop stop-color="#00E6B3"></stop>
+                  <stop offset="1" stop-color="#00C09A"></stop>
+                </linearGradient>
+              </defs>
+            </svg>
+            <span class="text-2xl font-bold text-white">QuantsEdge</span>
+          </a>
+          <p class="text-base font-semibold text-gray-300 mb-6">AI-Powered Trading Infrastructure.<br/>Built for Traders, by Quants.
+          </p>
+          <div class="flex space-x-4">
+            <a class="hover:text-teal-400 transition" href="#">Telegram</a>
+            <a class="hover:text-teal-400 transition" href="https://x.com/quantsedge">X</a>
+            <a class="hover:text-teal-400 transition" href="https://www.linkedin.com/company/quants-edge">LinkedIn</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold text-white mb-4 tracking-wide">Navigation</h4>
+          <ul class="space-y-3">
+            <li><a class="hover:text-teal-400 transition" href="#platform">Platform</a></li>
+            <li><a class="hover:text-teal-400 transition" href="#features">Features</a></li>
+            <li><a class="hover:text-teal-400 transition" href="#performance">Performance</a></li>
+            <li><a class="hover:text-teal-400 transition" href="#team">Team</a></li>
+            <li><a class="hover:text-teal-400 transition"
+                href="https://quantsedge.gitbook.io/quantsedge-docs/">Documentation</a></li>
+            <li><a class="hover:text-teal-400 transition" href="#faq">FAQ</a></li>
+            <li><a class="hover:text-teal-400 transition" href="#">Request Access</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold text-white mb-4 tracking-wide">Legal</h4>
+          <ul class="space-y-3">
+            <li><a class="hover:text-teal-400 transition" href="/terms.html">Terms of Service</a></li>
+            <li><a class="hover:text-teal-400 transition" href="/privacy.html">Privacy Policy</a></li>
+            <li><a class="hover:text-teal-400 transition" href="/risk.html">Risk Disclosure</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold text-white mb-4 tracking-wide">Contact</h4>
+          <ul class="space-y-3">
+            <li><a class="hover:text-teal-400 transition" href="mailto:contact@quantsedge.ai">info@quantsedge.ai</a>
+            </li>
+            <p class="text-sm text-gray-500 pt-8">© 2025 QuantsEdge. All rights reserved.</p>
+          </ul>
+        </div>
+      </div>
+      <div
+        class="mt-12 pt-8 border-t border-gray-800/50 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-500">
+        <p class="mb-4 sm:mb-0">Made with ⚡ by QuantsEdge.</p>
+        <div class="flex items-center space-x-6">
+          <span class="flex items-center"><span class="material-icons text-green-500 mr-1 text-base">verified_user</span>SOC2
+          Compliant (Coming soon)</span>
+          <span class="flex items-center"><span class="material-icons text-green-500 mr-1 text-base">gpp_good</span>Audited
+          Smart Contracts</span>
+          <span class="flex items-center"><span class="material-icons text-green-500 mr-1 text-base">signal_cellular_alt</span>99.98%
+          Uptime</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Organization","name":"QuantsEdge","url":"https://quantsedge.ai/","logo":"https://cdn.builder.io/api/v1/image/assets%2Fa3ea07ea56cd4088a16a9fe470b52776%2F1057cb999f8b48b5bb0e2e55d82f5232?format=webp&width=256","sameAs":["https://x.com/quantsedge","https://www.linkedin.com/company/quants-edge"]}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"QuantsEdge Trading Platform","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  </script>
+
+  <!-- ===== Charts (Performance + Dashboard) ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" defer></script>
+  <script>
+    (function(){
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const closeBtn = document.getElementById('close-menu');
+  const menu = document.getElementById('mobile-menu');
+  const overlay = document.getElementById('menu-overlay');
+
+  const openMenu = () => {
+    menu.classList.remove('translate-x-full');
+    document.documentElement.classList.add('menu-open');
+    document.body.classList.add('menu-open');
+
+    overlay.classList.remove('hidden');
+    overlay.classList.remove('pointer-events-none');
+    overlay.classList.add('opacity-100');
+
+    menuBtn?.setAttribute('aria-expanded', 'true');
+  };
+
+  const closeMenu = () => {
+    menu.classList.add('translate-x-full');
+    document.documentElement.classList.remove('menu-open');
+    document.body.classList.remove('menu-open');
+
+    overlay.classList.add('pointer-events-none');
+    overlay.classList.remove('opacity-100');
+    setTimeout(()=>overlay.classList.add('hidden'), 200);
+
+    menuBtn?.setAttribute('aria-expanded', 'false');
+  };
+
+  menuBtn?.addEventListener('click', openMenu);
+  closeBtn?.addEventListener('click', closeMenu);
+  overlay?.addEventListener('click', closeMenu);
+  window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+
+  // Close when any link in the drawer is tapped
+  menu.querySelectorAll('a[href^="#"], a[href^="/"], a[href^="http"]').forEach(a=>{
+    a.addEventListener('click', closeMenu);
+  });
+
+  // Safety: if rotated/resized to desktop, close the drawer
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1024) closeMenu();
+  });
+
+  /* ===== Charts ===== */
+  // Heading polish (footer headings left-aligned under text)
+  Array.from(document.querySelectorAll('h2, h4')).forEach(h=>{
+    if(h.dataset.enhanced) return; h.dataset.enhanced='1';
+    h.classList.add('relative');
+    const deco=document.createElement('span');
+    deco.setAttribute('aria-hidden','true');
+    const base='position:absolute;bottom:-10px;height:2px;border-radius:2px;background:linear-gradient(90deg,#14B8A6,#0EA5E9);opacity:.9;';
+    if (h.closest('footer')) { deco.style.cssText=base+"left:0;width:90px;"; }
+    else { deco.style.cssText=base+"left:50%;transform:translateX(-50%);width:90px;"; }
+    h.appendChild(deco);
+  });
+
+  // Analytics + CTA A/B
+  window.dataLayer = window.dataLayer || [];
+  function track(event, detail){ try{ window.dataLayer.push({event, ...detail}); if(navigator.sendBeacon){ navigator.sendBeacon('/__analytics', new Blob([JSON.stringify({event, ...detail})],{type:'application/json'})); } }catch(e){ console.debug('track', event, detail); } }
+  const ctaBtn = document.querySelector('#hero a.btn-primary');
+  if (ctaBtn){ const key='ctaVar'; let v=localStorage.getItem(key)|| (Math.random()<0.5?'A':'B'); localStorage.setItem(key,v); ctaBtn.textContent = v==='A' ? 'Unlock Your Trading Edge' : 'Request Access'; ctaBtn.addEventListener('click', ()=>track('cta_click',{variant:v, location:'hero'})); }
+
+  // Section reveals
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce){ const rev=document.querySelectorAll('.reveal'); const io = new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target);} }); }, {threshold:0.12}); rev.forEach(el=>io.observe(el)); }
+
+  // Hero particles
+  const cvs = document.getElementById('hero-particles');
+  if (cvs && !reduce){ const ctx=cvs.getContext('2d'); let w,h; const DPR=Math.min(window.devicePixelRatio||1,2); const P=Array.from({length:40}).map(()=>({x:Math.random(),y:Math.random(),vx:(Math.random()-.5)*0.0006,vy:(Math.random()-.5)*0.0006,r:1+Math.random()*2})); function resize(){ w=cvs.clientWidth; h=cvs.clientHeight; cvs.width=w*DPR; cvs.height=h*DPR; } function step(){ ctx.clearRect(0,0,cvs.width,cvs.height); ctx.fillStyle='rgba(20,184,166,.6)'; P.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>1) p.vx*=-1; if(p.y<0||p.y>1) p.vy*=-1; ctx.beginPath(); ctx.arc(p.x*w*DPR, p.y*h*DPR, p.r*DPR, 0, Math.PI*2); ctx.fill(); }); requestAnimationFrame(step);} resize(); new ResizeObserver(resize).observe(cvs); step(); }
+  function mkGradient(ctx, area){
+    const grad = ctx.createLinearGradient(0, area.top, 0, area.bottom);
+    grad.addColorStop(0, 'rgba(0,255,198,0.25)');
+    grad.addColorStop(1, 'rgba(0,255,198,0)');
+    return grad;
+  }
+  // simple glow plugin
+  const glow = {
+    id:'glow',
+    afterDatasetsDraw(chart,args,pluginOptions){
+      const {ctx, chartArea:{left,right,top,bottom}} = chart;
+      chart.data.datasets.forEach((ds,i)=>{
+        const meta = chart.getDatasetMeta(i);
+        if (!meta.data.length) return;
+        ctx.save();
+        ctx.shadowColor = 'rgba(20,184,166,.45)';
+        ctx.shadowBlur = 12;
+        ctx.lineWidth = 2.5;
+        ctx.strokeStyle = '#00FFC6';
+        ctx.beginPath();
+        meta.data.forEach((pt,idx)=>{ const {x,y}=pt.getProps(['x','y'], true); idx?ctx.lineTo(x,y):ctx.moveTo(x,y); });
+        ctx.stroke();
+        ctx.restore();
+      });
+    }
+  };
+
+  function makeOptions(){
+    return {
+      responsive:true, maintainAspectRatio:false,
+      interaction:{ intersect:false, mode:'index' },
+      animation:{ duration:900, easing:'easeOutCubic' },
+      plugins:{
+        legend:{ display:false },
+        tooltip:{
+          backgroundColor:'rgba(17,17,17,0.9)',
+          borderColor:'rgba(255,255,255,0.08)', borderWidth:1, padding:10,
+          displayColors:false, callbacks:{ label:(ctx)=>`${ctx.parsed.y.toFixed(2)}%` }
+        }
+      },
+      scales:{
+        x:{ grid:{ color:'rgba(255,255,255,0.06)' }, ticks:{ color:'rgba(255,255,255,0.6)' } },
+        y:{ grid:{ color:'rgba(255,255,255,0.06)' }, ticks:{ color:'rgba(255,255,255,0.6)', callback:v=>v+'%' } }
+      },
+      elements:{
+        point:{ radius:0, hoverRadius:4, hitRadius:8, backgroundColor:'#00FFC6', borderWidth:0 },
+        line:{ borderColor:'rgba(0,0,0,0)', borderWidth:0, tension:0.35 }
+      }
+    };
+  }
+
+  // MAIN performance chart
+  const perfEl = document.getElementById('performance-chart');
+  if (perfEl) {
+    const pctx = perfEl.getContext('2d');
+    const pdata = {
+      labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+      datasets: [{
+        label: 'Strategy PnL',
+        data: [2.4, 1.2, -0.8, 3.2, 0.9, -1.4, 2.1],
+        fill: true,
+        backgroundColor: (context) => {
+          const {ctx, chartArea} = context.chart;
+          if (!chartArea) return null;
+          return mkGradient(ctx, chartArea);
+        },
+      }]
+    };
+    new Chart(pctx, { type: 'line', data: pdata, options: makeOptions(), plugins:[glow] });
+  }
+
+  // Secondary dashboard sparkline
+  const dashEl = document.getElementById('dashboard-chart');
+  if (dashEl) {
+    const dctx = dashEl.getContext('2d');
+    const ddata = {
+      labels: Array.from({length: 20}).map((_,i)=>i+1),
+      datasets: [{
+        label: 'Equity',
+        data: [100,101,102,101,103,105,104,106,108,107,109,110,112,111,113,115,114,116,117,118],
+        fill: true,
+        backgroundColor: (context) => {
+          const {ctx, chartArea} = context.chart;
+          if (!chartArea) return null;
+          return mkGradient(ctx, chartArea);
+        },
+      }]
+    };
+    const opts = makeOptions();
+    opts.scales.x.display = false;
+    opts.scales.y.display = false;
+    opts.elements.point.radius = 0;
+    new Chart(dctx, { type: 'line', data: ddata, options: opts, plugins:[glow] });
+  }
+})();
+  </script>
 </body>
+
 </html>
