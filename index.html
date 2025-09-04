@@ -391,7 +391,7 @@
 
     <!-- NEW: overlay starts hidden and is removed from hit-testing when closed -->
     <div id="menu-overlay"
-      class="fixed inset-0 bg-black/60 opacity-0 pointer-events-none transition-opacity duration-300 z-40 hidden"></div>
+      class="fixed inset-0 bg-black/60 opacity-0 pointer-events-none transition-opacity duration-300 z-40 hidden" style="display: none;"></div>
 
     <!-- NEW: drawer uses dynamic viewport height and its own scroll -->
     <div id="mobile-menu"
@@ -930,6 +930,12 @@
 
     menuBtn?.setAttribute('aria-expanded', 'false');
   };
+
+  // Ensure overlay starts completely hidden
+  if (overlay) {
+    overlay.style.display = 'none';
+    overlay.classList.add('hidden', 'opacity-0', 'pointer-events-none');
+  }
 
   menuBtn?.addEventListener('click', openMenu);
   closeBtn?.addEventListener('click', closeMenu);
