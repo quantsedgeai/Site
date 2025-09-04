@@ -217,10 +217,20 @@ function enhanceChartAnimations() {
 
 // Mobile Navigation Enhancement
 function initMobileNavigation() {
-  const nav = document.querySelector('nav');
-  const navLinks = document.querySelectorAll('.hidden.lg\\:flex a');
+  const nav = document.querySelector('header nav');
+  const desktopNav = document.querySelector('nav.hidden.lg\\:flex');
+  let navLinks = [];
   
-  if (!nav || navLinks.length === 0) return;
+  if (desktopNav) {
+    navLinks = desktopNav.querySelectorAll('a');
+  } else {
+    // Fallback: find nav links directly
+    navLinks = document.querySelectorAll('nav a.nav-link');
+  }
+  
+  if (!nav || navLinks.length === 0) {
+    return;
+  }
   
   // Create mobile menu button
   const mobileButton = document.createElement('button');
