@@ -714,6 +714,31 @@ feed.on('tick', (t) => {
       modal.addEventListener('click', (e)=>{ if(e.target.dataset.close==='modal') closeModal(); });
       document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
       accessForm && accessForm.addEventListener('submit', (e)=>{ e.preventDefault(); const email=document.getElementById('acc-email'); if(!email.checkValidity()) { email.focus(); return; } const msg=document.getElementById('accessMsg'); if(msg){ msg.style.display='inline-flex'; msg.setAttribute('aria-hidden','false'); } setTimeout(closeModal, 900); accessForm.reset(); });
+      // Reveal-on-scroll for key elements
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduce) {
+        const targets = document.querySelectorAll('.benefit,.feature,.card,.cs-card,.doc-card,.kpi,.stat,.shot,.chart,h2');
+        targets.forEach(el=>el.classList.add('reveal'));
+        const io2 = new IntersectionObserver(es=>{
+          es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io2.unobserve(e.target);} });
+        },{rootMargin:'-10% 0px -10% 0px',threshold:0.01});
+        targets.forEach(el=>io2.observe(el));
+      }
+
+      // Button ripple effect
+      document.querySelectorAll('.btn').forEach(btn=>{
+        btn.addEventListener('click', (e)=>{
+          if (reduce) return;
+          const r = btn.getBoundingClientRect();
+          const x = e.clientX - r.left; const y = e.clientY - r.top;
+          const s = document.createElement('span'); s.className='ripple'; s.style.left=`${x}px`; s.style.top=`${y}px`; s.style.width=s.style.height=`${Math.max(r.width,r.height)}px`;
+          btn.appendChild(s); setTimeout(()=>s.remove(),650);
+        });
+      });
+
+      // Parallax hero glow
+      const setVar = () => document.documentElement.style.setProperty('--scrollY', String(window.scrollY||0));
+      window.addEventListener('scroll', setVar, {passive:true}); setVar();
     })();
   </script>
 </body>
