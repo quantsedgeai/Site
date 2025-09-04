@@ -646,7 +646,20 @@
       <!-- Team Grid -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="text-center">
-          <div class="w-32 h-32 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/10"></div>
+          <div class="relative w-40 h-40 mx-auto mb-6 group">
+            <!-- Subtle glow effect on hover -->
+            <div class="absolute inset-0 rounded-full bg-gradient-to-r from-accent/20 to-accent/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <!-- Image container with subtle border -->
+            <div class="relative w-full h-full rounded-full overflow-hidden ring-1 ring-white/10 group-hover:ring-accent/30 transition-all duration-300">
+              <!-- Replace src with actual image path -->
+              <img src="images/team-harrison.jpg" alt="Harrison Vance" class="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-500" 
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+              <!-- Fallback gradient if image not found -->
+              <div class="absolute inset-0 bg-gradient-to-br from-accent/20 to-accent/10 hidden items-center justify-center">
+                <span class="text-4xl text-accent/50">HV</span>
+              </div>
+            </div>
+          </div>
           <h3 class="text-lg font-semibold">Harrison Vance</h3>
           <p class="text-accent text-sm mb-2">Founder & CEO</p>
           <p class="text-sm text-text-secondary">
@@ -655,7 +668,20 @@
         </div>
         
         <div class="text-center">
-          <div class="w-32 h-32 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-500/10"></div>
+          <div class="relative w-40 h-40 mx-auto mb-6 group">
+            <!-- Subtle glow effect on hover -->
+            <div class="absolute inset-0 rounded-full bg-gradient-to-r from-accent/20 to-accent/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <!-- Image container with subtle border -->
+            <div class="relative w-full h-full rounded-full overflow-hidden ring-1 ring-white/10 group-hover:ring-accent/30 transition-all duration-300">
+              <!-- Replace src with actual image path -->
+              <img src="images/team-dan.jpg" alt="Dr. Dan He" class="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-500"
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+              <!-- Fallback gradient if image not found -->
+              <div class="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-purple-500/10 hidden items-center justify-center">
+                <span class="text-4xl text-purple-400/50">DH</span>
+              </div>
+            </div>
+          </div>
           <h3 class="text-lg font-semibold">Dr. Dan He</h3>
           <p class="text-purple-400 text-sm mb-2">Chief Technology Officer</p>
           <p class="text-sm text-text-secondary">
@@ -664,7 +690,20 @@
         </div>
         
         <div class="text-center">
-          <div class="w-32 h-32 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-500/20 to-blue-500/10"></div>
+          <div class="relative w-40 h-40 mx-auto mb-6 group">
+            <!-- Subtle glow effect on hover -->
+            <div class="absolute inset-0 rounded-full bg-gradient-to-r from-accent/20 to-accent/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <!-- Image container with subtle border -->
+            <div class="relative w-full h-full rounded-full overflow-hidden ring-1 ring-white/10 group-hover:ring-accent/30 transition-all duration-300">
+              <!-- Replace src with actual image path -->
+              <img src="images/team-dmitry.jpg" alt="Dmitry Motora" class="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-500"
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+              <!-- Fallback gradient if image not found -->
+              <div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-blue-500/10 hidden items-center justify-center">
+                <span class="text-4xl text-blue-400/50">DM</span>
+              </div>
+            </div>
+          </div>
           <h3 class="text-lg font-semibold">Dmitry Motora</h3>
           <p class="text-blue-400 text-sm mb-2">Chief Operating Officer</p>
           <p class="text-sm text-text-secondary">
