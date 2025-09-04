@@ -25,18 +25,18 @@
   <style>
     /* THEME */
     :root {
-      --bg: #0b1020;           /* deep navy/black */
-      --bg-elev: #0e1627;      /* cards */
-      --bg-soft: #0d1424;      /* overlays */
+      --bg: #0b1114;           /* app base */
+      --bg-elev: #0f151a;      /* cards */
+      --bg-soft: #0c1318;      /* overlays */
       --text: #ffffff;
-      --muted: #A3AEC2;
+      --muted: #8FA3B8;
       --teal: #14B8A6;         /* accent */
       --teal-2: #2DD4BF;       /* hover */
-      --outline: #1f2a44;
+      --outline: #1b2733;
       --success: #22c55e;
       --danger: #f43f5e;
       --shadow: 0 8px 30px rgba(0,0,0,.45);
-      --radius: 14px;
+      --radius: 12px;
     }
 
     /* BASE */
@@ -59,8 +59,8 @@
     /* BUTTONS */
     .btn { display:inline-flex; align-items:center; gap:.6rem; padding:.9rem 1.1rem; border-radius:10px; border:1px solid transparent; font-weight:600; letter-spacing:.01em; transition:background .2s, border-color .2s, color .2s, transform .2s; }
     .btn:focus-visible { outline: 2px solid var(--teal-2); outline-offset: 2px; }
-    .btn-primary { background: var(--teal); color:#001310; box-shadow: 0 6px 20px rgba(20,184,166,.25); }
-    .btn-primary:hover { background: var(--teal-2); transform: translateY(-1px); }
+    .btn-primary { background: linear-gradient(180deg, var(--teal), #19c9b9); color:#031310; border-color: rgba(20,184,166,.35); box-shadow: 0 8px 24px rgba(20,184,166,.28); }
+    .btn-primary:hover { background: linear-gradient(180deg, var(--teal-2), #44e1d2); transform: translateY(-1px); }
     .btn-ghost { background: transparent; color: var(--text); border-color: var(--outline); }
     .btn-ghost:hover { border-color: var(--teal); color: var(--teal-2); transform: translateY(-1px); }
 
@@ -68,7 +68,7 @@
     .chip { display:inline-flex; align-items:center; gap:.4rem; font-size:.85rem; padding:.4rem .6rem; background: #0a1323; border:1px solid var(--outline); border-radius: 8px; color: var(--muted); }
 
     /* HEADER (sticky) */
-    header.app-header { position: sticky; top: 0; z-index: 50; background: rgba(8,12,22,.65); border-bottom: 1px solid rgba(255,255,255,.06); backdrop-filter: blur(10px); }
+    header.app-header { position: sticky; top: 0; z-index: 50; background: rgba(9,14,20,.72); border-bottom: 1px solid #13202a; backdrop-filter: blur(10px); }
     .header-inner { display:flex; align-items:center; justify-content:space-between; padding: .9rem 0; }
     .brand { display:flex; align-items:center; gap:.8rem; }
     .brand-logo { width: 36px; height: 36px; border-radius: 10px; display:grid; place-items:center; background: transparent; }
@@ -76,8 +76,11 @@
     .brand svg { filter: drop-shadow(0 4px 14px rgba(20,184,166,.35)); }
 
     nav.main-nav { display:flex; align-items:center; gap:1.2rem; }
-    .nav-link { color: var(--muted); font-weight: 500; padding:.4rem .5rem; border-radius: 8px; }
+    .nav-link { position:relative; color: var(--muted); font-weight: 600; padding:.6rem .5rem; border-radius: 8px; }
+    .nav-link::after { content:""; position:absolute; left:.4rem; right:.4rem; bottom:-10px; height:2px; background: var(--teal); border-radius:2px; transform: scaleX(0); transform-origin: center; transition: transform .2s ease; }
     .nav-link:hover, .nav-link:focus-visible { color: var(--text); background:#0a1323; outline: none; }
+    .nav-link[data-active="true"], .nav-link[data-active="true"]:hover { color:#e7f8f4; }
+    .nav-link[data-active="true"]::after { transform: scaleX(1); }
 
     .header-actions { display:flex; align-items:center; gap:.6rem; }
 
@@ -135,7 +138,7 @@
     .code { background:#0a1323; border:1px solid var(--outline); border-radius:12px; padding:1rem; overflow:auto; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size:.92rem; line-height:1.5; color:#cfe6f5; }
 
     /* FOOTER */
-    footer { border-top:1px solid rgba(255,255,255,.06); background: #070b14; }
+    footer { border-top:1px solid rgba(255,255,255,.06); background: #080d12; }
     .footer-inner { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding: 1.2rem 0; }
     .social { display:flex; gap:.7rem; }
     .back-top { color: var(--muted); }
