@@ -215,6 +215,18 @@
 .btn-primary:active{filter:saturate(1.05) brightness(.98)}
 .btn-ghost:active{background:#0a1323}
 @media(max-width:980px){.logos{grid-template-columns:repeat(3,1fr)}.security-grid{grid-template-columns:1fr}}
+.reveal{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
+.reveal.visible{opacity:1;transform:none}
+.hero h1{background:linear-gradient(90deg,#eefcf9 0%,#c7fff3 50%,#eefcf9 100%);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;animation:title-shift 8s ease-in-out infinite}
+@keyframes title-shift{0%{background-position:0 0}50%{background-position:100% 0}100%{background-position:0 0}}
+.feature,.card,.cs-card,.doc-card,.shot,.chart{transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease}
+.feature:hover,.card:hover,.cs-card:hover,.doc-card:hover,.shot:hover,.chart:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.35)}
+.btn{position:relative;overflow:hidden}
+.btn::after{content:"";position:absolute;inset:-1px;transform:translateX(-120%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transition:transform .6s ease}
+.btn:hover::after{transform:translateX(120%)}
+.ripple{position:absolute;border-radius:50%;transform:scale(0);background:rgba(255,255,255,.28);animation:ripple .6s ease-out forwards;pointer-events:none}
+@keyframes ripple{to{transform:scale(6);opacity:0}}
+.hero .glow{will-change:transform}
 </style>
 </head>
 <body>
