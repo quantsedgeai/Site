@@ -1,0 +1,26 @@
+{
+  "name": "quantsedge-site",
+  "version": "1.0.0",
+  "description": "QuantsEdge - AI-Powered On-Chain Quant Trading Platform Website",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python3 -m http.server 8000",
+    "serve": "python3 -m http.server 8000",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "quantsedge",
+    "trading",
+    "ai",
+    "cryptocurrency",
+    "defi",
+    "static-website"
+  ],
+  "author": "QuantsEdge",
+  "license": "MIT",
+  "homepage": "https://quantsedge.ai/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/quantsedgeai/Site.git"
+  }
+}
