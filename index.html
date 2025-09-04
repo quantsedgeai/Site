@@ -1019,7 +1019,7 @@
         },
       }]
     };
-    new Chart(pctx, { type: 'line', data: pdata, options: makeOptions() });
+    new Chart(pctx, { type: 'line', data: pdata, options: makeOptions(), plugins:[glow] });
   }
 
   // Secondary dashboard sparkline
