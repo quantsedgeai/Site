@@ -181,9 +181,29 @@
       html { scroll-behavior: auto; }
       * { animation: none !important; transition: none !important; }
     }
-  </style>
+  .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+.skip-link:focus{left:16px;top:10px;width:auto;height:auto;background:#0a1323;color:#fff;border:1px solid var(--teal);padding:.5rem .7rem;border-radius:8px;z-index:100}
+.logo-strip{background:linear-gradient(180deg,#0a131a,#091119)}
+.logos{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;align-items:center;opacity:.9}
+.logos .logo{height:36px;border:1px dashed var(--outline);border-radius:10px;display:grid;place-items:center;color:#7b8ea3}
+.security{background:linear-gradient(180deg,#0a131a,#081018)}
+.security-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;align-items:center}
+.security-list{display:grid;gap:.5rem;color:var(--muted)}
+.modal{position:fixed;inset:0;display:none}
+.modal[aria-hidden="false"]{display:block}
+.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(2px)}
+.modal-card{position:relative;z-index:1;width:min(560px,92%);margin:6vh auto;background:var(--bg-elev);border:1px solid var(--outline);border-radius:14px;box-shadow:var(--shadow);padding:1rem}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem}
+.modal-body{display:grid;gap:.6rem}
+.input{background:#0a1323;border:1px solid var(--outline);color:var(--text);border-radius:10px;padding:.7rem .8rem;width:100%}
+.btn:active{transform:translateY(0)}
+.btn-primary:active{filter:saturate(1.05) brightness(.98)}
+.btn-ghost:active{background:#0a1323}
+@media(max-width:980px){.logos{grid-template-columns:repeat(3,1fr)}.security-grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
+  <a href="#content" class="skip-link">Skip to content</a>
   <!-- HEADER -->
   <header class="app-header" role="banner">
     <div class="container header-inner">
@@ -253,6 +273,17 @@
             <span>Transparent Performance</span>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- CREDIBILITY STRIP -->
+    <section id="credibility" class="section logo-strip" aria-label="Credibility logos">
+      <div class="container logos">
+        <div class="logo" aria-label="Audit Partner">Audit Partner</div>
+        <div class="logo" aria-label="Cloud Provider">Cloud Provider</div>
+        <div class="logo" aria-label="Exchange">Exchange</div>
+        <div class="logo" aria-label="VC / FO">VC / FO</div>
+        <div class="logo" aria-label="Ecosystem">Ecosystem</div>
       </div>
     </section>
 
@@ -338,6 +369,47 @@
       </div>
     </section>
 
+    <!-- SECURITY & TRANSPARENCY -->
+    <section id="security" class="section security" aria-labelledby="security-title">
+      <div class="container security-grid">
+        <div>
+          <h2 id="security-title">Security & Transparency</h2>
+          <p class="lead">Non‑custodial architecture with audited contracts and continuously monitored infrastructure.</p>
+          <ul class="security-list">
+            <li>Audited smart contracts (link placeholder)</li>
+            <li>Keys held by users; execution via permissions‑scoped relayers</li>
+            <li>99.9% uptime target with public status</li>
+            <li>Exportable logs and compliance‑ready reporting</li>
+          </ul>
+          <div style="margin-top:.8rem;display:flex;gap:.6rem;flex-wrap:wrap;">
+            <a class="btn btn-ghost" href="#status">View Status</a>
+            <a class="btn btn-primary" href="#docs">Read Methodology</a>
+          </div>
+        </div>
+        <div role="img" aria-label="Architecture diagram" class="shot" style="aspect-ratio:16/11;">
+          <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <rect width="640" height="360" rx="14" fill="#0a1323" />
+            <g stroke="#1f2a44" fill="#0f1828">
+              <rect x="40" y="40" width="200" height="90" rx="10" />
+              <rect x="260" y="40" width="200" height="90" rx="10" />
+              <rect x="480" y="40" width="120" height="90" rx="10" />
+              <rect x="120" y="200" width="200" height="90" rx="10" />
+              <rect x="360" y="200" width="160" height="90" rx="10" />
+            </g>
+            <text x="140" y="95" fill="#cfe6f5" font-size="14" text-anchor="middle">User Wallet</text>
+            <text x="360" y="95" fill="#cfe6f5" font-size="14" text-anchor="middle">Smart Contracts</text>
+            <text x="540" y="95" fill="#cfe6f5" font-size="14" text-anchor="middle">Status</text>
+            <text x="220" y="255" fill="#cfe6f5" font-size="14" text-anchor="middle">Execution Relayer</text>
+            <text x="440" y="255" fill="#cfe6f5" font-size="14" text-anchor="middle">Exchanges</text>
+            <path d="M240 85h20" stroke="var(--teal)" stroke-width="3"/>
+            <path d="M460 85h20" stroke="var(--teal)" stroke-width="3"/>
+            <path d="M240 240h-20" stroke="var(--teal)" stroke-width="3"/>
+            <path d="M360 240h-40" stroke="var(--teal)" stroke-width="3"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
     <!-- TEAM -->
     <section id="team" class="section" aria-labelledby="team-title">
       <div class="container">
@@ -391,6 +463,38 @@ feed.on('tick', (t) => {
       </div>
     </section>
   </main>
+
+  <!-- REQUEST ACCESS MODAL -->
+  <div id="accessModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="access-title">
+    <div class="modal-backdrop" data-close="modal"></div>
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="access-title">Request Access</h3>
+        <button class="btn btn-ghost" type="button" data-close="modal" aria-label="Close">Close</button>
+      </div>
+      <form id="accessForm" class="modal-body" novalidate>
+        <label class="sr-only" for="acc-name">Full name</label>
+        <input id="acc-name" class="input" name="name" placeholder="Full name" required />
+        <label class="sr-only" for="acc-org">Organization</label>
+        <input id="acc-org" class="input" name="org" placeholder="Organization" />
+        <label class="sr-only" for="acc-email">Work email</label>
+        <input id="acc-email" class="input" name="email" type="email" placeholder="Work email" required />
+        <label class="sr-only" for="acc-role">Role</label>
+        <select id="acc-role" class="input" name="role" required>
+          <option value="" disabled selected>Role</option>
+          <option>Fund / Family Office</option>
+          <option>Token Team</option>
+          <option>Quant / Trader</option>
+          <option>Other</option>
+        </select>
+        <div style="display:flex; gap:.6rem; align-items:center; flex-wrap:wrap;">
+          <button class="btn btn-primary" type="submit">Request Access</button>
+          <span class="chip" id="accessMsg" style="display:none;" aria-live="polite" aria-hidden="true">Thanks — we’ll reach out shortly.</span>
+        </div>
+        <small style="color:var(--muted)">By submitting, you agree to our <a class="back-top" href="#terms">Terms</a> & <a class="back-top" href="#privacy">Privacy</a>.</small>
+      </form>
+    </div>
+  </div>
 
   <!-- FOOTER -->
   <footer role="contentinfo">
@@ -496,7 +600,11 @@ feed.on('tick', (t) => {
       const sectionIds = ['platform','features','performance','team','documentation'];
       const linksMap = new Map(Array.from(document.querySelectorAll('nav.main-nav .nav-link')).map(l => [l.getAttribute('href').slice(1), l]));
       const setActive = (id) => {
-        linksMap.forEach((el, key) => el.toggleAttribute('data-active', key === id));
+        linksMap.forEach((el, key) => {
+          const active = key === id;
+          el.toggleAttribute('data-active', active);
+          if (active) el.setAttribute('aria-current','page'); else el.removeAttribute('aria-current');
+        });
       };
       const io = new IntersectionObserver((entries) => {
         entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
@@ -515,6 +623,16 @@ feed.on('tick', (t) => {
           form.reset();
         });
       }
+
+      // Request Access modal handlers
+      const modal = document.getElementById('accessModal');
+      const accessForm = document.getElementById('accessForm');
+      function openModal(){ modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; const f=document.getElementById('acc-name'); if(f) f.focus(); }
+      function closeModal(){ modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+      document.querySelectorAll('a[href="#request-access"]').forEach(a=>a.addEventListener('click', (e)=>{ e.preventDefault(); openModal(); }));
+      modal.addEventListener('click', (e)=>{ if(e.target.dataset.close==='modal') closeModal(); });
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
+      accessForm && accessForm.addEventListener('submit', (e)=>{ e.preventDefault(); const email=document.getElementById('acc-email'); if(!email.checkValidity()) { email.focus(); return; } const msg=document.getElementById('accessMsg'); if(msg){ msg.style.display='inline-flex'; msg.setAttribute('aria-hidden','false'); } setTimeout(closeModal, 900); accessForm.reset(); });
     })();
   </script>
 </body>
