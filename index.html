@@ -263,9 +263,11 @@
       transition: all .3s ease;
     }
 
-    .interactive-demo:hover {
-      transform: scale(1.02);
-    }
+    .interactive-demo:hover { transform: scale(1.02); }
+
+    .reveal{opacity:0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease}
+    .reveal.visible{opacity:1; transform:none}
+    #hero-particles{position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.35}
 
     .mobile-menu {
       transform: translateX(100%);
