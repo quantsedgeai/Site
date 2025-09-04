@@ -354,6 +354,125 @@ function initSmoothScroll() {
   });
 }
 
+// Real-time Market Data Simulation
+function initRealTimeMarketData() {
+  const cryptoPrices = {
+    BTC: { price: 43567.21, change: 0 },
+    ETH: { price: 2341.56, change: 0 },
+    SOL: { price: 89.23, change: 0 },
+    USDC: { price: 1.0001, change: 0 }
+  };
+  
+  let portfolioValue = 10247832;
+  let portfolioChange = 2.34;
+  let realizedPnL = 24567;
+  let unrealizedPnL = 8902;
+  
+  function updatePrices() {
+    // Simulate realistic price movements
+    Object.keys(cryptoPrices).forEach(symbol => {
+      const volatility = symbol === 'USDC' ? 0.0001 : (symbol === 'BTC' ? 0.002 : 0.003);
+      const change = (Math.random() - 0.5) * volatility;
+      cryptoPrices[symbol].price *= (1 + change);
+      cryptoPrices[symbol].change = change;
+    });
+    
+    // Update portfolio based on price changes
+    const totalChange = (cryptoPrices.BTC.change * 0.4 + cryptoPrices.ETH.change * 0.3 + cryptoPrices.SOL.change * 0.3) * 100;
+    portfolioValue *= (1 + totalChange / 100);
+    portfolioChange += totalChange;
+    
+    // Update unrealized P&L
+    unrealizedPnL *= (1 + totalChange / 100);
+    
+    // Update DOM elements
+    const btcEl = document.getElementById('btc-price');
+    const ethEl = document.getElementById('eth-price');
+    const solEl = document.getElementById('sol-price');
+    const usdcEl = document.getElementById('usdc-price');
+    
+    if (btcEl) btcEl.textContent = `$${cryptoPrices.BTC.price.toFixed(2)}`;
+    if (ethEl) ethEl.textContent = `$${cryptoPrices.ETH.price.toFixed(2)}`;
+    if (solEl) solEl.textContent = `$${cryptoPrices.SOL.price.toFixed(2)}`;
+    if (usdcEl) usdcEl.textContent = `$${cryptoPrices.USDC.price.toFixed(4)}`;
+    
+    // Update portfolio values
+    const portfolioEl = document.getElementById('portfolio-value');
+    const portfolioChangeEl = document.getElementById('portfolio-change');
+    const unrealizedEl = document.getElementById('unrealized-pnl');
+    const totalPnlEl = document.getElementById('total-pnl');
+    const lastUpdateEl = document.getElementById('last-update');
+    
+    if (portfolioEl) portfolioEl.textContent = `$${Math.floor(portfolioValue).toLocaleString()}`;
+    if (portfolioChangeEl) {
+      const changeText = portfolioChange >= 0 ? `+${portfolioChange.toFixed(2)}%` : `${portfolioChange.toFixed(2)}%`;
+      portfolioChangeEl.textContent = `${changeText} Today`;
+      portfolioChangeEl.className = portfolioChange >= 0 ? 'text-xs text-green-400' : 'text-xs text-red-400';
+    }
+    if (unrealizedEl) {
+      const unrealizedText = unrealizedPnL >= 0 ? `+$${Math.floor(unrealizedPnL).toLocaleString()}` : `-$${Math.floor(Math.abs(unrealizedPnL)).toLocaleString()}`;
+      unrealizedEl.textContent = unrealizedText;
+      unrealizedEl.className = unrealizedPnL >= 0 ? 'text-green-400' : 'text-red-400';
+    }
+    if (totalPnlEl) {
+      const total = realizedPnL + unrealizedPnL;
+      const totalText = total >= 0 ? `+$${Math.floor(total).toLocaleString()}` : `-$${Math.floor(Math.abs(total)).toLocaleString()}`;
+      totalPnlEl.textContent = totalText;
+      totalPnlEl.className = total >= 0 ? 'text-green-400' : 'text-red-400';
+    }
+    if (lastUpdateEl) {
+      const now = new Date();
+      lastUpdateEl.textContent = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+    }
+    
+    // Add flash effect for price changes
+    [btcEl, ethEl, solEl, usdcEl].forEach(el => {
+      if (el) {
+        el.style.transition = 'color 0.3s ease';
+        el.style.color = '#00FFC6';
+        setTimeout(() => {
+          el.style.color = '';
+        }, 300);
+      }
+    });
+  }
+  
+  // Update prices every 3 seconds
+  setInterval(updatePrices, 3000);
+  updatePrices(); // Initial update
+}
+
+// Active Navigation States
+function initActiveNavigation() {
+  const navLinks = document.querySelectorAll('.nav-link[data-section]');
+  const sections = document.querySelectorAll('section[id]');
+  
+  function updateActiveNav() {
+    let currentSection = '';
+    
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 100;
+      const sectionHeight = section.offsetHeight;
+      
+      if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+        currentSection = section.getAttribute('id');
+      }
+    });
+    
+    navLinks.forEach(link => {
+      const linkSection = link.getAttribute('data-section');
+      if (linkSection === currentSection) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+  
+  window.addEventListener('scroll', updateActiveNav);
+  updateActiveNav(); // Initial call
+}
+
 // Initialize
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
@@ -364,6 +483,8 @@ if (document.readyState === 'loading') {
     enhanceChartAnimations();
     initMobileNavigation();
     initFAQAccordion();
+    initRealTimeMarketData();
+    initActiveNavigation();
   });
 } else {
   animateChart();
@@ -373,4 +494,6 @@ if (document.readyState === 'loading') {
   enhanceChartAnimations();
   initMobileNavigation();
   initFAQAccordion();
+  initRealTimeMarketData();
+  initActiveNavigation();
 }

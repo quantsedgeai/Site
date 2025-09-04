@@ -95,3 +95,22 @@
   visibility: hidden;
   transform: translateY(-8px);
 }
+
+/* Active navigation states */
+.nav-link.active {
+  color: var(--accent) !important;
+}
+
+.nav-link.active::after {
+  width: 100% !important;
+}
+
+/* Enhanced CTA styling */
+.btn-primary.glow {
+  box-shadow: 0 0 20px rgba(0, 255, 198, 0.3);
+}
+
+.btn-primary.glow:hover {
+  box-shadow: 0 0 30px rgba(0, 255, 198, 0.5);
+  transform: translateY(-1px);
+}

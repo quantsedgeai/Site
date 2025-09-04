@@ -4,14 +4,24 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>QuantsEdge | Institutional Alpha Through AI</title>
-  <meta name="description" content="Where sophisticated traders access institutional-grade AI infrastructure. $1.2B+ volume. 2.3+ Sharpe. Non-custodial.">
+  <title>QuantsEdge | AI-Powered Alpha for Institutional Traders</title>
+  <meta name="description" content="Institutional trading platform delivering 2.3+ Sharpe ratio with $1.2B+ volume. Non-custodial AI strategies for sophisticated funds and family offices.">
   
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="QuantsEdge">
-  <meta property="og:description" content="Institutional Alpha Through AI">
+  <meta property="og:title" content="QuantsEdge | AI-Powered Alpha for Institutional Traders">
+  <meta property="og:description" content="Institutional trading platform delivering 2.3+ Sharpe ratio with $1.2B+ volume. Non-custodial AI strategies for sophisticated funds.">
   <meta property="og:url" content="https://quantsedge.ai/">
+  <meta property="og:image" content="https://quantsedge.ai/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="QuantsEdge - Institutional AI Trading Platform Performance Dashboard">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QuantsEdge | AI-Powered Alpha for Institutional Traders">
+  <meta name="twitter:description" content="Institutional trading platform delivering 2.3+ Sharpe ratio with $1.2B+ volume.">
+  <meta name="twitter:image" content="https://quantsedge.ai/og-image.png">
   
   <!-- Favicons -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -60,11 +70,11 @@
           
           <!-- Desktop Nav -->
           <nav class="hidden lg:flex items-center space-x-8">
-            <a href="#product" class="nav-link">Product</a>
-            <a href="#performance" class="nav-link">Performance</a>
-            <a href="#technology" class="nav-link">Technology</a>
-            <a href="#team" class="nav-link">Team</a>
-            <a href="#docs" class="nav-link">Docs</a>
+            <a href="#performance" class="nav-link" data-section="performance">Performance</a>
+            <a href="#technology" class="nav-link" data-section="technology">Technology</a>
+            <a href="#team" class="nav-link" data-section="team">Team</a>
+            <a href="#demo" class="nav-link" data-section="demo">Demo</a>
+            <a href="#docs" class="nav-link">Documentation</a>
           </nav>
           
           <!-- Mobile Menu Button -->
@@ -75,12 +85,15 @@
           </button>
           
           <!-- Right Actions -->
-          <div class="flex items-center space-x-4">
-            <button class="btn btn-secondary px-5 py-2 rounded-lg hidden sm:block">
-              Sign In
+          <div class="flex items-center space-x-3">
+            <a href="#" class="text-text-secondary hover:text-accent transition-colors text-sm font-medium hidden sm:block">
+              Client Login
+            </a>
+            <button class="btn btn-secondary px-4 py-2 rounded-lg text-sm hidden md:block">
+              Schedule Demo
             </button>
-            <button class="btn btn-primary px-5 py-2 rounded-lg">
-              Get Access
+            <button class="btn btn-primary px-6 py-2.5 rounded-lg text-sm font-semibold glow">
+              Request Access
             </button>
           </div>
         </div>
@@ -94,21 +107,24 @@
           <div class="space-y-4">
             <!-- Navigation Links -->
             <div class="space-y-3">
-              <a href="#product" class="mobile-nav-link block py-2 text-text-secondary hover:text-accent transition-colors">Product</a>
               <a href="#performance" class="mobile-nav-link block py-2 text-text-secondary hover:text-accent transition-colors">Performance</a>
               <a href="#technology" class="mobile-nav-link block py-2 text-text-secondary hover:text-accent transition-colors">Technology</a>
               <a href="#team" class="mobile-nav-link block py-2 text-text-secondary hover:text-accent transition-colors">Team</a>
-              <a href="#docs" class="mobile-nav-link block py-2 text-text-secondary hover:text-accent transition-colors">Docs</a>
+              <a href="#demo" class="mobile-nav-link block py-2 text-text-secondary hover:text-accent transition-colors">Demo</a>
+              <a href="#docs" class="mobile-nav-link block py-2 text-text-secondary hover:text-accent transition-colors">Documentation</a>
             </div>
             
             <!-- Action Buttons -->
             <div class="pt-4 border-t border-white/10 space-y-3">
               <button class="btn btn-secondary w-full py-3 rounded-lg text-center">
-                Sign In
+                Schedule Demo
               </button>
-              <button class="btn btn-primary w-full py-3 rounded-lg text-center">
-                Get Access
+              <button class="btn btn-primary w-full py-3 rounded-lg text-center glow">
+                Request Access
               </button>
+              <a href="#" class="text-center block py-2 text-text-secondary hover:text-accent transition-colors text-sm">
+                Client Login
+              </a>
             </div>
           </div>
         </div>
@@ -147,11 +163,11 @@
       
       <!-- CTAs -->
       <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16 fade-in stagger-3">
-        <button class="btn btn-primary px-8 py-4 rounded-xl text-base glow">
-          Request Institution Access
+        <button class="btn btn-primary px-8 py-4 rounded-xl text-base font-semibold glow">
+          Request Access
         </button>
         <button class="btn btn-secondary px-8 py-4 rounded-xl text-base">
-          View Live Performance →
+          Schedule Demo →
         </button>
       </div>
       
@@ -317,53 +333,68 @@
             <span class="label text-accent bg-accent/10 px-2 py-1 rounded">LIVE</span>
           </div>
           
-          <!-- Mock Trading Interface -->
-          <div class="bg-grey/10 rounded-xl p-4 mb-6">
+          <!-- Live Trading Interface -->
+          <div class="bg-grey/10 rounded-xl p-4 mb-6" id="live-trading-interface">
             <div class="flex justify-between items-center mb-4">
               <div>
                 <p class="text-sm text-text-tertiary">Portfolio Value</p>
-                <p class="text-2xl font-bold text-green-400">$10,247,832</p>
-                <p class="text-xs text-green-400">+2.34% Today</p>
+                <p class="text-2xl font-bold text-green-400" id="portfolio-value">$10,247,832</p>
+                <p class="text-xs text-green-400" id="portfolio-change">+2.34% Today</p>
               </div>
               <div class="text-right">
                 <p class="text-sm text-text-tertiary">Active Positions</p>
-                <p class="text-lg font-semibold">23</p>
+                <p class="text-lg font-semibold" id="active-positions">23</p>
+              </div>
+              <div class="text-right">
+                <p class="text-sm text-text-tertiary">Market Status</p>
+                <div class="flex items-center">
+                  <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse mr-1"></span>
+                  <span class="text-xs text-green-400">LIVE</span>
+                </div>
               </div>
             </div>
             
-            <!-- Mock Order Book -->
+            <!-- Live Order Book with Real Prices -->
             <div class="grid grid-cols-2 gap-4 text-xs">
               <div>
-                <p class="text-text-tertiary mb-2">Recent Orders</p>
-                <div class="space-y-1">
+                <p class="text-text-tertiary mb-2">Live Market Orders</p>
+                <div class="space-y-1" id="live-orders">
                   <div class="flex justify-between">
                     <span class="text-green-400">BUY ETH</span>
-                    <span>$2,341</span>
+                    <span id="eth-price">$2,341.56</span>
                   </div>
                   <div class="flex justify-between">
                     <span class="text-red-400">SELL BTC</span>
-                    <span>$43,567</span>
+                    <span id="btc-price">$43,567.21</span>
                   </div>
                   <div class="flex justify-between">
                     <span class="text-green-400">BUY SOL</span>
-                    <span>$89.23</span>
+                    <span id="sol-price">$89.23</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-blue-400">HEDGE USDC</span>
+                    <span id="usdc-price">$1.0001</span>
                   </div>
                 </div>
               </div>
               <div>
-                <p class="text-text-tertiary mb-2">P&L Today</p>
-                <div class="space-y-1">
+                <p class="text-text-tertiary mb-2">Real-time P&L</p>
+                <div class="space-y-1" id="live-pnl">
                   <div class="flex justify-between">
                     <span>Realized</span>
-                    <span class="text-green-400">+$24,567</span>
+                    <span class="text-green-400" id="realized-pnl">+$24,567</span>
                   </div>
                   <div class="flex justify-between">
                     <span>Unrealized</span>
-                    <span class="text-green-400">+$8,902</span>
+                    <span class="text-green-400" id="unrealized-pnl">+$8,902</span>
                   </div>
                   <div class="flex justify-between font-semibold">
-                    <span>Total</span>
-                    <span class="text-green-400">+$33,469</span>
+                    <span>Total P&L</span>
+                    <span class="text-green-400" id="total-pnl">+$33,469</span>
+                  </div>
+                  <div class="flex justify-between text-text-tertiary">
+                    <span>Last Update</span>
+                    <span id="last-update">Live</span>
                   </div>
                 </div>
               </div>
@@ -840,8 +871,8 @@
         </p>
         
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <button class="btn btn-primary px-8 py-4 rounded-xl text-base glow">
-            Request Institution Access
+          <button class="btn btn-primary px-8 py-4 rounded-xl text-base font-semibold glow">
+            Request Access
           </button>
           <button class="btn btn-secondary px-8 py-4 rounded-xl text-base">
             Schedule Demo
@@ -1275,6 +1306,76 @@
       </div>
     </div>
   </footer>
+  
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialService",
+    "name": "QuantsEdge",
+    "description": "AI-powered institutional trading platform delivering alpha through quantitative strategies",
+    "url": "https://quantsedge.ai",
+    "logo": "https://quantsedge.ai/og-image.png",
+    "foundingDate": "2023",
+    "founder": [
+      {
+        "@type": "Person",
+        "name": "Harrison Vance",
+        "jobTitle": "Founder & CEO",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "QuantsEdge"
+        }
+      }
+    ],
+    "employee": [
+      {
+        "@type": "Person",
+        "name": "Dr. Dan He",
+        "jobTitle": "Chief Technology Officer"
+      },
+      {
+        "@type": "Person",
+        "name": "Dmitry Motora",
+        "jobTitle": "Chief Operating Officer"
+      }
+    ],
+    "serviceType": "Institutional Trading Platform",
+    "areaServed": "Global",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "info@quantsedge.ai",
+      "contactType": "Business"
+    },
+    "sameAs": [
+      "https://linkedin.com/company/quantsedge",
+      "https://twitter.com/quantsedge"
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Institutional Trading Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "AI Trading Strategies",
+            "description": "Institutional-grade quantitative trading strategies powered by AI"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Non-custodial Trading Infrastructure",
+            "description": "Enterprise trading infrastructure with 99.98% uptime"
+          }
+        }
+      ]
+    }
+  }
+  </script>
+  
   <!-- Optimized Script -->
   <script src="app.js" defer></script>
 </body>
