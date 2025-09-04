@@ -14,7 +14,8 @@
   <meta property="og:url" content="https://quantsedge.ai/">
   
   <!-- Favicons -->
-  <link rel="icon" type="image/svg+xml" href="logo.svg">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="favicon.svg">
   
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -308,11 +309,19 @@
           <!-- Logo -->
           <a href="/" class="flex items-center space-x-2 group">
             <!-- Inline SVG Logo -->
-            <svg width="28" height="34" viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="transition-transform group-hover:scale-110">
-              <path d="M17.1716 2.82843C18.7337 1.26633 21.2663 1.26633 22.8284 2.82843L37.1716 17.1716C38.7337 18.7337 38.7337 21.2663 37.1716 22.8284L22.8284 37.1716C21.2663 38.7337 18.7337 38.7337 17.1716 37.1716L2.82843 22.8284C1.26633 21.2663 1.26633 18.7337 2.82843 17.1716L17.1716 2.82843Z" fill="#00FFC6"/>
-              <path d="M17.1716 26.8284C18.7337 25.2663 21.2663 25.2663 22.8284 26.8284L37.1716 41.1716C38.7337 42.7337 38.7337 45.2663 37.1716 46.8284C36.3905 47.6095 35.3905 48 34.3431 48H5.65685C4.60947 48 3.60947 47.6095 2.82843 46.8284C1.26633 45.2663 1.26633 42.7337 2.82843 41.1716L17.1716 26.8284Z" fill="#00D4AA" opacity="0.9"/>
+            <svg width="24" height="24" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" class="transition-transform group-hover:scale-105">
+              <defs>
+                <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#00FFC6"/>
+                  <stop offset="100%" stop-color="#00D4AA"/>
+                </linearGradient>
+              </defs>
+              <!-- Bottom diamond -->
+              <rect x="20" y="30" width="24" height="24" rx="3" transform="rotate(45 32 42)" fill="#00D4AA" opacity="0.9"/>
+              <!-- Top diamond -->
+              <rect x="18" y="12" width="26" height="26" rx="3.5" transform="rotate(45 31 25)" fill="url(#logo-gradient)"/>
             </svg>
-            <span class="font-bold text-[17px] tracking-tight">QuantsEdge</span>
+            <span class="font-semibold text-[16px] tracking-tight">QuantsEdge</span>
           </a>
           
           <!-- Desktop Nav -->
@@ -349,10 +358,10 @@
       <!-- Badge -->
       <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full glass mb-8 fade-in">
         <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
         </span>
-        <span class="label text-text-secondary">Live Trading • $4.2M Volume Today</span>
+        <span class="label text-text-secondary">LIVE TRADING • $4.2M VOLUME TODAY</span>
       </div>
       
       <!-- Headline -->
@@ -444,17 +453,17 @@
           </div>
           
           <!-- Live Animated Chart -->
-          <div class="h-64 relative overflow-hidden">
+          <div class="h-64 relative bg-grey/20 rounded-xl overflow-hidden">
             <!-- Grid Lines -->
-            <div class="absolute inset-0 flex flex-col justify-between">
-              <div class="border-b border-white/[0.02]"></div>
-              <div class="border-b border-white/[0.02]"></div>
-              <div class="border-b border-white/[0.02]"></div>
-              <div class="border-b border-white/[0.02]"></div>
+            <div class="absolute inset-0 flex flex-col justify-between p-4">
+              <div class="border-b border-white/[0.05]"></div>
+              <div class="border-b border-white/[0.05]"></div>
+              <div class="border-b border-white/[0.05]"></div>
+              <div class="border-b border-white/[0.05]"></div>
             </div>
             
             <!-- SVG Chart -->
-            <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+            <svg class="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
               <defs>
                 <linearGradient id="chart-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" style="stop-color:#00FFC6;stop-opacity:0.3" />
@@ -470,21 +479,21 @@
               </defs>
               
               <!-- Area Fill -->
-              <path id="chart-area" fill="url(#chart-gradient)" />
+              <path id="chart-area" fill="url(#chart-gradient)" d="M 0 100 L 0 60 L 10 58 L 20 55 L 30 52 L 40 48 L 50 45 L 60 42 L 70 38 L 80 35 L 90 33 L 100 30 L 100 100 Z" />
               
               <!-- Line -->
-              <path id="chart-line" fill="none" stroke="#00FFC6" stroke-width="2" filter="url(#glow)" />
+              <path id="chart-line" fill="none" stroke="#00FFC6" stroke-width="2" filter="url(#glow)" d="M 0 60 L 10 58 L 20 55 L 30 52 L 40 48 L 50 45 L 60 42 L 70 38 L 80 35 L 90 33 L 100 30" />
               
               <!-- Animated Dot -->
-              <circle id="chart-dot" r="4" fill="#00FFC6" filter="url(#glow)">
+              <circle id="chart-dot" cx="100" cy="30" r="4" fill="#00FFC6" filter="url(#glow)">
                 <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite" />
               </circle>
             </svg>
             
             <!-- Value Labels -->
-            <div class="absolute right-2 top-2 text-right">
+            <div class="absolute right-4 top-4 text-right">
               <p class="text-xs text-text-tertiary">Current</p>
-              <p class="mono text-lg font-bold text-accent" id="current-value">+12.4%</p>
+              <p class="mono text-2xl font-bold text-accent" id="current-value">+22.4%</p>
             </div>
           </div>
         </div>
@@ -698,10 +707,16 @@
   <footer class="border-t border-white/5 py-16 px-6">
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-col md:flex-row justify-between items-center">
-        <div class="flex items-center space-x-3 mb-4 md:mb-0">
-          <svg width="24" height="29" viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17.1716 2.82843C18.7337 1.26633 21.2663 1.26633 22.8284 2.82843L37.1716 17.1716C38.7337 18.7337 38.7337 21.2663 37.1716 22.8284L22.8284 37.1716C21.2663 38.7337 18.7337 38.7337 17.1716 37.1716L2.82843 22.8284C1.26633 21.2663 1.26633 18.7337 2.82843 17.1716L17.1716 2.82843Z" fill="#00FFC6"/>
-            <path d="M17.1716 26.8284C18.7337 25.2663 21.2663 25.2663 22.8284 26.8284L37.1716 41.1716C38.7337 42.7337 38.7337 45.2663 37.1716 46.8284C36.3905 47.6095 35.3905 48 34.3431 48H5.65685C4.60947 48 3.60947 47.6095 2.82843 46.8284C1.26633 45.2663 1.26633 42.7337 2.82843 41.1716L17.1716 26.8284Z" fill="#00D4AA" opacity="0.9"/>
+        <div class="flex items-center space-x-2 mb-4 md:mb-0">
+          <svg width="20" height="20" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="footer-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#00FFC6"/>
+                <stop offset="100%" stop-color="#00D4AA"/>
+              </linearGradient>
+            </defs>
+            <rect x="20" y="30" width="24" height="24" rx="3" transform="rotate(45 32 42)" fill="#00D4AA" opacity="0.9"/>
+            <rect x="18" y="12" width="26" height="26" rx="3.5" transform="rotate(45 31 25)" fill="url(#footer-gradient)"/>
           </svg>
           <span class="text-sm text-text-secondary">© 2025 QuantsEdge Inc.</span>
         </div>
@@ -720,27 +735,26 @@
   </footer>
   <!-- Chart Animation Script -->
   <script>
-    // Generate smooth chart data
+    // Generate smooth chart data with upward trend
     function generateChartPath() {
       const width = 100;
       const height = 100;
-      const points = 50;
-      const volatility = 15;
-      let y = 60;
+      const points = 20;
+      const baseValue = 65; // Starting point
+      const trendUp = -25; // How much it trends up (negative because SVG Y is inverted)
       
       let pathData = [];
       let areaData = [`M 0 ${height}`];
       
       for (let i = 0; i <= points; i++) {
         const x = (i / points) * width;
+        const progress = i / points;
         
-        // Add some randomness for realistic movement
-        const change = (Math.random() - 0.5) * volatility;
-        y = Math.max(20, Math.min(80, y + change));
-        
-        // Trend it upward slightly
-        if (i > points * 0.3) y -= 0.3;
-        if (i > points * 0.6) y -= 0.2;
+        // Create an upward trending line with some volatility
+        const trend = baseValue + (trendUp * progress);
+        const volatility = Math.sin(progress * Math.PI * 4) * 5;
+        const noise = (Math.random() - 0.5) * 3;
+        const y = Math.max(20, Math.min(70, trend + volatility + noise));
         
         pathData.push(`${i === 0 ? 'M' : 'L'} ${x} ${y}`);
         areaData.push(`L ${x} ${y}`);
@@ -750,15 +764,16 @@
       areaData.push(`L ${width} ${height}`);
       areaData.push('Z');
       
+      const finalY = baseValue + trendUp;
       return {
         line: pathData.join(' '),
         area: areaData.join(' '),
-        lastY: y,
+        lastY: finalY,
         lastX: width
       };
     }
     
-    // Animate the chart
+    // Animate the chart with smooth transitions
     function animateChart() {
       const chartLine = document.getElementById('chart-line');
       const chartArea = document.getElementById('chart-area');
@@ -767,31 +782,37 @@
       
       if (!chartLine || !chartArea || !chartDot) return;
       
+      let currentData = generateChartPath();
+      
       function update() {
-        const data = generateChartPath();
+        const newData = generateChartPath();
         
-        // Smooth transition
-        const currentPath = chartLine.getAttribute('d');
-        if (currentPath) {
-          chartLine.style.transition = 'all 0.5s ease';
-          chartArea.style.transition = 'all 0.5s ease';
-        }
+        // Smooth transition between states
+        chartLine.style.transition = 'all 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
+        chartArea.style.transition = 'all 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
+        chartDot.style.transition = 'all 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
         
-        chartLine.setAttribute('d', data.line);
-        chartArea.setAttribute('d', data.area);
-        chartDot.setAttribute('cx', data.lastX);
-        chartDot.setAttribute('cy', data.lastY);
+        chartLine.setAttribute('d', newData.line);
+        chartArea.setAttribute('d', newData.area);
+        chartDot.setAttribute('cx', newData.lastX);
+        chartDot.setAttribute('cy', newData.lastY);
         
-        // Update value
+        // Update value based on position (higher position = higher return)
         if (currentValue) {
-          const value = 15 - (data.lastY - 50) * 0.3;
-          currentValue.textContent = `${value > 0 ? '+' : ''}${value.toFixed(1)}%`;
-          currentValue.style.color = value > 0 ? '#00FFC6' : '#ff6b6b';
+          const value = 22.4 + (Math.random() - 0.5) * 2; // Fluctuate around 22.4%
+          currentValue.textContent = `+${value.toFixed(1)}%`;
+          // Keep it green since we're showing positive returns
+          currentValue.style.color = '#00FFC6';
         }
+        
+        currentData = newData;
       }
       
       // Initial render
-      update();
+      chartLine.setAttribute('d', currentData.line);
+      chartArea.setAttribute('d', currentData.area);
+      chartDot.setAttribute('cx', currentData.lastX);
+      chartDot.setAttribute('cy', currentData.lastY);
       
       // Update every 3 seconds for smooth, realistic movement
       setInterval(update, 3000);

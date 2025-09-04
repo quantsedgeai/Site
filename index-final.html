@@ -14,7 +14,8 @@
   <meta property="og:url" content="https://quantsedge.ai/">
   
   <!-- Favicons -->
-  <link rel="icon" type="image/svg+xml" href="logo.svg">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="favicon.svg">
   
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -290,6 +291,22 @@
       animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
     
+    /* Strong Blinking for Live Indicator */
+    @keyframes blink-strong {
+      0%, 100% { 
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% { 
+        opacity: 0.3;
+        transform: scale(0.9);
+      }
+    }
+    
+    .blink-strong {
+      animation: blink-strong 1s ease-in-out infinite;
+    }
+    
     /* Responsive Text Scaling */
     @media (max-width: 768px) {
       .display {
@@ -308,11 +325,19 @@
           <!-- Logo -->
           <a href="/" class="flex items-center space-x-2 group">
             <!-- Inline SVG Logo -->
-            <svg width="28" height="34" viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="transition-transform group-hover:scale-110">
-              <path d="M17.1716 2.82843C18.7337 1.26633 21.2663 1.26633 22.8284 2.82843L37.1716 17.1716C38.7337 18.7337 38.7337 21.2663 37.1716 22.8284L22.8284 37.1716C21.2663 38.7337 18.7337 38.7337 17.1716 37.1716L2.82843 22.8284C1.26633 21.2663 1.26633 18.7337 2.82843 17.1716L17.1716 2.82843Z" fill="#00FFC6"/>
-              <path d="M17.1716 26.8284C18.7337 25.2663 21.2663 25.2663 22.8284 26.8284L37.1716 41.1716C38.7337 42.7337 38.7337 45.2663 37.1716 46.8284C36.3905 47.6095 35.3905 48 34.3431 48H5.65685C4.60947 48 3.60947 47.6095 2.82843 46.8284C1.26633 45.2663 1.26633 42.7337 2.82843 41.1716L17.1716 26.8284Z" fill="#00D4AA" opacity="0.9"/>
+            <svg width="24" height="24" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" class="transition-transform group-hover:scale-105">
+              <defs>
+                <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#00FFC6"/>
+                  <stop offset="100%" stop-color="#00D4AA"/>
+                </linearGradient>
+              </defs>
+              <!-- Bottom diamond -->
+              <rect x="20" y="30" width="24" height="24" rx="3" transform="rotate(45 32 42)" fill="#00D4AA" opacity="0.9"/>
+              <!-- Top diamond -->
+              <rect x="18" y="12" width="26" height="26" rx="3.5" transform="rotate(45 31 25)" fill="url(#logo-gradient)"/>
             </svg>
-            <span class="font-bold text-[17px] tracking-tight">QuantsEdge</span>
+            <span class="font-semibold text-[16px] tracking-tight">QuantsEdge</span>
           </a>
           
           <!-- Desktop Nav -->
@@ -347,10 +372,11 @@
     
     <div class="relative max-w-6xl mx-auto text-center">
       <!-- Badge -->
-      <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full glass mb-8 fade-in">
-        <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
+      <div class="inline-flex items-center space-x-3 px-4 py-2 rounded-full glass mb-8 fade-in">
+        <span class="relative flex h-3 w-3">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-100"></span>
+          <span class="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-60 animate-pulse"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-green-400 border border-green-300"></span>
         </span>
         <span class="label text-text-secondary">LIVE TRADING • $4.2M VOLUME TODAY</span>
       </div>
@@ -698,10 +724,16 @@
   <footer class="border-t border-white/5 py-16 px-6">
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-col md:flex-row justify-between items-center">
-        <div class="flex items-center space-x-3 mb-4 md:mb-0">
-          <svg width="24" height="29" viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17.1716 2.82843C18.7337 1.26633 21.2663 1.26633 22.8284 2.82843L37.1716 17.1716C38.7337 18.7337 38.7337 21.2663 37.1716 22.8284L22.8284 37.1716C21.2663 38.7337 18.7337 38.7337 17.1716 37.1716L2.82843 22.8284C1.26633 21.2663 1.26633 18.7337 2.82843 17.1716L17.1716 2.82843Z" fill="#00FFC6"/>
-            <path d="M17.1716 26.8284C18.7337 25.2663 21.2663 25.2663 22.8284 26.8284L37.1716 41.1716C38.7337 42.7337 38.7337 45.2663 37.1716 46.8284C36.3905 47.6095 35.3905 48 34.3431 48H5.65685C4.60947 48 3.60947 47.6095 2.82843 46.8284C1.26633 45.2663 1.26633 42.7337 2.82843 41.1716L17.1716 26.8284Z" fill="#00D4AA" opacity="0.9"/>
+        <div class="flex items-center space-x-2 mb-4 md:mb-0">
+          <svg width="20" height="20" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="footer-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#00FFC6"/>
+                <stop offset="100%" stop-color="#00D4AA"/>
+              </linearGradient>
+            </defs>
+            <rect x="20" y="30" width="24" height="24" rx="3" transform="rotate(45 32 42)" fill="#00D4AA" opacity="0.9"/>
+            <rect x="18" y="12" width="26" height="26" rx="3.5" transform="rotate(45 31 25)" fill="url(#footer-gradient)"/>
           </svg>
           <span class="text-sm text-text-secondary">© 2025 QuantsEdge Inc.</span>
         </div>
