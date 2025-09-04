@@ -138,6 +138,21 @@
     /* DOCS */
     .code { background:#0a1323; border:1px solid var(--outline); border-radius:12px; padding:1rem; overflow:auto; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size:.92rem; line-height:1.5; color:#cfe6f5; }
 
+    /* KPIs / Case studies / Docs cards */
+    .kpis{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.8rem}
+    .kpi{background:#0a1323;border:1px solid var(--outline);border-radius:10px;padding:.7rem .8rem;min-width:160px}
+    .kpi .label{color:var(--muted);font-size:.9rem}
+    .kpi .value{font-weight:700}
+    .cs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .cs-card{background:var(--bg-elev);border:1px solid var(--outline);border-radius:var(--radius);padding:1rem;display:grid;gap:.5rem}
+    .cs-meta{display:flex;gap:.4rem;flex-wrap:wrap}
+    .cs-meta .chip{font-size:.75rem}
+    .doc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}
+    .doc-card{background:var(--bg-elev);border:1px solid var(--outline);border-radius:var(--radius);padding:1rem}
+    .status-card{background:#0a1323;border:1px solid var(--outline);border-radius:12px;padding:.9rem;display:flex;align-items:center;justify-content:space-between}
+    @media(max-width:980px){.cs-grid,.doc-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:680px){.cs-grid,.doc-grid{grid-template-columns:1fr}}
+
     /* FOOTER */
     footer { border-top:1px solid rgba(255,255,255,.06); background: #080d12; }
     .footer-grid { display:grid; grid-template-columns: 1.3fr repeat(3, 1fr); gap: 1.2rem; padding: 2rem 0 1rem; }
@@ -364,7 +379,13 @@
             <span class="stat neutral">Win Rate 57%</span>
             <span class="stat bad">Max Drawdown −8.9%</span>
           </div>
+          <div class="kpis">
+            <div class="kpi"><div class="label">Volatility (30d)</div><div class="value">12.1%</div></div>
+            <div class="kpi"><div class="label">Sharpe</div><div class="value">1.42</div></div>
+            <div class="kpi"><div class="label">Latency</div><div class="value">&lt;100ms</div></div>
+          </div>
           <p style="color: var(--muted); margin-top:.7rem; font-size:.95rem;">Figures shown are illustrative placeholders.</p>
+          <div style="margin-top:.6rem"><a class="btn btn-ghost" href="#case-studies">View Case Studies</a></div>
         </div>
       </div>
     </section>
@@ -374,6 +395,10 @@
       <div class="container security-grid">
         <div>
           <h2 id="security-title">Security & Transparency</h2>
+          <div class="status-card" style="margin:.4rem 0 .8rem">
+            <span class="role">Status: All systems operational</span>
+            <a class="btn btn-ghost" href="https://status.quantsedge.ai" target="_blank" rel="noopener">Open status</a>
+          </div>
           <p class="lead">Non‑custodial architecture with audited contracts and continuously monitored infrastructure.</p>
           <ul class="security-list">
             <li>Audited smart contracts (link placeholder)</li>
@@ -406,6 +431,45 @@
             <path d="M240 240h-20" stroke="var(--teal)" stroke-width="3"/>
             <path d="M360 240h-40" stroke="var(--teal)" stroke-width="3"/>
           </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASE STUDIES -->
+    <section id="case-studies" class="section" aria-labelledby="cs-title">
+      <div class="container">
+        <h2 id="cs-title">Case Studies</h2>
+        <div class="cs-grid">
+          <article class="cs-card">
+            <h3>Token Launch Liquidity</h3>
+            <p class="role">Stabilized price action in first 72h with dynamic inventory bands and volatility-aware routing.</p>
+            <div class="cs-meta">
+              <span class="chip">Slippage −32%</span>
+              <span class="chip">Volume +18%</span>
+              <span class="chip">MDD −2.1pt</span>
+            </div>
+            <a class="btn btn-ghost" href="#">Read case study</a>
+          </article>
+          <article class="cs-card">
+            <h3>Perp Strategy Optimization</h3>
+            <p class="role">AI parameter sweeps improved Sharpe and reduced drawdowns across choppy regimes.</p>
+            <div class="cs-meta">
+              <span class="chip">Sharpe +0.26</span>
+              <span class="chip">DD −1.8pt</span>
+              <span class="chip">WR +3.4pt</span>
+            </div>
+            <a class="btn btn-ghost" href="#">Read case study</a>
+          </article>
+          <article class="cs-card">
+            <h3>Cross‑Chain Execution</h3>
+            <p class="role">Latency‑aware routing across L2s reduced costs while maintaining fill quality.</p>
+            <div class="cs-meta">
+              <span class="chip">Latency &lt;100ms</span>
+              <span class="chip">Fees −15%</span>
+              <span class="chip">Fill +9%</span>
+            </div>
+            <a class="btn btn-ghost" href="#">Read case study</a>
+          </article>
         </div>
       </div>
     </section>
@@ -451,6 +515,11 @@
         <p class="lead">Explore our APIs, deployment guides, and strategy blueprints to get started quickly.</p>
         <div style="display:flex; gap:1rem; align-items:flex-start; margin-top:1rem; flex-wrap:wrap;">
           <a class="btn btn-primary" href="#docs">View Documentation</a>
+          <div class="doc-grid">
+            <div class="doc-card"><h3>Getting Started</h3><p class="role">Install, authenticate, and deploy your first strategy.</p><a class="btn btn-ghost" href="#">Open guide</a></div>
+            <div class="doc-card"><h3>API Reference</h3><p class="role">REST & WebSocket endpoints with schemas and examples.</p><a class="btn btn-ghost" href="#">Open API</a></div>
+            <div class="doc-card"><h3>SDKs</h3><p class="role">TypeScript and Python clients with backtesting helpers.</p><a class="btn btn-ghost" href="#">Open SDKs</a></div>
+          </div>
           <div class="code" aria-label="Code sample">
 <pre><code>// Example: subscribe to price feed (pseudo)
 const feed = await quantsedge.prices.subscribe({ pair: 'ETH/USDC' })
