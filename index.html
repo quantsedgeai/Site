@@ -407,7 +407,7 @@
               Access</a>
           </div>
         </nav>
-        <div class="mt-auto text-xs text-white/40">© QuantsEdge</div>
+        <div class="mt-auto text-xs text-white/40">�� QuantsEdge</div>
       </div>
     </div>
   </nav>
@@ -930,15 +930,17 @@
   });
 
   /* ===== Charts ===== */
-  // Heading polish
-  document.querySelectorAll('h2, h4').forEach(h=>{
-    if(h.dataset.enhanced) return; h.dataset.enhanced='1';
-    h.classList.add('relative');
-    const deco=document.createElement('span');
-    deco.setAttribute('aria-hidden','true');
-    deco.style.cssText='position:absolute;left:50%;transform:translateX(-50%);bottom:-10px;width:90px;height:2px;border-radius:2px;background:linear-gradient(90deg,#14B8A6,#0EA5E9);opacity:.9;';
-    h.appendChild(deco);
-  });
+  // Heading polish (exclude footer)
+  Array.from(document.querySelectorAll('h2, h4'))
+    .filter(h=>!h.closest('footer'))
+    .forEach(h=>{
+      if(h.dataset.enhanced) return; h.dataset.enhanced='1';
+      h.classList.add('relative');
+      const deco=document.createElement('span');
+      deco.setAttribute('aria-hidden','true');
+      deco.style.cssText='position:absolute;left:50%;transform:translateX(-50%);bottom:-10px;width:90px;height:2px;border-radius:2px;background:linear-gradient(90deg,#14B8A6,#0EA5E9);opacity:.9;';
+      h.appendChild(deco);
+    });
 
   // Count-up for KPI numbers inside Strategy Dashboard
   const kpis = Array.from(document.querySelectorAll('#platform .text-2xl.font-bold'));
