@@ -350,6 +350,11 @@
         transition: none !important;
       }
     }
+    /* Header/Footer gradient accent bars */
+    #navbar{position:fixed;}
+    #navbar::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#14B8A6,#0EA5E9);opacity:.95}
+    footer{position:relative;}
+    footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#14B8A6,#0EA5E9);opacity:.9}
   </style>
 </head>
 
