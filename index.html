@@ -34,7 +34,11 @@
   
   <!-- Critical CSS -->
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="mobile-nav.css">
+  <style>
+    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{left:12px;top:12px;width:auto;height:auto;background:#00FFC6;color:#000;padding:8px 12px;border-radius:8px;z-index:1000}
+    a:focus-visible,button:focus-visible,[role="button"]:focus-visible{outline:2px solid #00FFC6;outline-offset:2px}
+  </style>
   
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -45,9 +49,10 @@
 </head>
 
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
   <!-- Navigation -->
   <header class="fixed top-0 left-0 right-0 z-50">
-    <nav class="glass">
+    <nav class="glass" role="navigation" aria-label="Primary">
       <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
           <!-- Logo -->
@@ -77,7 +82,7 @@
           </nav>
           
           <!-- Mobile Menu Button -->
-          <button id="mobile-menu-button" class="lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors" aria-label="Toggle menu" aria-expanded="false">
+          <button id="mobile-menu-button" class="mobile-nav-button lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors" aria-label="Toggle menu" aria-expanded="false">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
@@ -124,6 +129,7 @@
     </div>
   </header>
   
+  <main id="main-content" role="main">
   <!-- Hero Section -->
   <section class="relative min-h-screen flex items-center justify-center px-6 pt-24">
     <!-- Background Gradient -->
@@ -1097,6 +1103,7 @@
     </div>
   </section>
   
+  </main>
   <!-- Footer -->
   <footer class="border-t border-white/5 py-20 px-6 bg-gradient-to-b from-transparent to-black/20">
     <div class="max-w-7xl mx-auto">
