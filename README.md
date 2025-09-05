@@ -1,49 +1,32 @@
-# QuantsEdge Website
+# QuantsEdge Website (Static, Netlify)
 
-QuantsEdge is an AI-powered, non-custodial quant trading platform. This repository contains the static website for QuantsEdge.
-
-## About
-
-QuantsEdge provides:
-- AI-powered on-chain quant trading
-- Non-custodial strategy execution
-- Fund-grade analytics and backtesting
-- Support for multiple blockchains (Ethereum, Base, Arbitrum, Avalanche, BNB Chain)
+This repository contains the static website for QuantsEdge. It is deployed via Netlify without a build step.
 
 ## Development
 
-### Local Development Server
+- Local server: `python3 -m http.server 8000` and open http://localhost:8000
+- Alternatively: `npm run dev` does the same using Python's http.server
 
-To serve the website locally for development:
+## Deployment (Netlify)
 
-```bash
-npm run dev
-```
+- Netlify publishes from repo root (`publish = "."`).
+- Build command is empty (no build): see `netlify.toml`.
+- Caching and security headers are configured in `netlify.toml`.
+- If a deploy looks stale, use "Clear cache and deploy site" on the Deploys tab.
 
-This will start a local HTTP server on port 8000. Visit `http://localhost:8000` in your browser.
+## Repository structure
 
-### Project Structure
+- `index.html`, `styles.css`, `app.js`, `images/` — live site assets
+- `archive/` — legacy prototypes and the previous nested site (`archive/Site-legacy/`) — do not edit
+- `netlify.toml` — deploy settings and headers
+- `ssh_config.sample` — sample SSH config (renamed from config.toml to avoid Hugo autodetection)
 
-- `index.html` - Main website file containing all HTML, CSS, and JavaScript
-- `package.json` - Project configuration and scripts
-- `README.md` - This file
+## Notes
 
-### Technologies Used
-
-- HTML5 with semantic markup
-- CSS3 with custom properties and animations
-- Tailwind CSS (loaded via CDN)
-- Google Fonts (Inter font family)
-- Responsive design principles
-
-## Deployment
-
-This is a static website that can be deployed to any static hosting service like:
-- GitHub Pages
-- Netlify
-- Vercel
-- AWS S3 + CloudFront
-- Any web server
+- Removed institutional claims and minimum AUM text.
+- Removed audit trail and data-quality export content.
+- Footer simplified; phone number removed.
+- Navigation cleaned of dead links.
 
 ## License
 
