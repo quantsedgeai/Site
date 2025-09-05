@@ -109,7 +109,6 @@ function initAnimatedCounters() {
   const counterData = [
     { selector: '.hero-stats [data-counter="volume"]', end: 1.2, suffix: 'B+' },
     { selector: '.hero-stats [data-counter="sharpe"]', end: 2.34, suffix: '' },
-    { selector: '.hero-stats [data-counter="institutions"]', end: 287, suffix: '' },
     { selector: '.hero-stats [data-counter="uptime"]', end: 99.98, suffix: '%' }
   ];
 
