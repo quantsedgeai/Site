@@ -1,0 +1,11 @@
+
+> quantsedge-site@1.0.0 dev /Users/wonky/Site
+> next dev
+
+ ⚠ Port 3000 is in use, trying 3001 instead.
+  ▲ Next.js 14.2.5
+  - Local:        http://localhost:3001
+
+ ✓ Starting...
+ ✓ Ready in 1426ms
+[?25h

@@ -1,0 +1,90 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#000000"/>
+      <stop offset="100%" stop-color="#1A1A1A"/>
+    </linearGradient>
+    <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00FFC6"/>
+      <stop offset="100%" stop-color="#00D4AA"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg-gradient)"/>
+  
+  <!-- Background Pattern -->
+  <circle cx="200" cy="150" r="100" fill="#00FFC6" opacity="0.05"/>
+  <circle cx="1000" cy="480" r="120" fill="#00D4AA" opacity="0.05"/>
+  
+  <!-- Logo -->
+  <g transform="translate(100, 150)">
+    <rect x="20" y="30" width="48" height="48" rx="6" transform="rotate(45 44 54)" fill="#00D4AA" opacity="0.9"/>
+    <rect x="16" y="16" width="52" height="52" rx="7" transform="rotate(45 42 42)" fill="url(#logo-gradient)"/>
+  </g>
+  
+  <!-- Main Title -->
+  <text x="250" y="220" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="64" font-weight="900" letter-spacing="-2px">
+    QuantsEdge
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="250" y="280" fill="url(#logo-gradient)" font-family="Inter, sans-serif" font-size="36" font-weight="600">
+    AI-Powered Alpha for Institutional Traders
+  </text>
+  
+  <!-- Key Metrics -->
+  <g transform="translate(250, 350)">
+    <text x="0" y="0" fill="#00FFC6" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">$1.2B+</text>
+    <text x="0" y="30" fill="#999999" font-family="Inter, sans-serif" font-size="14" text-transform="uppercase">Volume Traded</text>
+    
+    <text x="200" y="0" fill="#00FFC6" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">2.3+</text>
+    <text x="200" y="30" fill="#999999" font-family="Inter, sans-serif" font-size="14" text-transform="uppercase">Sharpe Ratio</text>
+    
+    <text x="350" y="0" fill="#00FFC6" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">99.98%</text>
+    <text x="350" y="30" fill="#999999" font-family="Inter, sans-serif" font-size="14" text-transform="uppercase">Uptime</text>
+  </g>
+  
+  <!-- Live Trading Indicator -->
+  <g transform="translate(250, 450)">
+    <circle cx="8" cy="0" r="4" fill="#00FF00" filter="url(#glow)">
+      <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <text x="25" y="6" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="16" font-weight="500">
+      LIVE TRADING • NON-CUSTODIAL • TRANSPARENT
+    </text>
+  </g>
+  
+  <!-- Chart Background -->
+  <rect x="700" y="100" width="400" height="250" fill="rgba(255,255,255,0.03)" rx="12" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  
+  <!-- Simplified Chart -->
+  <g transform="translate(700, 100)">
+    <path d="M 50 200 L 80 180 L 120 160 L 160 140 L 200 120 L 240 100 L 280 80 L 320 60 L 350 50" 
+          fill="none" stroke="url(#logo-gradient)" stroke-width="3" filter="url(#glow)"/>
+    
+    <!-- Chart Area -->
+    <path d="M 50 250 L 50 200 L 80 180 L 120 160 L 160 140 L 200 120 L 240 100 L 280 80 L 320 60 L 350 50 L 350 250 Z" 
+          fill="url(#logo-gradient)" opacity="0.1"/>
+    
+    <!-- Performance Label -->
+    <text x="200" y="30" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="18" font-weight="600" text-anchor="middle">
+      Live Performance
+    </text>
+    <text x="320" y="70" fill="#00FFC6" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">
+      +22.4%
+    </text>
+  </g>
+  
+  <!-- Bottom Text -->
+  <text x="600" y="580" fill="#666666" font-family="Inter, sans-serif" font-size="14" text-anchor="middle">
+    Minimum AUM: $10M • Former quants from Two Sigma, Citadel, Jane Street
+  </text>
+</svg>

@@ -1,6 +1,6 @@
 [build]
-  publish = "."
-  command = ""
+  publish = "out"
+  command = "pnpm run build"
 
 # Cache busting and security headers
 [[headers]]

@@ -1,33 +1,132 @@
-# QuantsEdge Website (Static, Netlify)
+# QuantsEdge Website (Next.js + React + TypeScript)
 
-This repository contains the static website for QuantsEdge. It is deployed via Netlify without a build step.
+Modern, professional website for QuantsEdge built with Next.js, React, TypeScript, and Framer Motion. Deployed via Netlify with static generation.
+
+## Features
+
+- ⚡ Next.js 14 with App Router
+- 🎨 Tailwind CSS with custom QuantsEdge design system  
+- 🎭 Framer Motion animations
+- 📱 Mobile-first responsive design
+- ♿ Accessibility optimized
+- 🔧 TypeScript for type safety
+- 📊 Animated performance counters
+- 🌟 Glass morphism UI effects
 
 ## Development
 
-- Local server: `python3 -m http.server 8000` and open http://localhost:8000
-- Alternatively: `npm run dev` does the same using Python's http.server
+### Prerequisites
+
+- Node.js 18+ (recommended: use `.nvmrc`)
+- pnpm (recommended package manager)
+
+### Quick Start
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm run dev
+
+# Open http://localhost:3000
+```
+
+### Available Scripts
+
+```bash
+# Development
+pnpm run dev          # Start dev server
+
+# Building
+pnpm run build        # Production build  
+pnpm run start        # Start production server
+
+# Code Quality  
+pnpm run lint         # ESLint with auto-fix
+pnpm run typecheck    # TypeScript checking
+
+# Dependency Management
+pnpm ci               # Clean install (CI/CD)
+```
 
 ## Deployment (Netlify)
 
-- Netlify publishes from repo root (`publish = "."`).
-- Build command is empty (no build): see `netlify.toml`.
-- Caching and security headers are configured in `netlify.toml`.
-- If a deploy looks stale, use "Clear cache and deploy site" on the Deploys tab.
+The site automatically deploys via Netlify when pushing to the main branch:
 
-## Repository structure
+- **Build command**: `pnpm run build`
+- **Publish directory**: `out`
+- **Node version**: 18+ (set in Netlify dashboard)
 
-- `index.html`, `styles.css`, `app.js`, `images/` — live site assets
-- `archive/` — legacy prototypes and the previous nested site (`archive/Site-legacy/`) — do not edit
-- `netlify.toml` — deploy settings and headers
-- `ssh_config.sample` — sample SSH config (renamed from config.toml to avoid Hugo autodetection)
+### Manual Deploy
 
-## Notes
+```bash
+# Build for production
+pnpm run build
 
-- Removed institutional claims and minimum AUM text.
-- Removed audit trail and data-quality export content.
-- Footer simplified; phone number removed.
-- Navigation cleaned of dead links.
+# Deploy the `out` folder to your hosting provider
+```
+
+## Project Structure
+
+```
+src/
+├── app/                # Next.js App Router
+│   ├── layout.tsx      # Root layout with fonts & metadata
+│   ├── page.tsx        # Homepage
+│   └── globals.css     # Global styles
+├── components/         # React components
+│   ├── Header.tsx      # Navigation header
+│   ├── Hero.tsx        # Hero section with animations
+│   └── ...
+├── lib/                # Utilities
+│   └── utils.ts        # Class name utilities
+public/                 # Static assets
+├── images/             # Team photos & assets  
+├── favicon.svg         # Site favicon
+├── logo.svg            # QuantsEdge logo
+└── og-image.png        # Open Graph image
+```
+
+## Design System
+
+### Colors
+- **Accent**: #00FFC6 (QuantsEdge brand green)
+- **Background**: #000000 (Pure black)
+- **Cards**: #0F0F0F (Dark gray)
+- **Text**: #FFFFFF, #999999, #666666 (Primary, secondary, tertiary)
+
+### Typography
+- **Primary**: Inter (Google Fonts)
+- **Monospace**: JetBrains Mono
+- **Display text**: Custom font weights & spacing
+
+### Components
+- Glass morphism effects
+- Subtle hover animations  
+- Mobile-first responsive design
+- Accessibility-focused interactions
+
+## Performance
+
+- Static generation for optimal loading
+- Optimized fonts with `display: swap`
+- Framer Motion with reduced motion support
+- Responsive images and modern formats
+
+## Browser Support
+
+- Modern browsers (Chrome, Firefox, Safari, Edge)
+- Mobile browsers (iOS Safari, Chrome Mobile)
+- Progressive enhancement for older browsers
+
+## Contributing
+
+1. Follow QuantsEdge coding conventions
+2. Run `pnpm run lint` and `pnpm run typecheck`
+3. Test on mobile and desktop
+4. Ensure accessibility compliance
 
 ## License
 
-MIT License
+MIT License - see LICENSE file for details.
