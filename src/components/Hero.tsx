@@ -390,19 +390,20 @@ export function Hero() {
                 variants={itemVariants}
                 className="flex flex-col justify-center gap-4 sm:flex-row lg:justify-start"
               >
-                <motion.a
+                <motion.button
+                  type="button"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  href="#early-access"
+                  onClick={() => setIsRequestOpen(true)}
                   className="btn btn-primary glow rounded-xl px-8 py-4 text-base font-semibold"
                   data-analytics-event="cta_request_access"
                   data-analytics-payload={JSON.stringify({
                     location: "hero",
-                    target: "early_access",
+                    target: "request_form",
                   })}
                 >
                   Request Access
-                </motion.a>
+                </motion.button>
                 <motion.a
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
