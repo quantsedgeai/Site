@@ -1,19 +1,30 @@
 {
   "extends": [
-    "next/core-web-vitals"
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:tailwindcss/recommended",
+    "prettier"
   ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "tailwindcss"],
   "rules": {
     "prefer-const": "error",
     "no-var": "error",
-    "no-console": "warn",
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
     "react/no-unescaped-entities": "off",
-    "@next/next/no-img-element": "off"
+    "@next/next/no-img-element": "off",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/consistent-type-imports": ["error", { "prefer": "type-imports" }],
+    "import/order": [
+      "error",
+      {
+        "groups": [["builtin", "external"], ["internal"], ["parent", "sibling", "index"]],
+        "newlines-between": "always",
+        "alphabetize": { "order": "asc", "caseInsensitive": true }
+      }
+    ],
+    "tailwindcss/no-custom-classname": "off"
   },
-  "ignorePatterns": [
-    "node_modules/",
-    ".next/",
-    "out/",
-    "backup-original/",
-    "archive/"
-  ]
+  "ignorePatterns": ["node_modules/", ".next/", "out/", "backup-original/", "archive/"]
 }

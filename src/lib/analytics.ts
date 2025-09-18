@@ -8,9 +8,10 @@ const getSessionId = () => {
   const storageKey = "quantsedge:session";
   let sessionId = window.sessionStorage.getItem(storageKey);
   if (!sessionId) {
-    sessionId = typeof crypto !== "undefined" && "randomUUID" in crypto
-      ? crypto.randomUUID()
-      : Math.random().toString(36).slice(2);
+    sessionId =
+      typeof crypto !== "undefined" && "randomUUID" in crypto
+        ? crypto.randomUUID()
+        : Math.random().toString(36).slice(2);
     window.sessionStorage.setItem(storageKey, sessionId);
   }
   return sessionId;

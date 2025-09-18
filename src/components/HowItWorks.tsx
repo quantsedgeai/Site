@@ -45,23 +45,23 @@ const fadeUp = {
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="relative py-24 px-6 overflow-hidden">
+    <section id="how-it-works" className="relative overflow-hidden px-6 py-24">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(16,185,129,0.08),transparent_55%),radial-gradient(circle_at_80%_0%,rgba(59,130,246,0.08),transparent_45%)]" />
-      <div className="max-w-7xl mx-auto relative">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <p className="label text-accent mb-4">How It Works</p>
-          <h2 className="display text-4xl sm:text-5xl lg:text-display-md mb-6">
+      <div className="relative mx-auto max-w-7xl">
+        <div className="mx-auto mb-16 max-w-3xl text-center">
+          <p className="label mb-4 text-accent">How It Works</p>
+          <h2 className="display mb-6 text-4xl sm:text-5xl lg:text-display-md">
             One pipeline from research to live execution
           </h2>
           <p className="text-lg text-text-secondary">
-            Every strategy walks the same three steps. Start experimenting, prove the idea without risking capital, then launch with
-            training wheels that stay on in production.
+            Every strategy walks the same three steps. Start experimenting, prove the idea without
+            risking capital, then launch with training wheels that stay on in production.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] gap-16">
+        <div className="grid gap-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
           <div className="relative pl-10">
-            <div className="absolute left-4 top-0 bottom-0 w-px bg-white/10" />
+            <div className="absolute inset-y-0 left-4 w-px bg-white/10" />
             <div className="absolute left-4 top-0 h-10 w-px bg-gradient-to-b from-accent/80 to-transparent" />
             {steps.map((step, index) => (
               <motion.div
@@ -72,13 +72,13 @@ export function HowItWorks() {
                 variants={fadeUp}
                 className="relative pb-12 last:pb-0"
               >
-                <span className="absolute -left-10 top-0 flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-black/60 text-sm font-semibold text-accent">
+                <span className="absolute -left-10 top-0 flex size-8 items-center justify-center rounded-full border border-white/10 bg-black/60 text-sm font-semibold text-accent">
                   {index + 1}
                 </span>
                 <div className="glass rounded-3xl border border-white/10 p-6 backdrop-blur-lg">
                   <h3 className="text-lg font-semibold text-text-primary">{step.title}</h3>
-                  <p className="text-sm text-text-secondary mt-2">{step.summary}</p>
-                  <p className="text-sm text-text-tertiary mt-4 leading-relaxed">{step.detail}</p>
+                  <p className="mt-2 text-sm text-text-secondary">{step.summary}</p>
+                  <p className="mt-4 text-sm leading-relaxed text-text-tertiary">{step.detail}</p>
                 </div>
               </motion.div>
             ))}
@@ -89,12 +89,16 @@ export function HowItWorks() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.4 }}
             variants={fadeUp}
-            className="glass rounded-3xl border border-white/10 p-8 backdrop-blur-xl space-y-6"
+            className="glass space-y-6 rounded-3xl border border-white/10 p-8 backdrop-blur-xl"
           >
             <div className="flex items-center justify-between gap-4">
               <div>
-                <p className="text-sm uppercase tracking-[0.35em] text-text-tertiary/80">Promotion Control</p>
-                <h3 className="text-2xl font-semibold text-text-primary mt-2">Median time to live: 58 minutes</h3>
+                <p className="text-sm uppercase tracking-[0.35em] text-text-tertiary/80">
+                  Promotion Control
+                </p>
+                <h3 className="mt-2 text-2xl font-semibold text-text-primary">
+                  Median time to live: 58 minutes
+                </h3>
               </div>
               <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-text-secondary">
                 Preview cohort data
@@ -102,22 +106,26 @@ export function HowItWorks() {
             </div>
             <ul className="space-y-4 text-sm text-text-secondary">
               <li className="flex items-start gap-3">
-                <span className="mt-1 h-2 w-2 rounded-full bg-green-400" />
-                Gates stay shut until drawdown &lt; 1.5%, fill variance &lt; 25 bps, and latency &lt; 50 ms—all enforced automatically.
+                <span className="mt-1 size-2 rounded-full bg-green-400" />
+                Gates stay shut until drawdown &lt; 1.5%, fill variance &lt; 25 bps, and latency
+                &lt; 50 ms—all enforced automatically.
               </li>
               <li className="flex items-start gap-3">
-                <span className="mt-1 h-2 w-2 rounded-full bg-blue-400" />
-                One approval signs the policy. The dispatcher then obeys position caps, leverage bands, and throttle rules per market.
+                <span className="mt-1 size-2 rounded-full bg-blue-400" />
+                One approval signs the policy. The dispatcher then obeys position caps, leverage
+                bands, and throttle rules per market.
               </li>
               <li className="flex items-start gap-3">
-                <span className="mt-1 h-2 w-2 rounded-full bg-amber-400" />
-                Every order, fill, and circuit-break fires into Slack, PagerDuty, or your webhook with full context for the desk.
+                <span className="mt-1 size-2 rounded-full bg-amber-400" />
+                Every order, fill, and circuit-break fires into Slack, PagerDuty, or your webhook
+                with full context for the desk.
               </li>
             </ul>
             <div className="rounded-2xl border border-white/10 bg-black/40 p-6">
               <p className="text-xs uppercase tracking-[0.3em] text-text-tertiary">Trader Signal</p>
-              <p className="text-base text-text-secondary mt-2">
-                Power traders in preview average 1.7 live promotions per week once the pipeline is wired into their workflow.
+              <p className="mt-2 text-base text-text-secondary">
+                Power traders in preview average 1.7 live promotions per week once the pipeline is
+                wired into their workflow.
               </p>
             </div>
           </motion.div>
@@ -133,10 +141,10 @@ export function HowItWorks() {
               variants={fadeUp}
               className="glass h-full rounded-3xl border border-white/10 p-8 text-left"
             >
-              <p className="text-lg text-text-primary leading-relaxed">“{item.quote}”</p>
+              <p className="text-lg leading-relaxed text-text-primary">“{item.quote}”</p>
               <footer className="mt-6 text-sm text-text-tertiary">
-                <span className="text-text-secondary font-semibold">{item.name}</span>
-                <span className="block text-xs text-text-tertiary mt-1">{item.title}</span>
+                <span className="font-semibold text-text-secondary">{item.name}</span>
+                <span className="mt-1 block text-xs text-text-tertiary">{item.title}</span>
               </footer>
             </motion.blockquote>
           ))}

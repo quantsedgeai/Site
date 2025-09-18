@@ -5,7 +5,7 @@ Modern, professional website for QuantsEdge built with Next.js, React, TypeScrip
 ## Features
 
 - ⚡ Next.js 14 with App Router
-- 🎨 Tailwind CSS with custom QuantsEdge design system  
+- 🎨 Tailwind CSS with custom QuantsEdge design system
 - 🎭 Framer Motion animations
 - 📱 Mobile-first responsive design
 - ♿ Accessibility optimized
@@ -39,12 +39,13 @@ pnpm run dev
 pnpm run dev          # Start dev server
 
 # Building
-pnpm run build        # Production build  
+pnpm run build        # Production build
 pnpm run start        # Start production server
 
-# Code Quality  
+# Code Quality
 pnpm run lint         # ESLint with auto-fix
 pnpm run typecheck    # TypeScript checking
+pnpm run format       # Prettier formatting
 
 # Dependency Management
 pnpm ci               # Clean install (CI/CD)
@@ -76,13 +77,16 @@ src/
 │   ├── page.tsx        # Homepage
 │   └── globals.css     # Global styles
 ├── components/         # React components
+│   ├── sections/       # Page sections (Performance, Technology, etc.)
 │   ├── Header.tsx      # Navigation header
 │   ├── Hero.tsx        # Hero section with animations
 │   └── ...
-├── lib/                # Utilities
+├── lib/                # Utilities & static content
+│   ├── content.ts      # Structured copy & data definitions
+│   ├── constants.ts    # Shared constants/events
 │   └── utils.ts        # Class name utilities
 public/                 # Static assets
-├── images/             # Team photos & assets  
+├── images/             # Team photos & assets
 ├── favicon.svg         # Site favicon
 ├── logo.svg            # QuantsEdge logo
 └── og-image.png        # Open Graph image
@@ -91,19 +95,22 @@ public/                 # Static assets
 ## Design System
 
 ### Colors
+
 - **Accent**: #00FFC6 (QuantsEdge brand green)
 - **Background**: #000000 (Pure black)
 - **Cards**: #0F0F0F (Dark gray)
 - **Text**: #FFFFFF, #999999, #666666 (Primary, secondary, tertiary)
 
 ### Typography
+
 - **Primary**: Inter (Google Fonts)
 - **Monospace**: JetBrains Mono
 - **Display text**: Custom font weights & spacing
 
 ### Components
+
 - Glass morphism effects
-- Subtle hover animations  
+- Subtle hover animations
 - Mobile-first responsive design
 - Accessibility-focused interactions
 

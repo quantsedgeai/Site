@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+
 import { REQUEST_ACCESS_EVENT } from "@/lib/constants";
 
 export function StickyCTA() {
@@ -19,15 +20,17 @@ export function StickyCTA() {
     >
       <button
         onClick={handleClick}
-        className="group inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-black/70 px-5 py-3 text-sm text-text-secondary backdrop-blur-xl shadow-[0_18px_60px_-30px_rgba(16,185,129,0.7)] hover:border-accent/40 hover:text-text-primary transition"
+        className="group inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-black/70 px-5 py-3 text-sm text-text-secondary shadow-[0_18px_60px_-30px_rgba(16,185,129,0.7)] backdrop-blur-xl transition hover:border-accent/40 hover:text-text-primary"
         type="button"
       >
-        <span className="relative flex h-2 w-2">
-          <span className="absolute inline-flex h-full w-full rounded-full bg-accent opacity-60 animate-ping" />
-          <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+        <span className="relative flex size-2">
+          <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />
+          <span className="relative inline-flex size-2 rounded-full bg-accent" />
         </span>
         <span className="font-semibold text-text-primary">Request Access</span>
-        <span className="text-xs uppercase tracking-[0.3em] text-text-tertiary group-hover:text-accent">Live</span>
+        <span className="text-xs uppercase tracking-[0.3em] text-text-tertiary group-hover:text-accent">
+          Live
+        </span>
       </button>
     </motion.div>
   );

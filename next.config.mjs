@@ -2,15 +2,15 @@
 const nextConfig = {
   // Enable experimental features for better performance
   experimental: {
-    optimizePackageImports: ['framer-motion'],
+    optimizePackageImports: ["framer-motion"],
   },
-  
+
   // Output for static export (Netlify compatibility)
-  output: 'export',
+  output: "export",
   trailingSlash: true,
   images: {
-    unoptimized: true
-  }
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;

@@ -1,7 +1,8 @@
 "use client";
 
-import { FormEvent, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import type { FormEvent } from "react";
+import { useRef, useState } from "react";
 
 export function EarlyAccess() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -14,48 +15,51 @@ export function EarlyAccess() {
   };
 
   return (
-    <section id="early-access" className="relative py-24 px-6 overflow-hidden">
+    <section id="early-access" className="relative overflow-hidden px-6 py-24">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(16,185,129,0.12),transparent_55%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.1),transparent_45%)] opacity-80" />
-      <div className="relative max-w-5xl mx-auto">
+      <div className="relative mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
-          className="glass rounded-[32px] border border-white/10 p-8 sm:p-12 backdrop-blur-2xl"
+          className="glass rounded-[32px] border border-white/10 p-8 backdrop-blur-2xl sm:p-12"
         >
           <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
-            <div className="space-y-4 max-w-xl">
+            <div className="max-w-xl space-y-4">
               <p className="label text-accent">Partnerships & Collaborations</p>
-              <h2 className="display text-3xl sm:text-4xl">
-                Build with QuantsEdge
-              </h2>
+              <h2 className="display text-3xl sm:text-4xl">Build with QuantsEdge</h2>
               <p className="text-base text-text-secondary">
-                Ecosystem teams, tooling partners, and integrations—we’d love to jam. Drop us a note and we’ll carve out time to explore fit.
+                Ecosystem teams, tooling partners, and integrations—we’d love to jam. Drop us a note
+                and we’ll carve out time to explore fit.
               </p>
-              <div className="grid gap-4 sm:grid-cols-2 text-sm text-text-secondary">
+              <div className="grid gap-4 text-sm text-text-secondary sm:grid-cols-2">
                 <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
-                  <p className="text-xs uppercase tracking-[0.25em] text-text-tertiary">What works well</p>
+                  <p className="text-xs uppercase tracking-[0.25em] text-text-tertiary">
+                    What works well
+                  </p>
                   <ul className="mt-3 space-y-2">
                     <li className="flex items-start gap-2">
-                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-accent" />
+                      <span className="mt-1 size-1.5 rounded-full bg-accent" />
                       Liquidity venues, execution tooling, or custody partners.
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-blue-400" />
+                      <span className="mt-1 size-1.5 rounded-full bg-blue-400" />
                       Data, analytics, or compliance infrastructure.
                     </li>
                   </ul>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
-                  <p className="text-xs uppercase tracking-[0.25em] text-text-tertiary">Less ideal</p>
+                  <p className="text-xs uppercase tracking-[0.25em] text-text-tertiary">
+                    Less ideal
+                  </p>
                   <ul className="mt-3 space-y-2">
                     <li className="flex items-start gap-2">
-                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-amber-400" />
+                      <span className="mt-1 size-1.5 rounded-full bg-amber-400" />
                       Retail affiliate programs or paid placement requests.
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-red-400" />
+                      <span className="mt-1 size-1.5 rounded-full bg-red-400" />
                       Cold pitch agencies or generic lead-gen.
                     </li>
                   </ul>
@@ -102,7 +106,7 @@ export function EarlyAccess() {
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <button
                     type="submit"
-                    className="btn btn-primary w-full sm:w-auto px-8 py-3 rounded-xl font-semibold"
+                    className="btn btn-primary w-full rounded-xl px-8 py-3 font-semibold sm:w-auto"
                   >
                     {submitted ? "Message Sent" : "Start the Conversation"}
                   </button>

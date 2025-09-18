@@ -18,8 +18,22 @@ const regionFromLocale = (locale: string): Region => {
 
   if (normalized.includes("en-us") || normalized.includes("es-us")) return "us";
   if (normalized.includes("pt-br") || normalized.includes("es-")) return "latam";
-  if (normalized.includes("en-gb") || normalized.includes("fr") || normalized.includes("de") || normalized.includes("it") || normalized.includes("es")) return "eu";
-  if (normalized.includes("zh") || normalized.includes("ja") || normalized.includes("ko") || normalized.includes("en-au") || normalized.includes("en-nz")) return "apac";
+  if (
+    normalized.includes("en-gb") ||
+    normalized.includes("fr") ||
+    normalized.includes("de") ||
+    normalized.includes("it") ||
+    normalized.includes("es")
+  )
+    return "eu";
+  if (
+    normalized.includes("zh") ||
+    normalized.includes("ja") ||
+    normalized.includes("ko") ||
+    normalized.includes("en-au") ||
+    normalized.includes("en-nz")
+  )
+    return "apac";
   return "global";
 };
 

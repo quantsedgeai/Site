@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { useState, useEffect } from "react";
+
 import { REQUEST_ACCESS_EVENT } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
 const Logo = () => (
   <svg
@@ -66,8 +67,8 @@ export function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navigationLinks.map(link => link.section);
-      const currentSection = sections.find(section => {
+      const sections = navigationLinks.map((link) => link.section);
+      const currentSection = sections.find((section) => {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
@@ -91,28 +92,23 @@ export function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
+    <header className="fixed inset-x-0 top-0 z-50">
       <nav className="glass" role="navigation" aria-label="Primary">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center space-x-2 group">
+            <Link href="/" className="group flex items-center space-x-2">
               <Logo />
-              <span className="font-semibold text-[16px] tracking-tight">
-                QuantsEdge
-              </span>
+              <span className="text-[16px] font-semibold tracking-tight">QuantsEdge</span>
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8">
+            <nav className="hidden items-center space-x-8 lg:flex">
               {navigationLinks.map((link) => (
                 <button
                   key={link.section}
                   onClick={() => handleLinkClick(link.href)}
-                  className={cn(
-                    "nav-link",
-                    activeSection === link.section && "active"
-                  )}
+                  className={cn("nav-link", activeSection === link.section && "active")}
                 >
                   {link.label}
                 </button>
@@ -120,18 +116,18 @@ export function Header() {
             </nav>
 
             {/* Desktop Action Buttons */}
-            <div className="hidden lg:flex items-center space-x-3">
+            <div className="hidden items-center space-x-3 lg:flex">
               <a
                 href="https://quantsedge.gitbook.io/quantsedge-docs"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-secondary px-4 py-2 rounded-lg"
+                className="btn btn-secondary rounded-lg px-4 py-2"
               >
                 Documentation
               </a>
               <button
                 onClick={openRequestAccess}
-                className="btn btn-primary px-6 py-2.5 rounded-lg glow"
+                className="btn btn-primary glow rounded-lg px-6 py-2.5"
               >
                 Request Access
               </button>
@@ -140,12 +136,12 @@ export function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="mobile-nav-button lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors"
+              className="mobile-nav-button rounded-lg p-2 transition-colors hover:bg-white/10 lg:hidden"
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
             >
               <svg
-                className="w-6 h-6"
+                className="size-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -185,7 +181,7 @@ export function Header() {
               className="mobile-menu lg:hidden"
             >
               <div className="glass border-t border-white/5">
-                <div className="max-w-7xl mx-auto px-6 py-4">
+                <div className="mx-auto max-w-7xl px-6 py-4">
                   <div className="space-y-4">
                     {/* Navigation Links */}
                     <div className="space-y-3">
@@ -201,18 +197,18 @@ export function Header() {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="pt-4 border-t border-white/10 space-y-3">
+                    <div className="space-y-3 border-t border-white/10 pt-4">
                       <a
                         href="https://quantsedge.gitbook.io/quantsedge-docs"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn btn-secondary w-full py-3 rounded-lg text-center"
+                        className="btn btn-secondary w-full rounded-lg py-3 text-center"
                       >
                         Documentation
                       </a>
                       <button
                         onClick={openRequestAccess}
-                        className="btn btn-primary w-full py-3 rounded-lg text-center glow"
+                        className="btn btn-primary glow w-full rounded-lg py-3 text-center"
                       >
                         Request Access
                       </button>

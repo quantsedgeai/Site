@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import { SmoothScroll } from "@/components/SmoothScroll";
+
 import { AnalyticsProvider } from "@/components/AnalyticsProvider";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import "./globals.css";
 
 const inter = Inter({
@@ -18,7 +19,8 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "QuantsEdge | AI-Powered Alpha for Institutional Traders",
-  description: "Institutional trading platform delivering 2.3+ Sharpe ratio with $1.2B+ volume. Non-custodial AI strategies for sophisticated funds and family offices.",
+  description:
+    "Institutional trading platform delivering 2.3+ Sharpe ratio with $1.2B+ volume. Non-custodial AI strategies for sophisticated funds and family offices.",
   keywords: ["quantsedge", "trading", "ai", "cryptocurrency", "defi", "institutional"],
   authors: [{ name: "QuantsEdge" }],
   creator: "QuantsEdge",
@@ -28,7 +30,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://quantsedge.ai",
     title: "QuantsEdge | AI-Powered Alpha for Institutional Traders",
-    description: "Institutional trading platform delivering 2.3+ Sharpe ratio with $1.2B+ volume. Non-custodial AI strategies for sophisticated funds.",
+    description:
+      "Institutional trading platform delivering 2.3+ Sharpe ratio with $1.2B+ volume. Non-custodial AI strategies for sophisticated funds.",
     siteName: "QuantsEdge",
     images: [
       {
@@ -65,22 +68,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
-      <body className="min-h-screen bg-black text-text-primary font-sans antialiased">
+      <body className="min-h-screen bg-black font-sans text-text-primary antialiased">
         {/* Noise texture overlay */}
-        <div className="fixed inset-0 opacity-[0.03] z-[1] pointer-events-none bg-noise" />
-        
+        <div className="pointer-events-none fixed inset-0 z-[1] bg-noise opacity-[0.03]" />
+
         {/* Main content */}
         <SmoothScroll>
-          <div className="relative z-[2]">
-            {children}
-          </div>
+          <div className="relative z-[2]">{children}</div>
         </SmoothScroll>
         <AnalyticsProvider />
       </body>

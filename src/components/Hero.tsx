@@ -1,10 +1,11 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { cn } from "@/lib/utils";
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { Area, AreaChart, ResponsiveContainer } from "recharts";
+
 import { REQUEST_ACCESS_EVENT } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
 interface CounterProps {
   end: number;
@@ -175,10 +176,14 @@ function HeroLiveChart() {
         </div>
         <div className="mt-6 grid grid-cols-3 gap-3 text-[11px] text-text-tertiary">
           {["BTC", "SOL", "ETH"].map((symbol, idx) => (
-            <div key={symbol} className="flex flex-col gap-1 rounded-2xl border border-white/5 bg-white/5 px-3 py-2">
+            <div
+              key={symbol}
+              className="flex flex-col gap-1 rounded-2xl border border-white/5 bg-white/5 px-3 py-2"
+            >
               <span className="mono text-xs text-text-secondary">{symbol}-USD</span>
               <span className="mono text-sm text-text-primary">
-                {stats.value.toFixed(1)}{idx === 0 ? "bps" : idx === 1 ? "liq" : "ms"}
+                {stats.value.toFixed(1)}
+                {idx === 0 ? "bps" : idx === 1 ? "liq" : "ms"}
               </span>
             </div>
           ))}
@@ -188,7 +193,12 @@ function HeroLiveChart() {
   );
 }
 
-function RequestAccessModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+interface RequestAccessModalProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+function RequestAccessModal({ open, onClose }: RequestAccessModalProps) {
   const [submitted, setSubmitted] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -197,7 +207,9 @@ function RequestAccessModal({ open, onClose }: { open: boolean; onClose: () => v
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
+      setSubmitted(false);
     }
+
     return () => {
       document.body.style.overflow = "";
     };
@@ -209,14 +221,16 @@ function RequestAccessModal({ open, onClose }: { open: boolean; onClose: () => v
     formRef.current?.reset();
   };
 
-  if (!open) return null;
+  if (!open) {
+    return null;
+  }
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 backdrop-blur-md px-6"
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 px-6 backdrop-blur-md"
       role="dialog"
       aria-modal="true"
     >
@@ -228,17 +242,19 @@ function RequestAccessModal({ open, onClose }: { open: boolean; onClose: () => v
         className="relative w-full max-w-lg rounded-3xl border border-white/10 bg-black/80 p-8 shadow-[0_40px_120px_-45px_rgba(16,185,129,0.5)]"
       >
         <button
+          type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 text-text-tertiary hover:text-text-secondary"
+          className="absolute right-4 top-4 text-text-tertiary transition hover:text-text-secondary"
           aria-label="Close request access form"
         >
           ×
         </button>
-        <div className="space-y-2 mb-6">
+        <div className="mb-6 space-y-2">
           <p className="text-xs uppercase tracking-[0.35em] text-text-tertiary">Request Access</p>
           <h3 className="text-2xl font-semibold text-text-primary">Tap into the preview cohort</h3>
           <p className="text-sm text-text-secondary">
-            We prioritize major projects and KOLs actively trading Hyperliquid. Share context so we can line up access fast.
+            We prioritize major projects and KOLs actively trading Hyperliquid. Share context so we
+            can line up access fast.
           </p>
         </div>
         <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
@@ -284,16 +300,13 @@ function RequestAccessModal({ open, onClose }: { open: boolean; onClose: () => v
               className="mt-2 w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-text-primary placeholder:text-text-tertiary/60 focus:border-accent focus:outline-none"
             />
           </label>
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-            <button
-              type="submit"
-              className="btn btn-primary px-6 py-3 rounded-xl font-semibold"
-            >
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <button type="submit" className="btn btn-primary rounded-xl px-6 py-3 font-semibold">
               {submitted ? "Request Received" : "Submit Request"}
             </button>
             <a
               href="mailto:access@quantsedge.xyz"
-              className="text-sm text-text-secondary hover:text-text-primary"
+              className="text-sm text-text-secondary transition hover:text-text-primary"
             >
               Prefer email? access@quantsedge.xyz
             </a>
@@ -313,198 +326,203 @@ export function Hero() {
   const [isRequestOpen, setIsRequestOpen] = useState(false);
 
   useEffect(() => {
-    const listener: EventListener = () => setIsRequestOpen(true);
-    window.addEventListener(REQUEST_ACCESS_EVENT, listener);
-    return () => window.removeEventListener(REQUEST_ACCESS_EVENT, listener);
+    const handleOpen = () => setIsRequestOpen(true);
+    window.addEventListener(REQUEST_ACCESS_EVENT, handleOpen as EventListener);
+
+    return () => {
+      window.removeEventListener(REQUEST_ACCESS_EVENT, handleOpen as EventListener);
+    };
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-6 pt-24">
-      {/* Background Gradient */}
-      <div className="absolute inset-0 overflow-hidden">
+    <>
+      <section className="relative flex min-h-screen items-center justify-center px-6 pt-24">
+        {/* Background Gradient */}
+        <div className="absolute inset-0 overflow-hidden">
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1.5 }}
+            className="absolute left-1/2 top-1/3 size-[900px] -translate-x-1/2 rounded-full bg-gradient-radial from-accent/10 via-transparent to-transparent blur-3xl"
+          />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6, duration: 1.2 }}
+            className="absolute inset-x-0 top-0 h-[420px] bg-gradient-to-b from-black/60 via-black/10 to-transparent"
+          />
+        </div>
+
         <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.5 }}
-          className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full bg-gradient-radial from-accent/10 via-transparent to-transparent blur-3xl"
-        />
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 1.2 }}
-          className="absolute inset-x-0 top-0 h-[420px] bg-gradient-to-b from-black/60 via-black/10 to-transparent"
-        />
-      </div>
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="relative mx-auto w-full max-w-7xl"
+        >
+          <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+            <div className="space-y-10 text-center lg:text-left">
+              {/* Badge */}
+              <motion.div
+                variants={itemVariants}
+                className="glass inline-flex items-center space-x-3 rounded-full px-4 py-1.5"
+              >
+                <span className="relative flex size-2">
+                  <span className="absolute inline-flex size-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex size-2 rounded-full bg-green-400"></span>
+                </span>
+                <span className="label text-text-secondary">
+                  Preview Access • Hyperliquid Verified
+                </span>
+              </motion.div>
 
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="relative max-w-7xl w-full mx-auto"
-      >
-        <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] gap-12 items-center">
-          <div className="text-center lg:text-left space-y-10">
-            {/* Badge */}
-            <motion.div
-              variants={itemVariants}
-              className="inline-flex items-center space-x-3 px-4 py-1.5 rounded-full glass"
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
-              </span>
-              <span className="label text-text-secondary">Preview Access • Hyperliquid Verified</span>
-            </motion.div>
+              {/* Headline */}
+              <div className="space-y-6">
+                <motion.h1
+                  variants={itemVariants}
+                  className="display text-5xl sm:text-7xl lg:text-display-lg"
+                >
+                  Ship Bots At
+                  <br />
+                  <span className="gradient-text">Hyperliquid Speed</span>
+                </motion.h1>
 
-            {/* Headline */}
-            <div className="space-y-6">
-              <motion.h1
-                variants={itemVariants}
-                className="display text-5xl sm:text-7xl lg:text-display-lg"
-              >
-                Ship Bots At
-                <br />
-                <span className="gradient-text">Hyperliquid Speed</span>
-              </motion.h1>
+                <motion.p
+                  variants={itemVariants}
+                  className="text-xs uppercase tracking-[0.35em] text-text-tertiary"
+                >
+                  Why It Matters
+                </motion.p>
+                <motion.p
+                  variants={itemVariants}
+                  className="mx-auto max-w-2xl text-lg text-text-secondary sm:text-xl lg:mx-0"
+                >
+                  Build, test, and ship on the same stack our desk trades. Backtests stay
+                  deterministic, paper fills run through the Hyperliquid SDK, and every launch keeps
+                  the guardrails you configure.
+                </motion.p>
+                <motion.p
+                  variants={itemVariants}
+                  className="text-xs uppercase tracking-[0.35em] text-text-tertiary"
+                >
+                  Time To Live
+                </motion.p>
+                <motion.p
+                  variants={itemVariants}
+                  className="mx-auto max-w-xl text-sm text-text-tertiary sm:text-base lg:mx-0"
+                >
+                  Move from research to production in under an hour with venue-grade telemetry
+                  following every order.
+                </motion.p>
+              </div>
 
-              <motion.p
+              {/* CTAs */}
+              <motion.div
                 variants={itemVariants}
-                className="text-xs uppercase tracking-[0.35em] text-text-tertiary"
+                className="flex flex-col justify-center gap-4 sm:flex-row lg:justify-start"
               >
-                Why It Matters
-              </motion.p>
-              <motion.p
+                <motion.a
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  href="#early-access"
+                  className="btn btn-primary glow rounded-xl px-8 py-4 text-base font-semibold"
+                  data-analytics-event="cta_request_access"
+                  data-analytics-payload={JSON.stringify({
+                    location: "hero",
+                    target: "early_access",
+                  })}
+                >
+                  Request Access
+                </motion.a>
+                <motion.a
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  href="#how-it-works"
+                  className="btn btn-secondary rounded-xl px-8 py-4 text-base"
+                  data-analytics-event="cta_view_pipeline"
+                  data-analytics-payload={JSON.stringify({
+                    location: "hero",
+                    target: "how_it_works",
+                  })}
+                >
+                  See How It Works →
+                </motion.a>
+              </motion.div>
+
+              {/* Proof Bar */}
+              <motion.div
                 variants={itemVariants}
-                className="text-lg sm:text-xl text-text-secondary max-w-2xl mx-auto lg:mx-0"
+                className="grid gap-4 text-left sm:grid-cols-3 lg:gap-6"
               >
-                Build, test, and ship on the same stack our desk trades. Backtests stay deterministic, paper fills run through
-                the Hyperliquid SDK, and every launch keeps the guardrails you configure.
-              </motion.p>
-              <motion.p
-                variants={itemVariants}
-                className="text-xs uppercase tracking-[0.35em] text-text-tertiary"
-              >
-                Time To Live
-              </motion.p>
-              <motion.p
-                variants={itemVariants}
-                className="text-sm sm:text-base text-text-tertiary max-w-xl mx-auto lg:mx-0"
-              >
-                Move from research to production in under an hour with venue-grade telemetry following every order.
-              </motion.p>
+                {[
+                  {
+                    title: "Deterministic Research",
+                    copy: "Lock data snapshots, compare diffs, and export promotion-ready run logs.",
+                  },
+                  {
+                    title: "Proof Before Live",
+                    copy: "Paper executions route through the Hyperliquid SDK with latency insights.",
+                  },
+                  {
+                    title: "Your Keys, Your Flows",
+                    copy: "We automate logic only—wallets stay yours, custody-free forever.",
+                  },
+                ].map((item) => (
+                  <div key={item.title} className="glass rounded-xl p-4">
+                    <p className="text-sm font-semibold text-text-primary">{item.title}</p>
+                    <p className="mt-1 text-xs leading-relaxed text-text-tertiary">{item.copy}</p>
+                  </div>
+                ))}
+              </motion.div>
             </div>
 
-            {/* CTAs */}
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
-            >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setIsRequestOpen(true)}
-                type="button"
-                className="btn btn-primary px-8 py-4 rounded-xl text-base font-semibold glow"
-                data-analytics-event="cta_request_access"
-                data-analytics-payload={JSON.stringify({
-                  location: "hero",
-                  target: "request_form",
-                })}
-              >
-                Request Access
-              </motion.button>
-              <motion.a
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                href="#how-it-works"
-                className="btn btn-secondary px-8 py-4 rounded-xl text-base"
-                data-analytics-event="cta_view_pipeline"
-                data-analytics-payload={JSON.stringify({
-                  location: "hero",
-                  target: "how_it_works",
-                })}
-              >
-                See How It Works →
-              </motion.a>
-            </motion.div>
-
-            {/* Proof Bar */}
-            <motion.div
-              variants={itemVariants}
-              className="grid sm:grid-cols-3 gap-4 lg:gap-6 text-left"
-            >
-              {[
-                {
-                  title: "Deterministic Research",
-                  copy: "Lock data snapshots, compare diffs, and export promotion-ready run logs.",
-                },
-                {
-                  title: "Proof Before Live",
-                  copy: "Paper executions route through the Hyperliquid SDK with latency insights.",
-                },
-                {
-                  title: "Your Keys, Your Flows",
-                  copy: "We automate logic only—wallets stay yours, custody-free forever.",
-                },
-              ].map((item) => (
-                <div key={item.title} className="glass rounded-xl p-4">
-                  <p className="text-sm font-semibold text-text-primary">{item.title}</p>
-                  <p className="text-xs text-text-tertiary mt-1 leading-relaxed">{item.copy}</p>
-                </div>
-              ))}
+            {/* Hero Media */}
+            <motion.div variants={itemVariants} className="relative">
+              <div className="pointer-events-none absolute -inset-6 bg-accent/10 opacity-60 blur-3xl" />
+              <HeroLiveChart />
             </motion.div>
           </div>
 
-          {/* Hero Media */}
+          {/* Stats */}
           <motion.div
             variants={itemVariants}
-            className="relative"
+            className="mt-16 grid grid-cols-2 gap-4 lg:grid-cols-4"
           >
-            <div className="absolute -inset-6 bg-accent/10 blur-3xl opacity-60 pointer-events-none" />
-            <HeroLiveChart />
+            {[
+              {
+                label: "Cumulative Volume",
+                value: <AnimatedCounter end={1.2} suffix="B+" />,
+                accent: "text-accent",
+              },
+              {
+                label: "Trader Retention",
+                value: <AnimatedCounter end={87} suffix="%" />,
+                accent: "text-green-400",
+              },
+              {
+                label: "Median Fill Speed",
+                value: <span className="mono text-2xl">42ms</span>,
+                accent: "text-text-primary",
+              },
+              {
+                label: "Strategies Synced",
+                value: <AnimatedCounter end={312} suffix="" />,
+                accent: "text-accent",
+              },
+            ].map((stat) => (
+              <motion.div
+                key={stat.label}
+                whileHover={{ scale: 1.05, y: -4 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="glass card-hover rounded-2xl p-6"
+              >
+                <p className={cn("mono text-2xl font-bold", stat.accent)}>{stat.value}</p>
+                <p className="label mt-2 text-text-tertiary">{stat.label}</p>
+              </motion.div>
+            ))}
           </motion.div>
-        </div>
-
-        {/* Stats */}
-        <motion.div
-          variants={itemVariants}
-          className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4"
-        >
-          {[
-            {
-              label: "Cumulative Volume",
-              value: <AnimatedCounter end={1.2} suffix="B+" />,
-              accent: "text-accent",
-            },
-            {
-              label: "Trader Retention",
-              value: <AnimatedCounter end={87} suffix="%" />,
-              accent: "text-green-400",
-            },
-            {
-              label: "Median Fill Speed",
-              value: <span className="mono text-2xl">42ms</span>,
-              accent: "text-text-primary",
-            },
-            {
-              label: "Strategies Synced",
-              value: <AnimatedCounter end={312} suffix="" />,
-              accent: "text-accent",
-            },
-          ].map((stat) => (
-            <motion.div
-              key={stat.label}
-              whileHover={{ scale: 1.05, y: -4 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="glass rounded-2xl p-6 card-hover"
-            >
-              <p className={cn("mono text-2xl font-bold", stat.accent)}>{stat.value}</p>
-              <p className="label text-text-tertiary mt-2">{stat.label}</p>
-            </motion.div>
-          ))}
         </motion.div>
-      </motion.div>
+      </section>
       <RequestAccessModal open={isRequestOpen} onClose={() => setIsRequestOpen(false)} />
-    </section>
+    </>
   );
 }

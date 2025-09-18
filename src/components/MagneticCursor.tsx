@@ -1,14 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
-import { useGesture } from "@use-gesture/react";
+import { useEffect, useRef, useState } from "react";
 
 interface CursorState {
   x: number;
   y: number;
   isHovering: boolean;
-  hoverType: 'default' | 'button' | 'link' | 'chart';
+  hoverType: "default" | "button" | "link" | "chart";
 }
 
 export function MagneticCursor() {
@@ -17,154 +16,154 @@ export function MagneticCursor() {
     x: 0,
     y: 0,
     isHovering: false,
-    hoverType: 'default'
+    hoverType: "default",
   });
-  
+
   // Always call hooks at the top level
   useCursorHide();
   const cursorRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  
+
   // Smooth spring animation for cursor
   const springConfig = { damping: 25, stiffness: 700, mass: 0.5 };
   const cursorX = useSpring(x, springConfig);
   const cursorY = useSpring(y, springConfig);
-  
+
   useEffect(() => {
     const checkDevice = () => {
       setIsDesktop(window.innerWidth > 768);
     };
-    
+
     checkDevice();
-    window.addEventListener('resize', checkDevice);
-    
-    return () => window.removeEventListener('resize', checkDevice);
+    window.addEventListener("resize", checkDevice);
+
+    return () => window.removeEventListener("resize", checkDevice);
   }, []);
-  
+
   useEffect(() => {
     const updateCursor = (e: MouseEvent) => {
       x.set(e.clientX);
       y.set(e.clientY);
-      
-      setCursorState(prev => ({
+
+      setCursorState((prev) => ({
         ...prev,
         x: e.clientX,
-        y: e.clientY
+        y: e.clientY,
       }));
     };
-    
+
     const handleMouseEnter = (e: Event) => {
       const target = e.target as HTMLElement;
-      let hoverType: CursorState['hoverType'] = 'default';
-      
-      if (target.matches('button, .btn')) {
-        hoverType = 'button';
-      } else if (target.matches('a, .nav-link')) {
-        hoverType = 'link';
-      } else if (target.closest('.trading-chart, .chart-container')) {
-        hoverType = 'chart';
+      let hoverType: CursorState["hoverType"] = "default";
+
+      if (target.matches("button, .btn")) {
+        hoverType = "button";
+      } else if (target.matches("a, .nav-link")) {
+        hoverType = "link";
+      } else if (target.closest(".trading-chart, .chart-container")) {
+        hoverType = "chart";
       }
-      
-      setCursorState(prev => ({
+
+      setCursorState((prev) => ({
         ...prev,
         isHovering: true,
-        hoverType
+        hoverType,
       }));
     };
-    
+
     const handleMouseLeave = () => {
-      setCursorState(prev => ({
+      setCursorState((prev) => ({
         ...prev,
         isHovering: false,
-        hoverType: 'default'
+        hoverType: "default",
       }));
     };
-    
+
     // Add magnetic effect to interactive elements
-    const magneticElements = document.querySelectorAll('button, .btn, a, .nav-link');
-    
-    magneticElements.forEach(element => {
+    const magneticElements = document.querySelectorAll("button, .btn, a, .nav-link");
+
+    magneticElements.forEach((element) => {
       const el = element as HTMLElement;
-      
+
       const handleMouseMove = (e: MouseEvent) => {
         if (!cursorState.isHovering) return;
-        
+
         const rect = el.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
-        
+
         const deltaX = e.clientX - centerX;
         const deltaY = e.clientY - centerY;
         const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
-        
+
         if (distance < 80) {
           const strength = Math.max(0, 1 - distance / 80);
           const magnetX = deltaX * strength * 0.3;
           const magnetY = deltaY * strength * 0.3;
-          
+
           el.style.transform = `translate(${magnetX}px, ${magnetY}px) scale(${1 + strength * 0.1})`;
         } else {
-          el.style.transform = 'translate(0px, 0px) scale(1)';
+          el.style.transform = "translate(0px, 0px) scale(1)";
         }
       };
-      
+
       const resetTransform = () => {
-        el.style.transform = 'translate(0px, 0px) scale(1)';
+        el.style.transform = "translate(0px, 0px) scale(1)";
       };
-      
-      element.addEventListener('mouseenter', handleMouseEnter);
-      element.addEventListener('mouseleave', handleMouseLeave);
-      element.addEventListener('mouseleave', resetTransform);
-      document.addEventListener('mousemove', handleMouseMove);
+
+      element.addEventListener("mouseenter", handleMouseEnter);
+      element.addEventListener("mouseleave", handleMouseLeave);
+      element.addEventListener("mouseleave", resetTransform);
+      document.addEventListener("mousemove", handleMouseMove);
     });
-    
-    document.addEventListener('mousemove', updateCursor);
-    
+
+    document.addEventListener("mousemove", updateCursor);
+
     return () => {
-      document.removeEventListener('mousemove', updateCursor);
-      magneticElements.forEach(element => {
-        element.removeEventListener('mouseenter', handleMouseEnter);
-        element.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener("mousemove", updateCursor);
+      magneticElements.forEach((element) => {
+        element.removeEventListener("mouseenter", handleMouseEnter);
+        element.removeEventListener("mouseleave", handleMouseLeave);
       });
     };
   }, [x, y, cursorState.isHovering]);
-  
+
   // Custom cursor variants
   const getCursorVariant = () => {
     switch (cursorState.hoverType) {
-      case 'button':
+      case "button":
         return {
           scale: 2.5,
-          backgroundColor: 'rgba(0, 255, 198, 0.8)',
-          border: '2px solid #00FFC6',
+          backgroundColor: "rgba(0, 255, 198, 0.8)",
+          border: "2px solid #00FFC6",
         };
-      case 'link':
+      case "link":
         return {
           scale: 1.8,
-          backgroundColor: 'transparent',
-          border: '2px solid #00FFC6',
+          backgroundColor: "transparent",
+          border: "2px solid #00FFC6",
         };
-      case 'chart':
+      case "chart":
         return {
           scale: 1.5,
-          backgroundColor: 'rgba(0, 255, 198, 0.3)',
-          border: '1px solid #00FFC6',
+          backgroundColor: "rgba(0, 255, 198, 0.3)",
+          border: "1px solid #00FFC6",
         };
       default:
         return {
           scale: 1,
-          backgroundColor: '#00FFC6',
-          border: 'none',
+          backgroundColor: "#00FFC6",
+          border: "none",
         };
     }
   };
-  
+
   return (
-    <div className={isDesktop ? 'block' : 'hidden'}>
+    <div className={isDesktop ? "block" : "hidden"}>
       <motion.div
         ref={cursorRef}
-        className="fixed pointer-events-none z-[9999] rounded-full mix-blend-difference"
+        className="pointer-events-none fixed z-[9999] rounded-full mix-blend-difference"
         style={{
           x: cursorX,
           y: cursorY,
@@ -176,11 +175,11 @@ export function MagneticCursor() {
         animate={getCursorVariant()}
         transition={{ type: "spring", stiffness: 500, damping: 28 }}
       />
-      
+
       <AnimatePresence>
         {cursorState.isHovering && (
           <motion.div
-            className="fixed pointer-events-none z-[9998] rounded-full border border-accent/30"
+            className="pointer-events-none fixed z-[9998] rounded-full border border-accent/30"
             style={{
               x: cursorX,
               y: cursorY,
@@ -196,12 +195,12 @@ export function MagneticCursor() {
           />
         )}
       </AnimatePresence>
-      
+
       {/* Trailing particles */}
       <AnimatePresence>
-        {cursorState.hoverType === 'button' && (
+        {cursorState.hoverType === "button" && (
           <motion.div
-            className="fixed pointer-events-none z-[9997]"
+            className="pointer-events-none fixed z-[9997]"
             style={{
               x: cursorX,
               y: cursorY,
@@ -212,7 +211,7 @@ export function MagneticCursor() {
             {[...Array(3)].map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute w-1 h-1 rounded-full bg-accent"
+                className="absolute size-1 rounded-full bg-accent"
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{
                   scale: [0, 1, 0],
@@ -239,18 +238,18 @@ export function useCursorHide() {
   useEffect(() => {
     const checkDevice = () => {
       if (window.innerWidth > 768) {
-        document.body.style.cursor = 'none';
+        document.body.style.cursor = "none";
       } else {
-        document.body.style.cursor = 'auto';
+        document.body.style.cursor = "auto";
       }
     };
-    
+
     checkDevice();
-    window.addEventListener('resize', checkDevice);
-    
+    window.addEventListener("resize", checkDevice);
+
     return () => {
-      document.body.style.cursor = 'auto';
-      window.removeEventListener('resize', checkDevice);
+      document.body.style.cursor = "auto";
+      window.removeEventListener("resize", checkDevice);
     };
   }, []);
 }

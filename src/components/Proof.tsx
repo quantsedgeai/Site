@@ -49,10 +49,10 @@ const proofPillars = [
 
 export function Proof() {
   return (
-    <section id="proof" className="relative py-24 px-6">
+    <section id="proof" className="relative px-6 py-24">
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-accent/5 to-transparent opacity-40" />
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12 mb-16">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-16 flex flex-col gap-12 lg:flex-row lg:items-center lg:justify-between">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -64,9 +64,9 @@ export function Proof() {
             <h2 className="display text-4xl sm:text-5xl">
               Proof before promotion, receipts after every fill
             </h2>
-            <p className="text-text-secondary text-lg">
-              The pipeline emits artifacts at each gate—run logs, latency deltas, risk flags—so you can audit every step and
-              keep compliance in the loop.
+            <p className="text-lg text-text-secondary">
+              The pipeline emits artifacts at each gate—run logs, latency deltas, risk flags—so you
+              can audit every step and keep compliance in the loop.
             </p>
           </motion.div>
 
@@ -75,14 +75,14 @@ export function Proof() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={containerVariants}
-            className="glass rounded-3xl p-6 sm:p-8 w-full lg:max-w-md"
+            className="glass w-full rounded-3xl p-6 sm:p-8 lg:max-w-md"
           >
-            <div className="grid sm:grid-cols-3 lg:grid-cols-1 gap-4">
+            <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
               {proofStats.map((stat) => (
-                <div key={stat.label} className="rounded-2xl bg-black/30 border border-white/5 p-4">
+                <div key={stat.label} className="rounded-2xl border border-white/5 bg-black/30 p-4">
                   <p className="mono text-2xl font-semibold text-accent">{stat.value}</p>
-                  <p className="text-sm text-text-primary mt-1">{stat.label}</p>
-                  <p className="text-xs text-text-tertiary mt-1">{stat.detail}</p>
+                  <p className="mt-1 text-sm text-text-primary">{stat.label}</p>
+                  <p className="mt-1 text-xs text-text-tertiary">{stat.detail}</p>
                 </div>
               ))}
             </div>
@@ -97,10 +97,12 @@ export function Proof() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
               variants={containerVariants}
-              className="glass rounded-2xl p-6 h-full"
+              className="glass h-full rounded-2xl p-6"
             >
-              <p className="text-sm font-semibold text-accent uppercase tracking-wider">{pillar.title}</p>
-              <p className="text-text-secondary text-sm mt-3 leading-relaxed">
+              <p className="text-sm font-semibold uppercase tracking-wider text-accent">
+                {pillar.title}
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-text-secondary">
                 {pillar.description}
               </p>
             </motion.div>
