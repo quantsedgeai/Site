@@ -1,8 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
 
-import { TradingChart } from "@/components/TradingChart";
 import type { PerformanceMetric } from "@/lib/content";
 import { PERFORMANCE_METRICS } from "@/lib/content";
 
@@ -15,7 +16,29 @@ const cardVariants = {
   },
 };
 
+const TradingChart = dynamic(
+  () => import("@/components/TradingChart").then((mod) => mod.TradingChart),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="glass rounded-3xl border border-white/10 p-10 text-center text-sm text-text-secondary">
+        Loading performance chart…
+      </div>
+    ),
+  }
+);
+
 export function PerformanceSection() {
+  const chartRef = useRef<HTMLDivElement>(null);
+  const isChartInView = useInView(chartRef, { once: true, margin: "0px 0px -120px 0px" });
+  const [enableChart, setEnableChart] = useState(false);
+
+  useEffect(() => {
+    if (window.innerWidth >= 768) {
+      setEnableChart(true);
+    }
+  }, []);
+
   return (
     <section id="performance" className="px-6 py-24">
       <div className="mx-auto max-w-7xl">
@@ -48,7 +71,15 @@ export function PerformanceSection() {
           ))}
         </div>
 
-        <TradingChart />
+        <div ref={chartRef}>
+          {enableChart && isChartInView ? (
+            <TradingChart />
+          ) : (
+            <div className="glass rounded-3xl border border-white/10 p-10 text-center text-sm text-text-secondary">
+              Performance chart unlocks on larger screens.
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

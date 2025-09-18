@@ -51,6 +51,14 @@ pnpm run format       # Prettier formatting
 pnpm ci               # Clean install (CI/CD)
 ```
 
+### Environment Variables
+
+```bash
+cp .env.sample .env.local
+```
+
+- `REQUEST_ACCESS_WEBHOOK_URL` – optional Slack (or generic HTTP) webhook that receives request-access submissions. Without it, submissions are logged to the server console.
+
 ## Deployment (Netlify)
 
 The site automatically deploys via Netlify when pushing to the main branch:

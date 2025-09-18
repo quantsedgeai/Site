@@ -1,10 +1,12 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
-import { Area, AreaChart, ResponsiveContainer } from "recharts";
+import dynamic from "next/dynamic";
+import type { FormEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { REQUEST_ACCESS_EVENT } from "@/lib/constants";
+import { submitRequestAccess } from "@/lib/requestAccess";
 import { cn } from "@/lib/utils";
 
 interface CounterProps {
@@ -81,117 +83,14 @@ const itemVariants = {
     },
   },
 };
-
-interface HeroChartPoint {
-  idx: number;
-  value: number;
-}
-
-function useHeroChartData() {
-  const [data, setData] = useState<HeroChartPoint[]>([]);
-
-  useEffect(() => {
-    const seed: HeroChartPoint[] = Array.from({ length: 48 }, (_, idx) => ({
-      idx,
-      value: 12 + Math.sin(idx / 4) * 3 + Math.random() * 0.8,
-    }));
-    setData(seed);
-  }, []);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setData((prev) =>
-        prev.map((point, index) =>
-          index === prev.length - 1
-            ? {
-                ...point,
-                value: Math.max(8, Math.min(18, point.value + (Math.random() - 0.5) * 1.2)),
-              }
-            : point
-        )
-      );
-    }, 1800);
-
-    return () => clearInterval(id);
-  }, []);
-
-  const stats = useMemo(() => {
-    if (!data.length) return { value: 0, drift: 0 };
-    const latest = data[data.length - 1].value;
-    const base = data[0].value;
-    return {
-      value: latest,
-      drift: latest - base,
-    };
-  }, [data]);
-
-  return { data, stats };
-}
-
-function HeroLiveChart() {
-  const { data, stats } = useHeroChartData();
-
-  return (
-    <div className="relative h-full">
-      <div className="absolute inset-0 rounded-[28px] bg-gradient-to-br from-accent/25 via-transparent to-transparent" />
-      <div className="relative h-full rounded-[28px] border border-white/10 bg-black/55 p-6 backdrop-blur-xl">
-        <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.3em] text-text-tertiary/80">
-          <span>Live Fill Quality</span>
-          <span className="rounded-full border border-white/10 px-2 py-0.5 text-[10px] tracking-[0.2em] text-text-tertiary">
-            Hyperliquid SDK
-          </span>
-        </div>
-        <div className="mt-5 grid grid-cols-2 gap-4 text-sm">
-          <div>
-            <p className="text-text-tertiary">Slip vs Venue</p>
-            <p className="mono text-2xl font-semibold text-text-primary">
-              {stats.drift >= 0 ? "+" : ""}
-              {stats.drift.toFixed(2)} bps
-            </p>
-          </div>
-          <div>
-            <p className="text-text-tertiary">Latency Rolling Avg</p>
-            <p className="mono text-2xl font-semibold text-accent">42 ms</p>
-          </div>
-        </div>
-        <div className="mt-6 h-48">
-          <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={data} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
-              <defs>
-                <linearGradient id="heroArea" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="10%" stopColor="#34d399" stopOpacity={0.6} />
-                  <stop offset="90%" stopColor="#34d399" stopOpacity={0} />
-                </linearGradient>
-              </defs>
-              <Area
-                type="monotone"
-                dataKey="value"
-                stroke="#34d399"
-                strokeWidth={2}
-                fill="url(#heroArea)"
-                isAnimationActive={false}
-              />
-            </AreaChart>
-          </ResponsiveContainer>
-        </div>
-        <div className="mt-6 grid grid-cols-3 gap-3 text-[11px] text-text-tertiary">
-          {["BTC", "SOL", "ETH"].map((symbol, idx) => (
-            <div
-              key={symbol}
-              className="flex flex-col gap-1 rounded-2xl border border-white/5 bg-white/5 px-3 py-2"
-            >
-              <span className="mono text-xs text-text-secondary">{symbol}-USD</span>
-              <span className="mono text-sm text-text-primary">
-                {stats.value.toFixed(1)}
-                {idx === 0 ? "bps" : idx === 1 ? "liq" : "ms"}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
+const HeroChart = dynamic(() => import("./HeroChart").then((mod) => mod.HeroChart), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-full items-center justify-center rounded-[28px] border border-white/10 bg-black/50 p-10 text-center text-sm text-text-secondary">
+      Loading live metrics…
     </div>
-  );
-}
+  ),
+});
 
 interface RequestAccessModalProps {
   open: boolean;
@@ -199,7 +98,8 @@ interface RequestAccessModalProps {
 }
 
 function RequestAccessModal({ open, onClose }: RequestAccessModalProps) {
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState<string>("");
   const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
@@ -207,7 +107,9 @@ function RequestAccessModal({ open, onClose }: RequestAccessModalProps) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
-      setSubmitted(false);
+      setStatus("idle");
+      setMessage("");
+      formRef.current?.reset();
     }
 
     return () => {
@@ -217,8 +119,40 @@ function RequestAccessModal({ open, onClose }: RequestAccessModalProps) {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setSubmitted(true);
-    formRef.current?.reset();
+    const formData = new FormData(event.currentTarget);
+    const name = formData.get("name")?.toString().trim() ?? "";
+    const email = formData.get("email")?.toString().trim() ?? "";
+    const project = formData.get("project")?.toString().trim() ?? undefined;
+    const volume = formData.get("volume")?.toString().trim() ?? undefined;
+    const notes = formData.get("notes")?.toString().trim() ?? undefined;
+
+    if (!name || !email) {
+      setStatus("error");
+      setMessage("Name and email are required.");
+      return;
+    }
+
+    void (async () => {
+      setStatus("loading");
+      setMessage("");
+      const response = await submitRequestAccess({
+        name,
+        email,
+        project,
+        volume,
+        notes,
+        source: "hero",
+      });
+
+      if (response.success) {
+        setStatus("success");
+        setMessage(response.message);
+        formRef.current?.reset();
+      } else {
+        setStatus("error");
+        setMessage(response.message);
+      }
+    })();
   };
 
   if (!open) {
@@ -264,6 +198,7 @@ function RequestAccessModal({ open, onClose }: RequestAccessModalProps) {
               type="text"
               required
               placeholder="Your name / KOL handle"
+              name="name"
               className="mt-2 w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-text-primary placeholder:text-text-tertiary/60 focus:border-accent focus:outline-none"
             />
           </label>
@@ -273,6 +208,7 @@ function RequestAccessModal({ open, onClose }: RequestAccessModalProps) {
               type="email"
               required
               placeholder="you@project.xyz"
+              name="email"
               className="mt-2 w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-text-primary placeholder:text-text-tertiary/60 focus:border-accent focus:outline-none"
             />
           </label>
@@ -281,6 +217,7 @@ function RequestAccessModal({ open, onClose }: RequestAccessModalProps) {
             <input
               type="text"
               placeholder="Token/project name, trading desk, or network"
+              name="project"
               className="mt-2 w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-text-primary placeholder:text-text-tertiary/60 focus:border-accent focus:outline-none"
             />
           </label>
@@ -289,6 +226,7 @@ function RequestAccessModal({ open, onClose }: RequestAccessModalProps) {
             <input
               type="text"
               placeholder="Avg daily notional, liquidity managed, audience size"
+              name="volume"
               className="mt-2 w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-text-primary placeholder:text-text-tertiary/60 focus:border-accent focus:outline-none"
             />
           </label>
@@ -297,12 +235,21 @@ function RequestAccessModal({ open, onClose }: RequestAccessModalProps) {
             <textarea
               rows={3}
               placeholder="Share what you’re building, why you want access, and timelines."
+              name="notes"
               className="mt-2 w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-text-primary placeholder:text-text-tertiary/60 focus:border-accent focus:outline-none"
             />
           </label>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <button type="submit" className="btn btn-primary rounded-xl px-6 py-3 font-semibold">
-              {submitted ? "Request Received" : "Submit Request"}
+            <button
+              type="submit"
+              className="btn btn-primary rounded-xl px-6 py-3 font-semibold"
+              disabled={status === "loading"}
+            >
+              {status === "loading"
+                ? "Submitting…"
+                : status === "success"
+                  ? "Request Received"
+                  : "Submit Request"}
             </button>
             <a
               href="mailto:access@quantsedge.xyz"
@@ -311,9 +258,9 @@ function RequestAccessModal({ open, onClose }: RequestAccessModalProps) {
               Prefer email? access@quantsedge.xyz
             </a>
           </div>
-          {submitted && (
-            <p className="text-xs text-green-400">
-              Thanks! We’ll follow up within one business day with next steps.
+          {message && (
+            <p className={`text-xs ${status === "success" ? "text-green-400" : "text-amber-400"}`}>
+              {message}
             </p>
           )}
         </form>
@@ -324,15 +271,38 @@ function RequestAccessModal({ open, onClose }: RequestAccessModalProps) {
 
 export function Hero() {
   const [isRequestOpen, setIsRequestOpen] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
     const handleOpen = () => setIsRequestOpen(true);
-    window.addEventListener(REQUEST_ACCESS_EVENT, handleOpen as EventListener);
+    window.addEventListener(REQUEST_ACCESS_EVENT, handleOpen);
 
     return () => {
-      window.removeEventListener(REQUEST_ACCESS_EVENT, handleOpen as EventListener);
+      window.removeEventListener(REQUEST_ACCESS_EVENT, handleOpen);
     };
   }, []);
+
+  useEffect(() => {
+    const updateSize = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches);
+
+    updatePreference();
+    mediaQuery.addEventListener("change", updatePreference);
+    return () => mediaQuery.removeEventListener("change", updatePreference);
+  }, []);
+
+  const showChart = isDesktop && !prefersReducedMotion;
 
   return (
     <>
@@ -478,7 +448,13 @@ export function Hero() {
             {/* Hero Media */}
             <motion.div variants={itemVariants} className="relative">
               <div className="pointer-events-none absolute -inset-6 bg-accent/10 opacity-60 blur-3xl" />
-              <HeroLiveChart />
+              {showChart ? (
+                <HeroChart active />
+              ) : (
+                <div className="flex h-full items-center justify-center rounded-[28px] border border-white/10 bg-black/50 p-10 text-center text-sm text-text-secondary">
+                  Live fills unlock on larger displays.
+                </div>
+              )}
             </motion.div>
           </div>
 

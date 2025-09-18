@@ -4,14 +4,45 @@ import { motion } from "framer-motion";
 import type { FormEvent } from "react";
 import { useRef, useState } from "react";
 
+import { submitRequestAccess } from "@/lib/requestAccess";
+
 export function EarlyAccess() {
   const formRef = useRef<HTMLFormElement>(null);
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState<string>("");
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setSubmitted(true);
-    formRef.current?.reset();
+    const formData = new FormData(event.currentTarget);
+    const name = formData.get("name")?.toString().trim() ?? "";
+    const email = formData.get("email")?.toString().trim() ?? "";
+    const notes = formData.get("notes")?.toString().trim() ?? undefined;
+
+    if (!name || !email) {
+      setStatus("error");
+      setMessage("Name and email are required.");
+      return;
+    }
+
+    void (async () => {
+      setStatus("loading");
+      setMessage("");
+      const response = await submitRequestAccess({
+        name,
+        email,
+        notes,
+        source: "partnerships",
+      });
+
+      if (response.success) {
+        setStatus("success");
+        setMessage(response.message);
+        formRef.current?.reset();
+      } else {
+        setStatus("error");
+        setMessage(response.message);
+      }
+    })();
   };
 
   return (
@@ -107,8 +138,13 @@ export function EarlyAccess() {
                   <button
                     type="submit"
                     className="btn btn-primary w-full rounded-xl px-8 py-3 font-semibold sm:w-auto"
+                    disabled={status === "loading"}
                   >
-                    {submitted ? "Message Sent" : "Start the Conversation"}
+                    {status === "loading"
+                      ? "Sending…"
+                      : status === "success"
+                        ? "Message Sent"
+                        : "Start the Conversation"}
                   </button>
                   <a
                     href="mailto:partners@quantsedge.xyz"
@@ -117,9 +153,11 @@ export function EarlyAccess() {
                     Email us directly: partners@quantsedge.xyz
                   </a>
                 </div>
-                {submitted && (
-                  <p className="text-xs text-green-400">
-                    Thanks! We’ll follow up shortly with next steps.
+                {message && (
+                  <p
+                    className={`text-xs ${status === "success" ? "text-green-400" : "text-amber-400"}`}
+                  >
+                    {message}
                   </p>
                 )}
               </form>

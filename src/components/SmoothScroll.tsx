@@ -10,19 +10,40 @@ interface SmoothScrollProps {
 
 export function SmoothScroll({ children }: SmoothScrollProps) {
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    });
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const isDesktop = window.innerWidth >= 1024;
+    const reduceMotion = mediaQuery.matches;
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
+    if (!isDesktop || reduceMotion) {
+      return undefined;
     }
 
-    requestAnimationFrame(raf);
+    const lenis = new Lenis({
+      duration: 1,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
+
+    let rafId: number;
+
+    const raf = (time: number) => {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    };
+
+    rafId = requestAnimationFrame(raf);
+
+    const handleChange = () => {
+      if (mediaQuery.matches) {
+        cancelAnimationFrame(rafId);
+        lenis.destroy();
+      }
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
 
     return () => {
+      cancelAnimationFrame(rafId);
+      mediaQuery.removeEventListener("change", handleChange);
       lenis.destroy();
     };
   }, []);
