@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { REQUEST_ACCESS_EVENT } from "@/lib/constants";
 
 const Logo = () => (
   <svg
@@ -44,15 +45,24 @@ const Logo = () => (
 );
 
 const navigationLinks = [
+  { href: "#how-it-works", label: "Pipeline", section: "how-it-works" },
+  { href: "#proof", label: "Proof", section: "proof" },
   { href: "#performance", label: "Performance", section: "performance" },
   { href: "#technology", label: "Technology", section: "technology" },
   { href: "#team", label: "Team", section: "team" },
-  { href: "#demo", label: "Demo", section: "demo" },
+  { href: "#roadmap", label: "Roadmap", section: "roadmap" },
 ];
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+
+  const openRequestAccess = () => {
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event(REQUEST_ACCESS_EVENT));
+    }
+    setIsMenuOpen(false);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -111,13 +121,18 @@ export function Header() {
 
             {/* Desktop Action Buttons */}
             <div className="hidden lg:flex items-center space-x-3">
-              <button
-                onClick={() => handleLinkClick("#demo")}
+              <a
+                href="https://quantsedge.gitbook.io/quantsedge-docs"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn btn-secondary px-4 py-2 rounded-lg"
               >
-                View Demo
-              </button>
-              <button className="btn btn-primary px-6 py-2.5 rounded-lg glow">
+                Documentation
+              </a>
+              <button
+                onClick={openRequestAccess}
+                className="btn btn-primary px-6 py-2.5 rounded-lg glow"
+              >
                 Request Access
               </button>
             </div>
@@ -187,13 +202,18 @@ export function Header() {
 
                     {/* Action Buttons */}
                     <div className="pt-4 border-t border-white/10 space-y-3">
-                      <button
-                        onClick={() => handleLinkClick("#demo")}
+                      <a
+                        href="https://quantsedge.gitbook.io/quantsedge-docs"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="btn btn-secondary w-full py-3 rounded-lg text-center"
                       >
-                        View Demo
-                      </button>
-                      <button className="btn btn-primary w-full py-3 rounded-lg text-center glow">
+                        Documentation
+                      </a>
+                      <button
+                        onClick={openRequestAccess}
+                        className="btn btn-primary w-full py-3 rounded-lg text-center glow"
+                      >
                         Request Access
                       </button>
                     </div>

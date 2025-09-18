@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { usePersonalization } from "@/hooks/usePersonalization";
 
 const Logo = () => (
   <svg
@@ -116,6 +117,15 @@ const itemVariants = {
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const { greeting, localTime, region } = usePersonalization();
+
+  const regionLabel = {
+    us: "United States",
+    eu: "Europe",
+    apac: "Asia-Pacific",
+    latam: "Latin America",
+    global: "Worldwide",
+  }[region];
 
   return (
     <footer className="relative border-t border-white/5 bg-black/50 backdrop-blur-sm">
@@ -142,6 +152,9 @@ export function Footer() {
             <p className="text-text-secondary text-sm leading-relaxed mb-6">
               Institutional-grade quantitative trading platform delivering consistent alpha through 
               advanced AI strategies and non-custodial architecture.
+            </p>
+            <p className="text-xs text-text-tertiary font-mono uppercase tracking-wide mb-6">
+              {greeting}! Local time {localTime} • Region focus: {regionLabel}
             </p>
             
             {/* Social Links */}
@@ -174,11 +187,20 @@ export function Footer() {
                 }
               />
               <SocialIcon
-                href="Fill in telegram link here"
+                href="https://t.me/quantsedge"
                 name="Telegram"
                 icon={
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.010c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.120.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418Z"/>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M21.49 2.27a1.5 1.5 0 0 0-1.62-.2L2.78 9.53a1.46 1.46 0 0 0 .12 2.78l3.7 1.19 1.5 4.8a1.49 1.49 0 0 0 1.34 1.04h.08a1.48 1.48 0 0 0 1.33-.85l1.9-4.06 4.63 3.41a1.5 1.5 0 0 0 2.36-.86l2.45-12.1a1.5 1.5 0 0 0-.8-1.71ZM10 20.32l-1.46-4.7 8.59-7.6-9.92 6.46L4.6 12 20 4.73Z" />
+                  </svg>
+                }
+              />
+              <SocialIcon
+                href="https://www.crunchbase.com/organization/quantsedge"
+                name="Crunchbase"
+                icon={
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10a9.96 9.96 0 0 0 7.07-2.93l-1.768-1.768A7.96 7.96 0 0 1 12 20c-4.411 0-8-3.589-8-8s3.589-8 8-8a7.96 7.96 0 0 1 5.302 2.018l1.773-1.78A9.96 9.96 0 0 0 12 2Zm0 5a5 5 0 0 0-5 5c0 2.757 2.243 5 5 5a4.98 4.98 0 0 0 3.953-1.94l-1.57-1.23A2.982 2.982 0 0 1 12 15a3 3 0 0 1 0-6 2.98 2.98 0 0 1 2.377 1.153l1.577-1.237A4.98 4.98 0 0 0 12 7Z" />
                   </svg>
                 }
               />
@@ -191,8 +213,8 @@ export function Footer() {
             <div className="space-y-4">
               <FooterLink href="#performance">Performance</FooterLink>
               <FooterLink href="#technology">Technology</FooterLink>
+              <FooterLink href="#roadmap">Roadmap</FooterLink>
               <FooterLink href="#team">Team</FooterLink>
-              <FooterLink href="/status" external>System Status</FooterLink>
             </div>
           </motion.div>
 
@@ -213,7 +235,7 @@ export function Footer() {
               <FooterLink href="/about">About Us</FooterLink>
               <FooterLink href="/press" external>Press Kit</FooterLink>
               <FooterLink href="/contact">Contact</FooterLink>
-              <FooterLink href="/partnerships" external>Partnerships</FooterLink>
+              <FooterLink href="#early-access">Partnerships</FooterLink>
             </div>
           </motion.div>
         </div>
