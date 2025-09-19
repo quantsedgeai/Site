@@ -76,72 +76,72 @@ export const PERFORMANCE_METRICS: PerformanceMetric[] = [
 export const RESEARCH_CARDS: ResearchCard[] = [
   {
     title: "Optuna Hyperparameter Grid",
-    copy: "Sweep leverage bands, indicator windows, and risk guards with pruning and early exits baked in.",
+    copy: "Auto-scan leverage, indicator windows, and risk caps with smart pruning.",
   },
   {
     title: "Unified Backtesting",
-    copy: "Deterministic runners keep data, features, and metrics identical from research to promotion.",
+    copy: "Replay identical data + features so research matches live behavior.",
   },
   {
     title: "Paper Trading Sandbox",
-    copy: "Hyperliquid feeds plus your guardrails let you dry run in production conditions before you size up.",
+    copy: "Hyperliquid feeds and your guardrails for no-risk proving grounds.",
   },
   {
     title: "Telemetry & Scoring",
-    copy: "Auto-generated run logs compare iterations, flag anomalies, and highlight what’s ready for the next gate.",
+    copy: "Run logs flag anomalies and highlight bots ready to ship.",
   },
 ];
 
 export const EXECUTION_FEATURES: ExecutionFeature[] = [
   {
     title: "Deterministic state",
-    copy: "Position, PnL, and order books stay in sync with instant rollbacks on breach.",
+    copy: "Position, PnL, and order books stay in sync with instant rollbacks.",
   },
   {
     title: "Native Hyperliquid",
-    copy: "SDK integration handles signatures so high-leverage bots never pause.",
+    copy: "Native SDK signing handles fills so bots fire without wallet pop-ups.",
   },
   {
     title: "Data fused",
-    copy: "Uniswap, PancakeSwap, and centralized intel pipe into the same routing layer.",
+    copy: "DEX + CEX liquidity and intel feed one routing brain.",
   },
   {
     title: "Guardrails on",
-    copy: "Kill-switches, throttles, and leverage bands stay attached per market.",
+    copy: "Kill-switches, throttles, and leverage bands stick per market.",
   },
 ];
 
 export const WALLET_FEATURES: WalletFeature[] = [
   {
     title: "Automated Sub-Orgs",
-    copy: "Dedicated orgs per user isolate keys, respect RP ID separation, and keep staging / prod siloed.",
+    copy: "Turnkey spins up per-user orgs instantly, keeping keys and environments separated.",
   },
   {
     title: "Permissioned Signing",
-    copy: "Server-side policy lets bots execute without prompts while honoring spending caps and rate limits.",
+    copy: "Turnkey policy engine signs on your behalf while respecting the limits you set.",
   },
   {
     title: "API-First Automation",
-    copy: "Retail traders onboard fast while quants wire bots or monitoring through REST hooks.",
+    copy: "Quick onboarding with REST hooks for bots, monitoring, and alerting.",
   },
   {
     title: "Resilience & Backoff",
-    copy: "Built-in retry logic absorbs vendor hiccups and keeps execution timelines predictable.",
+    copy: "Retries and backoff absorb vendor hiccups, keeping execution predictable.",
   },
 ];
 
 export const DATA_FABRIC_BULLETS: DataFabricBullet[] = [
   {
     title: "Cross-venue coverage",
-    copy: "Uniswap, PancakeSwap, and centralized feeds stream into a unified schema for arb and hedging models.",
+    copy: "Uniswap spot, PancakeSwap spot, and Hyperliquid perps unify for fast cross-market plays.",
   },
   {
     title: "Latency engineered",
-    copy: "Ankr RPC mesh and regional edge caches keep signal propagation under 200 ms across venues.",
+    copy: "Edge caches + RPC mesh keep signals under 200 ms end-to-end.",
   },
   {
     title: "Explainable tooling",
-    copy: "Feature attribution, scenario replays, and diff reports justify model updates for ops and compliance.",
+    copy: "Feature attribution and scenario replays show why a model changed.",
   },
 ];
 
@@ -155,21 +155,21 @@ export const TEAM: TeamMember[] = [
   {
     name: "Harrison",
     role: "Founder",
-    bio: "Pioneered account abstraction and gasless transaction rails long before the Ethereum merge—setting the blueprint for our custody-free architecture.",
+    bio: "Pioneered account abstraction and gasless transactions ahead of the Ethereum merge, laying the groundwork for our custody-free architecture.",
     image: "/images/team-harrison.png",
     accentRing: "ring-accent/20",
   },
   {
     name: "Dmitry",
     role: "Lead Engineer",
-    bio: "Previously engineered high-frequency trading systems for multi-billion-dollar hedge funds; now hardens QuantsEdge execution under real market stress.",
+    bio: "Built high-frequency trading engines for major crypto desks and now keeps QuantsEdge execution battle ready.",
     image: "/images/team-dmitry.png",
     accentRing: "ring-purple-400/20",
   },
   {
     name: "Dan",
     role: "Head of AI",
-    bio: "Ex-IBM TJ Watson quantitative researcher and UCLA PhD guiding our AI stack from signal discovery through production promotion.",
+    bio: "Former IBM TJ Watson researcher and UCLA PhD guiding our AI stack from signal ideas to production bots.",
     image: "/images/team-dan.png",
     accentRing: "ring-blue-400/20",
   },

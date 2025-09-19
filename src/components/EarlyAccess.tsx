@@ -67,31 +67,39 @@ export function EarlyAccess() {
               <div className="grid gap-4 text-sm text-text-secondary sm:grid-cols-2">
                 <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
                   <p className="text-xs uppercase tracking-[0.25em] text-text-tertiary">
-                    What works well
+                    What partners unlock
                   </p>
                   <ul className="mt-3 space-y-2">
                     <li className="flex items-start gap-2">
                       <span className="mt-1 size-1.5 rounded-full bg-accent" />
-                      Liquidity venues, execution tooling, or custody partners.
+                      Product co-design sessions with the QuantsEdge engineering desk.
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="mt-1 size-1.5 rounded-full bg-blue-400" />
-                      Data, analytics, or compliance infrastructure.
+                      Early access to new execution rails and custody workflows.
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="mt-1 size-1.5 rounded-full bg-purple-400" />
+                      Joint GTM moments across shared communities.
                     </li>
                   </ul>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
                   <p className="text-xs uppercase tracking-[0.25em] text-text-tertiary">
-                    Less ideal
+                    How we move fast
                   </p>
                   <ul className="mt-3 space-y-2">
                     <li className="flex items-start gap-2">
+                      <span className="mt-1 size-1.5 rounded-full bg-green-400" />
+                      Dedicated point of contact with 24-hour feedback loops.
+                    </li>
+                    <li className="flex items-start gap-2">
                       <span className="mt-1 size-1.5 rounded-full bg-amber-400" />
-                      Retail affiliate programs or paid placement requests.
+                      Lightweight integration checklist tailored to your stack.
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="mt-1 size-1.5 rounded-full bg-red-400" />
-                      Cold pitch agencies or generic lead-gen.
+                      Transparent telemetry so your team knows what’s shipping when.
                     </li>
                   </ul>
                 </div>

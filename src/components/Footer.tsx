@@ -243,7 +243,7 @@ export function Footer() {
           <motion.div variants={itemVariants}>
             <h4 className="mb-6 font-semibold text-text-primary">Resources</h4>
             <div className="space-y-4">
-              <FooterLink href="/guides" external>
+              <FooterLink href="https://quantsedge.gitbook.io/quantsedge-docs" external>
                 Trading Guides
               </FooterLink>
               <FooterLink href="/community" external>
@@ -263,7 +263,9 @@ export function Footer() {
               <FooterLink href="/press" external>
                 Press Kit
               </FooterLink>
-              <FooterLink href="/contact">Contact</FooterLink>
+              <FooterLink href="mailto:support@quantsedge.ai" external>
+                Contact
+              </FooterLink>
               <FooterLink href="#early-access">Partnerships</FooterLink>
             </div>
           </motion.div>
@@ -285,7 +287,7 @@ export function Footer() {
             {/* Contact Info */}
             <div className="text-sm text-text-secondary">
               <p className="mb-1">
-                Questions? <span className="text-accent">info@quantsedge.ai</span>
+                Questions? <span className="text-accent">support@quantsedge.ai</span>
               </p>
             </div>
           </div>

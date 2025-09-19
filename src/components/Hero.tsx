@@ -1,11 +1,13 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 import dynamic from "next/dynamic";
-import type { FormEvent } from "react";
+import Image from "next/image";
+import type { FormEvent, PointerEvent as ReactPointerEvent } from "react";
 import { useEffect, useRef, useState } from "react";
 
 import { REQUEST_ACCESS_EVENT } from "@/lib/constants";
+import { fadeUp, staggerChildren } from "@/lib/motion";
 import { submitRequestAccess } from "@/lib/requestAccess";
 import { cn } from "@/lib/utils";
 
@@ -25,15 +27,12 @@ function AnimatedCounter({ end, suffix, className = "" }: CounterProps) {
 
     const duration = 2500;
     const startTime = Date.now();
-    const startValue = 0;
 
     const updateCounter = () => {
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / duration, 1);
-
-      // Easing function (ease-out cubic)
       const easeOut = 1 - Math.pow(1 - progress, 3);
-      const currentValue = startValue + (end - startValue) * easeOut;
+      const currentValue = easeOut * end;
 
       setCount(currentValue);
 
@@ -48,12 +47,14 @@ function AnimatedCounter({ end, suffix, className = "" }: CounterProps) {
   const formatValue = (value: number) => {
     if (suffix === "%") {
       return value.toFixed(2) + suffix;
-    } else if (suffix === "B+") {
-      return "$" + value.toFixed(1) + suffix;
-    } else if (end.toString().includes(".")) {
+    }
+    if (suffix === "B+") {
+      return `$${value.toFixed(1)}${suffix}`;
+    }
+    if (end.toString().includes(".")) {
       return value.toFixed(2);
     }
-    return Math.floor(value).toString();
+    return Math.floor(value).toString() + suffix;
   };
 
   return (
@@ -63,26 +64,24 @@ function AnimatedCounter({ end, suffix, className = "" }: CounterProps) {
   );
 }
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
+const containerVariants = staggerChildren;
+const itemVariants = fadeUp;
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.4, 0, 0.2, 1],
-    },
+const HERO_POINTS = [
+  {
+    label: "Launch time",
+    copy: "Idea to live bot in under an hour.",
   },
-};
+  {
+    label: "Paper → live",
+    copy: "Same fills through the Hyperliquid SDK.",
+  },
+  {
+    label: "Guardrails",
+    copy: "Kill-switches, slip alerts, and notifications baked in.",
+  },
+];
+
 const HeroChart = dynamic(() => import("./HeroChart").then((mod) => mod.HeroChart), {
   ssr: false,
   loading: () => (
@@ -173,8 +172,9 @@ function RequestAccessModal({ open, onClose }: RequestAccessModalProps) {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 20 }}
         transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-        className="relative w-full max-w-lg rounded-3xl border border-white/10 bg-black/80 p-8 shadow-[0_40px_120px_-45px_rgba(16,185,129,0.5)]"
+        className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-white/10 bg-black/80 p-8 shadow-[0_40px_120px_-45px_rgba(16,185,129,0.5)]"
       >
+        <div className="pointer-events-none absolute -top-32 right-10 size-40 rounded-full bg-[radial-gradient(circle,_rgba(56,189,248,0.35)_0%,_rgba(56,189,248,0)_70%)] blur-3xl" />
         <button
           type="button"
           onClick={onClose}
@@ -187,8 +187,8 @@ function RequestAccessModal({ open, onClose }: RequestAccessModalProps) {
           <p className="text-xs uppercase tracking-[0.35em] text-text-tertiary">Request Access</p>
           <h3 className="text-2xl font-semibold text-text-primary">Tap into the preview cohort</h3>
           <p className="text-sm text-text-secondary">
-            We prioritize major projects and KOLs actively trading Hyperliquid. Share context so we
-            can line up access fast.
+            We prioritize power traders actively exploring Hyperliquid. Share context so we can line
+            up access fast.
           </p>
         </div>
         <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
@@ -213,10 +213,10 @@ function RequestAccessModal({ open, onClose }: RequestAccessModalProps) {
             />
           </label>
           <label className="block text-xs uppercase tracking-[0.25em] text-text-tertiary">
-            Project or Desk
+            Project or Stack
             <input
               type="text"
-              placeholder="Token/project name, trading desk, or network"
+              placeholder="Token, strategy brand, or community"
               name="project"
               className="mt-2 w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-text-primary placeholder:text-text-tertiary/60 focus:border-accent focus:outline-none"
             />
@@ -225,7 +225,7 @@ function RequestAccessModal({ open, onClose }: RequestAccessModalProps) {
             Volume / Reach Snapshot
             <input
               type="text"
-              placeholder="Avg daily notional, liquidity managed, audience size"
+              placeholder="Daily notional, audience size, or liquidity managed"
               name="volume"
               className="mt-2 w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-text-primary placeholder:text-text-tertiary/60 focus:border-accent focus:outline-none"
             />
@@ -234,7 +234,7 @@ function RequestAccessModal({ open, onClose }: RequestAccessModalProps) {
             Notes
             <textarea
               rows={3}
-              placeholder="Share what you’re building, why you want access, and timelines."
+              placeholder="Share your current workflow, targets, and timelines."
               name="notes"
               className="mt-2 w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-text-primary placeholder:text-text-tertiary/60 focus:border-accent focus:outline-none"
             />
@@ -273,6 +273,11 @@ export function Hero() {
   const [isRequestOpen, setIsRequestOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const highlightX = useSpring(pointerX, { stiffness: 120, damping: 25 });
+  const highlightY = useSpring(pointerY, { stiffness: 120, damping: 25 });
 
   useEffect(() => {
     const handleOpen = () => setIsRequestOpen(true);
@@ -303,10 +308,29 @@ export function Hero() {
   }, []);
 
   const showChart = isDesktop && !prefersReducedMotion;
+  const showHighlight = showChart;
+
+  useEffect(() => {
+    if (!showHighlight || !sectionRef.current) return;
+    const bounds = sectionRef.current.getBoundingClientRect();
+    pointerX.set(bounds.width / 2);
+    pointerY.set(bounds.height / 2);
+  }, [showHighlight, pointerX, pointerY]);
+
+  const handlePointerMove = (event: ReactPointerEvent<HTMLElement>) => {
+    if (!showHighlight || !sectionRef.current) return;
+    const bounds = sectionRef.current.getBoundingClientRect();
+    pointerX.set(event.clientX - bounds.left);
+    pointerY.set(event.clientY - bounds.top);
+  };
 
   return (
     <>
-      <section className="relative flex min-h-screen items-center justify-center px-6 pt-24">
+      <section
+        ref={sectionRef}
+        onPointerMove={handlePointerMove}
+        className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-24"
+      >
         {/* Background Gradient */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
@@ -321,6 +345,12 @@ export function Hero() {
             transition={{ delay: 0.6, duration: 1.2 }}
             className="absolute inset-x-0 top-0 h-[420px] bg-gradient-to-b from-black/60 via-black/10 to-transparent"
           />
+          {showHighlight && (
+            <motion.div
+              style={{ left: highlightX, top: highlightY }}
+              className="pointer-events-none absolute size-[320px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,_rgba(16,185,129,0.32)_0%,_rgba(16,185,129,0)_70%)] blur-3xl"
+            />
+          )}
         </div>
 
         <motion.div
@@ -356,33 +386,30 @@ export function Hero() {
                   <span className="gradient-text">Hyperliquid Speed</span>
                 </motion.h1>
 
-                <motion.p
+                <motion.div
                   variants={itemVariants}
-                  className="text-xs uppercase tracking-[0.35em] text-text-tertiary"
+                  className="mx-auto flex max-w-2xl flex-col gap-4 text-left text-sm text-text-secondary sm:text-base lg:mx-0"
                 >
-                  Why It Matters
-                </motion.p>
-                <motion.p
-                  variants={itemVariants}
-                  className="mx-auto max-w-2xl text-lg text-text-secondary sm:text-xl lg:mx-0"
-                >
-                  Build, test, and ship on the same stack our desk trades. Backtests stay
-                  deterministic, paper fills run through the Hyperliquid SDK, and every launch keeps
-                  the guardrails you configure.
-                </motion.p>
-                <motion.p
-                  variants={itemVariants}
-                  className="text-xs uppercase tracking-[0.35em] text-text-tertiary"
-                >
-                  Time To Live
-                </motion.p>
-                <motion.p
-                  variants={itemVariants}
-                  className="mx-auto max-w-xl text-sm text-text-tertiary sm:text-base lg:mx-0"
-                >
-                  Move from research to production in under an hour with venue-grade telemetry
-                  following every order.
-                </motion.p>
+                  <p className="leading-relaxed">
+                    Compose, dry-run, and launch on Hyperliquid without touching extra tooling.
+                  </p>
+                  <div className="grid gap-3 sm:grid-cols-3">
+                    {HERO_POINTS.map((point) => (
+                      <motion.div
+                        key={point.label}
+                        whileHover={{ y: -6, scale: 1.03 }}
+                        className="glass rounded-2xl border border-white/10 bg-black/40 p-4 transition"
+                      >
+                        <p className="mono text-xs uppercase tracking-[0.3em] text-accent">
+                          {point.label}
+                        </p>
+                        <p className="mt-2 text-xs leading-relaxed text-text-tertiary">
+                          {point.copy}
+                        </p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
               </div>
 
               {/* CTAs */}
@@ -417,6 +444,28 @@ export function Hero() {
                 >
                   See How It Works →
                 </motion.a>
+              </motion.div>
+
+              {/* Partner attribution */}
+              <motion.div
+                variants={itemVariants}
+                className="flex flex-wrap items-center justify-center gap-3 text-xs text-text-tertiary/80 sm:justify-start"
+              >
+                <Image
+                  src="/partners/hyperliquid.svg"
+                  alt="Hyperliquid"
+                  width={160}
+                  height={16}
+                  className="h-4 w-auto opacity-80"
+                />
+                <span className="whitespace-nowrap">Secured by</span>
+                <Image
+                  src="/partners/turnkey.svg"
+                  alt="Turnkey"
+                  width={120}
+                  height={31}
+                  className="h-5 w-auto opacity-80"
+                />
               </motion.div>
 
               {/* Proof Bar */}
@@ -466,13 +515,13 @@ export function Hero() {
           >
             {[
               {
-                label: "Cumulative Volume",
-                value: <AnimatedCounter end={1.2} suffix="B+" />,
+                label: "Early Access Traders",
+                value: <AnimatedCounter end={420} suffix="+" />,
                 accent: "text-accent",
               },
               {
-                label: "Trader Retention",
-                value: <AnimatedCounter end={87} suffix="%" />,
+                label: "Run-to-Live Success",
+                value: <AnimatedCounter end={92} suffix="%" />,
                 accent: "text-green-400",
               },
               {
@@ -481,8 +530,8 @@ export function Hero() {
                 accent: "text-text-primary",
               },
               {
-                label: "Strategies Synced",
-                value: <AnimatedCounter end={312} suffix="" />,
+                label: "Bots Live Right Now",
+                value: <AnimatedCounter end={18} suffix="" />,
                 accent: "text-accent",
               },
             ].map((stat) => (
