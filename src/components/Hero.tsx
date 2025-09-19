@@ -21,9 +21,37 @@ function AnimatedCounter({ end, suffix, className = "" }: CounterProps) {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.5 });
+  const [shouldAnimate, setShouldAnimate] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const evaluate = () => {
+      const prefersReducedMotion = mediaQuery.matches;
+      const isLargeScreen = window.innerWidth >= 768;
+      setShouldAnimate(!prefersReducedMotion && isLargeScreen);
+    };
+
+    evaluate();
+    mediaQuery.addEventListener("change", evaluate);
+    window.addEventListener("resize", evaluate);
+
+    return () => {
+      mediaQuery.removeEventListener("change", evaluate);
+      window.removeEventListener("resize", evaluate);
+    };
+  }, []);
 
   useEffect(() => {
     if (!isInView) return;
+    if (!shouldAnimate) {
+      setCount(end);
+      return;
+    }
 
     const duration = 2500;
     const startTime = Date.now();
@@ -42,7 +70,13 @@ function AnimatedCounter({ end, suffix, className = "" }: CounterProps) {
     };
 
     requestAnimationFrame(updateCounter);
-  }, [isInView, end]);
+  }, [isInView, end, shouldAnimate]);
+
+  useEffect(() => {
+    if (!shouldAnimate) {
+      setCount(end);
+    }
+  }, [shouldAnimate, end]);
 
   const formatValue = (value: number) => {
     if (suffix === "%") {
@@ -309,6 +343,8 @@ export function Hero() {
 
   const showChart = isDesktop && !prefersReducedMotion;
   const showHighlight = showChart;
+  const hoverLift = isDesktop ? { y: -4, scale: 1.02 } : undefined;
+  const hoverScale = isDesktop ? { scale: 1.05 } : undefined;
 
   useEffect(() => {
     if (!showHighlight || !sectionRef.current) return;
@@ -397,7 +433,7 @@ export function Hero() {
                     {HERO_HIGHLIGHTS.map((item) => (
                       <motion.div
                         key={item.title}
-                        whileHover={{ y: -4, scale: 1.02 }}
+                        whileHover={hoverLift}
                         transition={{ type: "spring", stiffness: 260, damping: 18 }}
                         className="group flex min-w-[200px] flex-1 items-start gap-3 rounded-2xl border border-white/10 bg-black/35 px-4 py-3 backdrop-blur"
                       >
@@ -421,8 +457,8 @@ export function Hero() {
               >
                 <motion.button
                   type="button"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={hoverScale}
+                  whileTap={isDesktop ? { scale: 0.95 } : undefined}
                   onClick={() => setIsRequestOpen(true)}
                   className="btn btn-primary glow rounded-xl px-8 py-4 text-base font-semibold"
                   data-analytics-event="cta_request_access"
@@ -434,8 +470,8 @@ export function Hero() {
                   Request Access
                 </motion.button>
                 <motion.a
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={hoverScale}
+                  whileTap={isDesktop ? { scale: 0.95 } : undefined}
                   href="#how-it-works"
                   className="btn btn-secondary rounded-xl px-8 py-4 text-base"
                   data-analytics-event="cta_view_pipeline"

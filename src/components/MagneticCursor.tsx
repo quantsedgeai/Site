@@ -19,8 +19,7 @@ export function MagneticCursor() {
     hoverType: "default",
   });
 
-  // Always call hooks at the top level
-  useCursorHide();
+  useCursorHide(isDesktop);
   const cursorRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -42,92 +41,45 @@ export function MagneticCursor() {
   }, []);
 
   useEffect(() => {
-    const updateCursor = (e: MouseEvent) => {
-      x.set(e.clientX);
-      y.set(e.clientY);
+    if (!isDesktop) {
+      return undefined;
+    }
 
-      setCursorState((prev) => ({
-        ...prev,
-        x: e.clientX,
-        y: e.clientY,
-      }));
-    };
+    const handlePointerMove = (event: MouseEvent) => {
+      const target = event.target as HTMLElement | null;
 
-    const handleMouseEnter = (e: Event) => {
-      const target = e.target as HTMLElement;
+      x.set(event.clientX);
+      y.set(event.clientY);
+
       let hoverType: CursorState["hoverType"] = "default";
-
-      if (target.matches("button, .btn")) {
+      if (target?.closest("button, .btn")) {
         hoverType = "button";
-      } else if (target.matches("a, .nav-link")) {
+      } else if (target?.closest("a, .nav-link")) {
         hoverType = "link";
-      } else if (target.closest(".trading-chart, .chart-container")) {
+      } else if (target?.closest(".trading-chart, .chart-container")) {
         hoverType = "chart";
       }
 
-      setCursorState((prev) => ({
-        ...prev,
-        isHovering: true,
+      setCursorState({
+        x: event.clientX,
+        y: event.clientY,
+        isHovering: hoverType !== "default",
         hoverType,
-      }));
-    };
-
-    const handleMouseLeave = () => {
-      setCursorState((prev) => ({
-        ...prev,
-        isHovering: false,
-        hoverType: "default",
-      }));
-    };
-
-    // Add magnetic effect to interactive elements
-    const magneticElements = document.querySelectorAll("button, .btn, a, .nav-link");
-
-    magneticElements.forEach((element) => {
-      const el = element as HTMLElement;
-
-      const handleMouseMove = (e: MouseEvent) => {
-        if (!cursorState.isHovering) return;
-
-        const rect = el.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-
-        const deltaX = e.clientX - centerX;
-        const deltaY = e.clientY - centerY;
-        const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
-
-        if (distance < 80) {
-          const strength = Math.max(0, 1 - distance / 80);
-          const magnetX = deltaX * strength * 0.3;
-          const magnetY = deltaY * strength * 0.3;
-
-          el.style.transform = `translate(${magnetX}px, ${magnetY}px) scale(${1 + strength * 0.1})`;
-        } else {
-          el.style.transform = "translate(0px, 0px) scale(1)";
-        }
-      };
-
-      const resetTransform = () => {
-        el.style.transform = "translate(0px, 0px) scale(1)";
-      };
-
-      element.addEventListener("mouseenter", handleMouseEnter);
-      element.addEventListener("mouseleave", handleMouseLeave);
-      element.addEventListener("mouseleave", resetTransform);
-      document.addEventListener("mousemove", handleMouseMove);
-    });
-
-    document.addEventListener("mousemove", updateCursor);
-
-    return () => {
-      document.removeEventListener("mousemove", updateCursor);
-      magneticElements.forEach((element) => {
-        element.removeEventListener("mouseenter", handleMouseEnter);
-        element.removeEventListener("mouseleave", handleMouseLeave);
       });
     };
-  }, [x, y, cursorState.isHovering]);
+
+    const handlePointerLeave = () => {
+      setCursorState((prev) => ({ ...prev, isHovering: false, hoverType: "default" }));
+    };
+
+    document.addEventListener("mousemove", handlePointerMove, { passive: true });
+    document.addEventListener("mouseleave", handlePointerLeave);
+
+    return () => {
+      document.removeEventListener("mousemove", handlePointerMove);
+      document.removeEventListener("mouseleave", handlePointerLeave);
+    };
+  }, [isDesktop, x, y]);
 
   // Custom cursor variants
   const getCursorVariant = () => {
@@ -234,9 +186,14 @@ export function MagneticCursor() {
 }
 
 // Custom hook to hide default cursor
-export function useCursorHide() {
+export function useCursorHide(enabled: boolean) {
   useEffect(() => {
-    const checkDevice = () => {
+    if (!enabled) {
+      document.body.style.cursor = "auto";
+      return undefined;
+    }
+
+    const applyCursor = () => {
       if (window.innerWidth > 768) {
         document.body.style.cursor = "none";
       } else {
@@ -244,12 +201,12 @@ export function useCursorHide() {
       }
     };
 
-    checkDevice();
-    window.addEventListener("resize", checkDevice);
+    applyCursor();
+    window.addEventListener("resize", applyCursor);
 
     return () => {
       document.body.style.cursor = "auto";
-      window.removeEventListener("resize", checkDevice);
+      window.removeEventListener("resize", applyCursor);
     };
-  }, []);
+  }, [enabled]);
 }

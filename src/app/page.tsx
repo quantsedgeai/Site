@@ -1,9 +1,10 @@
+import dynamic from "next/dynamic";
+
 import { EarlyAccess } from "@/components/EarlyAccess";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { HowItWorks } from "@/components/HowItWorks";
-import { MagneticCursor } from "@/components/MagneticCursor";
 import { Proof } from "@/components/Proof";
 import { PerformanceSection } from "@/components/sections/PerformanceSection";
 import { RoadmapSection } from "@/components/sections/RoadmapSection";
@@ -11,6 +12,14 @@ import { SectionDivider } from "@/components/sections/SectionDivider";
 import { TeamSection } from "@/components/sections/TeamSection";
 import { TechnologySection } from "@/components/sections/TechnologySection";
 import { StickyCTA } from "@/components/StickyCTA";
+
+const MagneticCursor = dynamic(
+  () => import("@/components/MagneticCursor").then((mod) => mod.MagneticCursor),
+  {
+    ssr: false,
+    loading: () => null,
+  }
+);
 
 export default function Home() {
   return (
