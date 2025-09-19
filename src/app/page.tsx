@@ -33,7 +33,7 @@ export default function Home() {
         <PerformanceSection />
         <SectionDivider label="Stacks" />
         <TechnologySection />
-        <SectionDivider label="Humans" />
+        <SectionDivider label="Team" />
         <TeamSection />
         <SectionDivider label="Roadmap" />
         <RoadmapSection />
