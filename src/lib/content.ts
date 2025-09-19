@@ -154,22 +154,22 @@ export const DATA_FABRIC_STATS: DataFabricStat[] = [
 export const TEAM: TeamMember[] = [
   {
     name: "Harrison",
-    role: "Co-Founder & CEO",
-    bio: "Former Goldman Sachs VP, 12+ years in quantitative trading",
+    role: "Founder",
+    bio: "Pioneered account abstraction and gasless transaction rails long before the Ethereum merge—setting the blueprint for our custody-free architecture.",
     image: "/images/team-harrison.png",
     accentRing: "ring-accent/20",
   },
   {
     name: "Dmitry",
-    role: "Co-Founder & CTO",
-    bio: "Former Google Senior Engineer, PhD in Machine Learning",
+    role: "Lead Engineer",
+    bio: "Previously engineered high-frequency trading systems for multi-billion-dollar hedge funds; now hardens QuantsEdge execution under real market stress.",
     image: "/images/team-dmitry.png",
     accentRing: "ring-purple-400/20",
   },
   {
     name: "Dan",
-    role: "Head of Research",
-    bio: "Former Citadel Quantitative Researcher, MIT PhD",
+    role: "Head of AI",
+    bio: "Ex-IBM TJ Watson quantitative researcher and UCLA PhD guiding our AI stack from signal discovery through production promotion.",
     image: "/images/team-dan.png",
     accentRing: "ring-blue-400/20",
   },
