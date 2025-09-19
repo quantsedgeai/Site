@@ -1,0 +1,11 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="turnkeyGradient" x1="12" y1="56" x2="52" y2="8" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0EA5E9" />
+      <stop offset="1" stop-color="#1D4ED8" />
+    </linearGradient>
+  </defs>
+  <path d="M32 6L14 14V28C14 40.732 21.058 52.628 32 58C42.942 52.628 50 40.732 50 28V14L32 6Z" stroke="url(#turnkeyGradient)" stroke-width="4" fill="#0F172A" />
+  <path d="M27 30C27 27.2386 29.2386 25 32 25C34.7614 25 37 27.2386 37 30C37 32.7614 34.7614 35 32 35C29.2386 35 27 32.7614 27 30Z" fill="#38BDF8" />
+  <path d="M29 36H35V44L32 47L29 44V36Z" fill="#38BDF8" />
+</svg>

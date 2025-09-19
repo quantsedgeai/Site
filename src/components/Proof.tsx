@@ -15,36 +15,36 @@ const proofStats = [
   {
     label: "Live Promotions (60d)",
     value: "146",
-    detail: "Strategies cleared the gates and hit Hyperliquid live",
+    detail: "Bots cleared the launch gates",
   },
   {
     label: "Latency Delta",
     value: "12ms",
-    detail: "Avg paper vs live gap on Hyperliquid fills",
+    detail: "Paper to live gap on fills",
   },
   {
     label: "Guardrail Triggers",
     value: "41",
-    detail: "Circuit breakers fired before risk thresholds hit",
+    detail: "Circuit breakers fired pre-threshold",
   },
 ];
 
 const proofPillars = [
   {
     title: "Transparent Pilot Runs",
-    description:
-      "Share promotion logs, parameter diffs, and telemetry exports with your desk before anything goes live.",
+    description: "Promotion logs, parameter diffs, and telemetry exports stay one click away.",
   },
   {
     title: "Deterministic Backtests",
-    description:
-      "Replay identical market states with locked data snapshots so every iteration is provable and repeatable.",
+    description: "Locked data snapshots replay identical market states for every iteration.",
   },
-  {
-    title: "Signal Containment",
-    description:
-      "Fork community alpha into private sandboxes while guardrails and approvals ensure no surprises in production.",
-  },
+];
+
+const proofLogPreview = [
+  "14:32:11Z | promotion passed | latency 42ms | variance 18bps",
+  "14:32:12Z | order ack | size 1800 | policy ok",
+  "14:32:14Z | guardrail check | drawdown 1.1% | clear",
+  "14:32:22Z | fill logged | pnl +0.42% | webhook sent",
 ];
 
 export function Proof() {
@@ -107,6 +107,24 @@ export function Proof() {
               </p>
             </motion.div>
           ))}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={containerVariants}
+            className="glass h-full rounded-2xl border border-white/10 bg-black/45 p-6 font-mono text-xs text-text-secondary"
+          >
+            <p className="text-sm font-semibold uppercase tracking-wider text-accent">
+              Live Log Stream
+            </p>
+            <div className="mt-3 space-y-2 rounded-xl bg-black/40 p-4">
+              {proofLogPreview.map((line) => (
+                <p key={line} className="truncate text-text-tertiary">
+                  {line}
+                </p>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

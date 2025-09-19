@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
@@ -102,13 +103,20 @@ export function TechnologySection() {
             className="glass card-hover rounded-3xl p-8 sm:p-10"
           >
             <div className="mb-4 flex items-center gap-3">
-              <div className="flex size-12 items-center justify-center rounded-xl border border-accent/30 bg-accent/10">
-                <span className="mono text-xs uppercase tracking-[0.3em] text-accent">AI</span>
+              <div className="flex size-12 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 p-2">
+                <Image
+                  src="/technology/optuna.svg"
+                  alt="Optuna hyperparameter tuning"
+                  width={32}
+                  height={32}
+                  className="h-auto w-full"
+                />
               </div>
               <h3 className="text-2xl font-semibold">Strategy Research</h3>
             </div>
             <p className="mb-4 text-sm text-text-secondary">
-              Spin through ideas, see what sticks, and auto-promote the winners.
+              Optuna sweeps plug straight into our backtesting lane so promising configs surface
+              fast.
             </p>
             <div className="space-y-3">
               {RESEARCH_CARDS.map((feature, index) => (
@@ -131,9 +139,7 @@ export function TechnologySection() {
           >
             <div className="flex items-center gap-3">
               <div className="flex size-12 items-center justify-center rounded-xl border border-purple-400/30 bg-purple-400/10">
-                <span className="mono text-xs uppercase tracking-[0.3em] text-purple-200">
-                  Data
-                </span>
+                <span className="block size-6 rounded-full bg-gradient-to-br from-purple-300 via-sky-400 to-emerald-300" />
               </div>
               <h3 className="text-2xl font-semibold">Signal Fabric</h3>
             </div>
@@ -162,13 +168,20 @@ export function TechnologySection() {
             className="glass card-hover rounded-3xl p-8 sm:p-10"
           >
             <div className="mb-4 flex items-center gap-3">
-              <div className="flex size-12 items-center justify-center rounded-xl border border-green-400/30 bg-green-400/10">
-                <span className="mono text-xs uppercase tracking-[0.3em] text-green-200">Keys</span>
+              <div className="flex size-12 items-center justify-center rounded-xl border border-green-400/30 bg-green-400/10 p-2">
+                <Image
+                  src="/technology/turnkey-badge.svg"
+                  alt="Turnkey secure wallets"
+                  width={32}
+                  height={32}
+                  className="h-auto w-full"
+                />
               </div>
               <h3 className="text-2xl font-semibold">Wallet Mesh</h3>
             </div>
             <p className="mb-4 text-sm text-text-secondary">
-              Passkey wallets spin up instantly while policies keep spend and signers tight.
+              Turnkey handles wallet provisioning and policy controls so signatures stay fast and
+              fenced in.
             </p>
             <div className="space-y-3">
               {WALLET_FEATURES.map((feature, index) => (
@@ -191,7 +204,7 @@ export function TechnologySection() {
           >
             <div className="flex items-center gap-3">
               <div className="flex size-12 items-center justify-center rounded-xl border border-blue-500/30 bg-blue-500/10">
-                <span className="mono text-xs uppercase tracking-[0.3em] text-blue-200">Exec</span>
+                <span className="block size-6 rounded-[10px] bg-gradient-to-br from-blue-300 via-sky-400 to-cyan-500" />
               </div>
               <h3 className="text-2xl font-semibold">Execution Dispatcher</h3>
             </div>

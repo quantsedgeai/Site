@@ -13,6 +13,12 @@ const fadeUp = {
   },
 };
 
+const statusStyles: Record<string, string> = {
+  Released: "border-green-400/40 bg-green-400/10 text-green-200",
+  "In QA": "border-blue-400/40 bg-blue-400/10 text-blue-200",
+  Design: "border-amber-400/40 bg-amber-400/10 text-amber-200",
+};
+
 export function RoadmapSection() {
   return (
     <section id="roadmap" className="px-6 py-24">
@@ -44,17 +50,26 @@ export function RoadmapSection() {
               {ROADMAP_MILESTONES.map((item) => (
                 <div key={item.title} className="glass rounded-2xl border border-white/5 p-6">
                   <div className="flex flex-wrap items-center justify-between gap-3">
-                    <div>
-                      <p className="text-sm uppercase tracking-wide text-accent">{item.status}</p>
-                      <h4 className="mt-1 text-lg font-semibold text-text-primary">{item.title}</h4>
-                    </div>
+                    <span
+                      className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold ${
+                        statusStyles[item.status] ?? "border-white/15 bg-white/5 text-text-tertiary"
+                      }`}
+                    >
+                      {item.status}
+                    </span>
                     <span className="rounded-full bg-white/5 px-3 py-1 font-mono text-xs text-text-tertiary">
                       {item.eta}
                     </span>
                   </div>
-                  <p className="mt-4 text-sm leading-relaxed text-text-secondary">
-                    {item.description}
-                  </p>
+                  <h4 className="mt-4 text-lg font-semibold text-text-primary">{item.title}</h4>
+                  <ul className="mt-3 space-y-2 text-sm text-text-secondary">
+                    {item.points.map((point) => (
+                      <li key={point} className="flex items-start gap-2">
+                        <span className="mt-1 size-1.5 rounded-full bg-accent" />
+                        <span className="leading-snug">{point}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ))}
             </div>

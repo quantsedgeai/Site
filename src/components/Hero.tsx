@@ -67,18 +67,18 @@ function AnimatedCounter({ end, suffix, className = "" }: CounterProps) {
 const containerVariants = staggerChildren;
 const itemVariants = fadeUp;
 
-const HERO_POINTS = [
+const HERO_HIGHLIGHTS = [
   {
-    label: "Launch time",
-    copy: "Idea to live bot in under an hour.",
+    title: "60m to Live",
+    copy: "Prebuilt templates keep bot launches fast and clean.",
   },
   {
-    label: "Paper → live",
-    copy: "Same fills through the Hyperliquid SDK.",
+    title: "One Hyperliquid Lane",
+    copy: "Paper and production share the exact SDK flow.",
   },
   {
-    label: "Guardrails",
-    copy: "Kill-switches, slip alerts, and notifications baked in.",
+    title: "Safeguards On",
+    copy: "Policies, alerts, and kill switches stay enforced at launch.",
   },
 ];
 
@@ -388,24 +388,26 @@ export function Hero() {
 
                 <motion.div
                   variants={itemVariants}
-                  className="mx-auto flex max-w-2xl flex-col gap-4 text-left text-sm text-text-secondary sm:text-base lg:mx-0"
+                  className="mx-auto flex max-w-2xl flex-col gap-4 text-left text-base text-text-secondary sm:text-lg lg:mx-0"
                 >
                   <p className="leading-relaxed">
-                    Compose, dry-run, and launch on Hyperliquid without touching extra tooling.
+                    Draft, dry run, and graduate bots on Hyperliquid in one continuous workflow.
                   </p>
-                  <div className="grid gap-3 sm:grid-cols-3">
-                    {HERO_POINTS.map((point) => (
+                  <div className="flex flex-wrap gap-3">
+                    {HERO_HIGHLIGHTS.map((item) => (
                       <motion.div
-                        key={point.label}
-                        whileHover={{ y: -6, scale: 1.03 }}
-                        className="glass rounded-2xl border border-white/10 bg-black/40 p-4 transition"
+                        key={item.title}
+                        whileHover={{ y: -4, scale: 1.02 }}
+                        transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                        className="group flex min-w-[200px] flex-1 items-start gap-3 rounded-2xl border border-white/10 bg-black/35 px-4 py-3 backdrop-blur"
                       >
-                        <p className="mono text-xs uppercase tracking-[0.3em] text-accent">
-                          {point.label}
-                        </p>
-                        <p className="mt-2 text-xs leading-relaxed text-text-tertiary">
-                          {point.copy}
-                        </p>
+                        <span className="mt-1 inline-flex size-2 rounded-full bg-accent group-hover:shadow-[0_0_12px_rgba(16,185,129,0.6)]" />
+                        <div className="space-y-1">
+                          <p className="mono text-xs uppercase tracking-[0.25em] text-accent">
+                            {item.title}
+                          </p>
+                          <p className="text-sm leading-snug text-text-tertiary">{item.copy}</p>
+                        </div>
                       </motion.div>
                     ))}
                   </div>

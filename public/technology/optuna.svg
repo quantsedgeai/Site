@@ -1,0 +1,12 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="optunaGradient" x1="8" y1="56" x2="56" y2="8" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6EE7B7" />
+      <stop offset="0.5" stop-color="#60A5FA" />
+      <stop offset="1" stop-color="#A855F7" />
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="28" stroke="url(#optunaGradient)" stroke-width="6" opacity="0.8" />
+  <circle cx="24" cy="24" r="8" fill="#6EE7B7" opacity="0.9" />
+  <circle cx="40" cy="40" r="10" fill="#6366F1" opacity="0.9" />
+</svg>
