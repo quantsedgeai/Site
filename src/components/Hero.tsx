@@ -252,10 +252,10 @@ function RequestAccessModal({ open, onClose }: RequestAccessModalProps) {
                   : "Submit Request"}
             </button>
             <a
-              href="mailto:access@quantsedge.xyz"
+              href="mailto:access@quantsedge.ai"
               className="text-sm text-text-secondary transition hover:text-text-primary"
             >
-              Prefer email? access@quantsedge.xyz
+              Prefer email? access@quantsedge.ai
             </a>
           </div>
           {message && (

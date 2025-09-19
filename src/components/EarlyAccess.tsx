@@ -147,10 +147,10 @@ export function EarlyAccess() {
                         : "Start the Conversation"}
                   </button>
                   <a
-                    href="mailto:partners@quantsedge.xyz"
+                    href="mailto:partners@quantsedge.ai"
                     className="text-sm text-text-secondary hover:text-text-primary"
                   >
-                    Email us directly: partners@quantsedge.xyz
+                    Email us directly: partners@quantsedge.ai
                   </a>
                 </div>
                 {message && (
