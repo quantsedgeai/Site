@@ -57,7 +57,7 @@ pnpm ci               # Clean install (CI/CD)
 cp .env.sample .env.local
 ```
 
-- `REQUEST_ACCESS_WEBHOOK_URL` – optional Slack (or generic HTTP) webhook that receives request-access submissions. Without it, submissions are logged to the server console.
+- `REQUEST_ACCESS_WEBHOOK_URL` – optional Slack (or generic HTTP) webhook that receives request-access submissions when using the API route. The default site flow opens the visitor's mail client to email admin@quantsedge.ai directly.
 
 ## Deployment (Netlify)
 

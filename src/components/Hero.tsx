@@ -280,16 +280,16 @@ function RequestAccessModal({ open, onClose }: RequestAccessModalProps) {
               disabled={status === "loading"}
             >
               {status === "loading"
-                ? "Submitting…"
+                ? "Opening Email…"
                 : status === "success"
-                  ? "Request Received"
+                  ? "Email Draft Ready"
                   : "Submit Request"}
             </button>
             <a
-              href="mailto:access@quantsedge.ai"
+              href="mailto:admin@quantsedge.ai"
               className="text-sm text-text-secondary transition hover:text-text-primary"
             >
-              Prefer email? access@quantsedge.ai
+              Prefer email? admin@quantsedge.ai
             </a>
           </div>
           {message && (

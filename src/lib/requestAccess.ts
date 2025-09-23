@@ -12,33 +12,41 @@ export interface RequestAccessResponse {
   message: string;
 }
 
+const CONTACT_EMAIL = "admin@quantsedge.ai";
+const SUBJECT_BY_SOURCE: Record<RequestAccessPayload["source"], string> = {
+  hero: "QuantsEdge Access Request",
+  partnerships: "QuantsEdge Partnerships Inquiry",
+};
+
 export async function submitRequestAccess(
   payload: RequestAccessPayload
 ): Promise<RequestAccessResponse> {
-  try {
-    const response = await fetch("/api/request-access", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({ message: "Request failed" }));
-      return {
-        success: false,
-        message: error.message ?? "Unable to submit request",
-      };
-    }
-
-    const result = (await response.json()) as RequestAccessResponse;
-    return result;
-  } catch (error) {
-    console.error("Failed to submit request access form", error);
+  if (typeof window === "undefined") {
     return {
       success: false,
-      message: "Network error. Please try again soon.",
+      message: `Please email ${CONTACT_EMAIL} directly.`,
     };
   }
+
+  const { name, email, project, volume, notes, source } = payload;
+  const subject = SUBJECT_BY_SOURCE[source] ?? "QuantsEdge Inquiry";
+
+  const bodyLines = [
+    `Name: ${name}`,
+    `Email: ${email}`,
+    project ? `Project: ${project}` : null,
+    volume ? `Volume/Reach: ${volume}` : null,
+    notes ? `Notes: ${notes}` : null,
+    `Source: ${source}`,
+  ].filter(Boolean) as string[];
+
+  const mailtoUrl = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+
+  // Trigger the user's default mail client with the composed draft.
+  window.location.href = mailtoUrl;
+
+  return {
+    success: true,
+    message: `Your email client should now open a draft to ${CONTACT_EMAIL}. If it doesn't, email us directly.`,
+  };
 }

@@ -149,16 +149,16 @@ export function EarlyAccess() {
                     disabled={status === "loading"}
                   >
                     {status === "loading"
-                      ? "Sending…"
+                      ? "Opening Email…"
                       : status === "success"
-                        ? "Message Sent"
+                        ? "Email Draft Ready"
                         : "Start the Conversation"}
                   </button>
                   <a
-                    href="mailto:partners@quantsedge.ai"
+                    href="mailto:admin@quantsedge.ai"
                     className="text-sm text-text-secondary hover:text-text-primary"
                   >
-                    Email us directly: partners@quantsedge.ai
+                    Email us directly: admin@quantsedge.ai
                   </a>
                 </div>
                 {message && (
