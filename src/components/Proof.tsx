@@ -31,17 +31,17 @@ const proofStats = [
 
 const proofPillars = [
   {
-    title: "Transparent Pilot Runs",
-    description: "Promotion logs, parameter diffs, and telemetry exports stay one click away.",
+    title: "Transparent Test Runs",
+    description: "Live logs, parameter diffs, and telemetry exports stay one click away.",
   },
   {
-    title: "Deterministic Backtests",
-    description: "Locked data snapshots replay identical market states for every iteration.",
+    title: "Locked-In Backtests",
+    description: "Fixed data snapshots replay identical market states every time.",
   },
 ];
 
 const proofLogPreview = [
-  "14:32:11Z | promotion passed | latency 42ms | variance 18bps",
+  "14:32:11Z | bot launched | latency 42ms | variance 18bps",
   "14:32:12Z | order ack | size 1800 | policy ok",
   "14:32:14Z | guardrail check | drawdown 1.1% | clear",
   "14:32:22Z | fill logged | pnl +0.42% | webhook sent",
@@ -62,11 +62,11 @@ export function Proof() {
           >
             <p className="label text-accent">Guardrails & Transparency</p>
             <h2 className="display text-4xl sm:text-5xl">
-              Proof before promotion, receipts after every fill
+              Proof before live, logs after every fill
             </h2>
             <p className="text-lg text-text-secondary">
-              The pipeline emits artifacts at each gate—run logs, latency deltas, risk flags—so you
-              can audit every step and keep compliance in the loop.
+              Every gate emits artifacts—run logs, latency deltas, risk flags—so you can track every
+              step and stay in control.
             </p>
           </motion.div>
 
@@ -75,7 +75,7 @@ export function Proof() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={containerVariants}
-            className="glass w-full rounded-3xl p-6 sm:p-8 lg:max-w-md"
+            className="glass-premium magnetic touch-feedback w-full rounded-3xl p-6 sm:p-8 lg:max-w-md"
           >
             <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
               {proofStats.map((stat) => (
@@ -97,7 +97,7 @@ export function Proof() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
               variants={containerVariants}
-              className="glass h-full rounded-2xl p-6"
+              className="glass-premium magnetic touch-feedback h-full rounded-2xl p-6"
             >
               <p className="text-sm font-semibold uppercase tracking-wider text-accent">
                 {pillar.title}
@@ -112,14 +112,17 @@ export function Proof() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={containerVariants}
-            className="glass h-full rounded-2xl border border-white/10 bg-black/45 p-6 font-mono text-xs text-text-secondary"
+            className="glass-premium magnetic touch-feedback group h-full rounded-2xl bg-black/45 p-6 font-mono text-xs text-text-secondary"
           >
             <p className="text-sm font-semibold uppercase tracking-wider text-accent">
               Live Log Stream
             </p>
-            <div className="mt-3 space-y-2 rounded-xl bg-black/40 p-4">
-              {proofLogPreview.map((line) => (
-                <p key={line} className="truncate text-text-tertiary">
+            <div className="mt-3 space-y-2 rounded-xl bg-black/40 p-4 transition-colors duration-300 group-hover:bg-black/60">
+              {proofLogPreview.map((line, index) => (
+                <p
+                  key={line}
+                  className={`stagger- truncate text-text-tertiary transition-colors duration-300 group-hover:text-text-secondary${index + 1}`}
+                >
                   {line}
                 </p>
               ))}

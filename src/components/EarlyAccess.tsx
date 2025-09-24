@@ -54,7 +54,7 @@ export function EarlyAccess() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
-          className="glass rounded-[32px] border border-white/10 p-8 backdrop-blur-2xl sm:p-12"
+          className="glass-premium magnetic rounded-[32px] p-8 backdrop-blur-2xl sm:p-12"
         >
           <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
             <div className="max-w-xl space-y-4">
@@ -65,14 +65,14 @@ export function EarlyAccess() {
                 and we’ll carve out time to explore fit.
               </p>
               <div className="grid gap-4 text-sm text-text-secondary sm:grid-cols-2">
-                <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
-                  <p className="text-xs uppercase tracking-[0.25em] text-text-tertiary">
+                <div className="glass magnetic touch-feedback group rounded-2xl p-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-text-tertiary transition-colors group-hover:text-accent">
                     What partners unlock
                   </p>
                   <ul className="mt-3 space-y-2">
                     <li className="flex items-start gap-2">
                       <span className="mt-1 size-1.5 rounded-full bg-accent" />
-                      Product co-design sessions with the QuantsEdge engineering desk.
+                      Product co-design sessions with the QuantsEdge engineering team.
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="mt-1 size-1.5 rounded-full bg-blue-400" />
@@ -84,8 +84,8 @@ export function EarlyAccess() {
                     </li>
                   </ul>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
-                  <p className="text-xs uppercase tracking-[0.25em] text-text-tertiary">
+                <div className="glass magnetic touch-feedback group rounded-2xl p-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-text-tertiary transition-colors group-hover:text-accent">
                     How we move fast
                   </p>
                   <ul className="mt-3 space-y-2">
@@ -145,7 +145,7 @@ export function EarlyAccess() {
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <button
                     type="submit"
-                    className="btn btn-primary w-full rounded-xl px-8 py-3 font-semibold sm:w-auto"
+                    className="btn btn-primary magnetic touch-feedback touch-target w-full rounded-xl px-8 py-3 font-semibold sm:w-auto"
                     disabled={status === "loading"}
                   >
                     {status === "loading"

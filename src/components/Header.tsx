@@ -151,18 +151,21 @@ export function Header() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
+                  d="M4 6h16"
                   animate={isMenuOpen ? { d: "M6 18L18 6" } : { d: "M4 6h16" }}
                 />
                 <motion.path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
+                  d="M4 12h16"
                   animate={isMenuOpen ? { opacity: 0 } : { opacity: 1, d: "M4 12h16" }}
                 />
                 <motion.path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
+                  d="M4 18h16"
                   animate={isMenuOpen ? { d: "M6 6l12 12" } : { d: "M4 18h16" }}
                 />
               </svg>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 
 import { AnalyticsProvider } from "@/components/AnalyticsProvider";
 import { SmoothScroll } from "@/components/SmoothScroll";
@@ -71,7 +72,38 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+      <head>
+        {/* Critical resource hints */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
+      </head>
       <body className="min-h-screen bg-black font-sans text-text-primary antialiased">
+        {/* Performance monitoring */}
+        <Script id="performance-init" strategy="beforeInteractive">
+          {`
+            // Critical performance optimizations
+            if ('requestIdleCallback' in window) {
+              requestIdleCallback(() => {
+                import('/src/lib/performance.js').then(({ optimizeForInteraction, preloadCriticalResources }) => {
+                  optimizeForInteraction();
+                  preloadCriticalResources();
+                }).catch(() => {});
+              });
+            }
+
+            // Preload critical images
+            const criticalImages = ['/images/team-harrison.jpg', '/images/team-dmitry.jpg', '/images/team-dan.jpg'];
+            criticalImages.forEach(src => {
+              const link = document.createElement('link');
+              link.rel = 'preload';
+              link.as = 'image';
+              link.href = src;
+              document.head.appendChild(link);
+            });
+          `}
+        </Script>
+
         {/* Noise texture overlay */}
         <div className="pointer-events-none fixed inset-0 z-[1] bg-noise opacity-[0.03]" />
 

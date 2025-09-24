@@ -24,7 +24,7 @@ export function TeamSection() {
             Built by Veterans
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-text-secondary">
-            Former executives from leading trading firms and tech companies.
+            Battle-tested builders from crypto's front lines.
           </p>
         </div>
 
@@ -36,7 +36,9 @@ export function TeamSection() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
-              className="text-center"
+              whileHover={{ scale: 1.02, y: -4 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="magnetic touch-feedback -m-6 rounded-2xl p-6 text-center"
             >
               <div
                 className={`mx-auto mb-4 size-32 overflow-hidden rounded-full ring-2 ${member.accentRing}`}

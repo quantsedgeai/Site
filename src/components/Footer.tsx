@@ -128,15 +128,7 @@ const itemVariants = {
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
-  const { greeting, localTime, region } = usePersonalization();
-
-  const regionLabel = {
-    us: "United States",
-    eu: "Europe",
-    apac: "Asia-Pacific",
-    latam: "Latin America",
-    global: "Worldwide",
-  }[region];
+  const { greeting, localTime } = usePersonalization();
 
   return (
     <footer className="relative border-t border-white/5 bg-black/50 backdrop-blur-sm">
@@ -161,11 +153,11 @@ export function Footer() {
               </div>
             </div>
             <p className="mb-6 text-sm leading-relaxed text-text-secondary">
-              Institutional-grade quantitative trading platform delivering consistent alpha through
-              advanced AI strategies and non-custodial architecture.
+              AI-powered trading platform delivering consistent alpha through advanced strategies
+              and non-custodial architecture.
             </p>
             <p className="mb-6 font-mono text-xs uppercase tracking-wide text-text-tertiary">
-              {greeting}! Local time {localTime} • Region focus: {regionLabel}
+              {greeting}! Local time {localTime}
             </p>
 
             {/* Social Links */}

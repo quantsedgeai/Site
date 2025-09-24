@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
 
+import { SectionTransition } from "@/components/ui/SectionTransition";
+import { useSwipeGestures } from "@/hooks/useGestures";
 import {
   DATA_FABRIC_BULLETS,
   DATA_FABRIC_STATS,
@@ -31,36 +33,63 @@ function FeatureAccordion({ title, copy, defaultOpen = false }: FeatureAccordion
   const [open, setOpen] = useState(defaultOpen);
 
   return (
-    <details
+    <motion.details
       open={open}
       onToggle={(event) => setOpen((event.target as HTMLDetailsElement).open)}
-      className="group rounded-2xl border border-white/10 bg-black/40 p-4 transition hover:border-accent/40"
+      className="glass-premium magnetic touch-feedback group rounded-2xl p-4 transition-all duration-300 hover:border-accent/40"
+      whileHover={{ scale: 1.01 }}
+      transition={{ type: "spring", stiffness: 400, damping: 25 }}
     >
-      <summary className="flex cursor-pointer items-center justify-between text-sm font-semibold text-text-primary">
-        <span>{title}</span>
-        <span className="text-accent transition group-open:rotate-45">＋</span>
+      <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-text-primary [&::-webkit-details-marker]:hidden">
+        <span className="transition-colors duration-200 group-hover:text-accent">{title}</span>
+        <motion.span
+          className="flex size-6 items-center justify-center rounded-full border border-accent/30 bg-accent/10 text-sm text-accent"
+          animate={{ rotate: open ? 45 : 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          ＋
+        </motion.span>
       </summary>
-      <p className="mt-2 text-xs leading-relaxed text-text-tertiary lg:group-open:block">{copy}</p>
-    </details>
+      <motion.div
+        initial={false}
+        animate={{
+          height: open ? "auto" : 0,
+          opacity: open ? 1 : 0,
+        }}
+        transition={{
+          duration: 0.3,
+          ease: [0.4, 0, 0.2, 1],
+        }}
+        className="overflow-hidden"
+      >
+        <p className="mt-3 pb-1 text-xs leading-relaxed text-text-tertiary">{copy}</p>
+      </motion.div>
+    </motion.details>
   );
 }
 
 export function TechnologySection() {
+  const { panHandlers } = useSwipeGestures({
+    onSwipeLeft: () => {},
+    onSwipeRight: () => {},
+    threshold: 50,
+  });
+
   return (
     <section id="technology" className="relative overflow-hidden px-6 py-24">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.12),transparent_55%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,0.1),transparent_45%)]" />
 
       <div className="relative mx-auto max-w-7xl">
-        <div className="mb-16 text-center">
+        <SectionTransition variant="fade" className="mb-16 text-center">
           <p className="label mb-4 text-accent">Technology</p>
           <h2 className="display mb-4 text-4xl sm:text-5xl lg:text-display-md">
-            The stack that keeps you shipping
+            Stack built for speed
           </h2>
           <p className="mx-auto max-w-3xl text-lg text-text-secondary">
-            Every piece clicks into the next so you can explore an idea, dry-run it, and go live
-            without bouncing between tools.
+            Everything connects so you can test an idea, prove it works, and go live without
+            switching tools.
           </p>
-        </div>
+        </SectionTransition>
 
         <motion.div
           variants={fadeUp}
@@ -73,11 +102,11 @@ export function TechnologySection() {
             <div className="space-y-4 text-left">
               <p className="text-xs uppercase tracking-[0.3em] text-accent">Snapshot</p>
               <h3 className="text-2xl font-semibold text-text-primary sm:text-3xl">
-                Research, data, wallets, execution — stitched into a single lane.
+                Research, data, wallets, execution—all in one flow.
               </h3>
               <p className="max-w-2xl text-sm text-text-secondary sm:text-base">
-                Bots graduate through the same guardrails they were trained on. Nothing gets lost,
-                nothing needs to be rebuilt.
+                Bots move through the same guardrails they trained on. Nothing gets lost, nothing
+                needs rebuilding.
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-3">
@@ -94,13 +123,13 @@ export function TechnologySection() {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <motion.div className="grid grid-cols-1 gap-6 md:grid-cols-2" {...panHandlers}>
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            className="glass card-hover rounded-3xl p-8 sm:p-10"
+            className="glass-premium card-hover magnetic rounded-3xl p-8 sm:p-10"
           >
             <div className="mb-4 flex items-center gap-3">
               <div className="flex size-12 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 p-2">
@@ -115,8 +144,7 @@ export function TechnologySection() {
               <h3 className="text-2xl font-semibold">Strategy Research</h3>
             </div>
             <p className="mb-4 text-sm text-text-secondary">
-              Optuna sweeps plug straight into our backtesting lane so promising configs surface
-              fast.
+              Optuna sweeps plug into backtesting so winning configs surface fast.
             </p>
             <div className="space-y-3">
               {RESEARCH_CARDS.map((feature, index) => (
@@ -138,7 +166,7 @@ export function TechnologySection() {
             className="glass flex flex-col gap-6 rounded-3xl p-8 sm:p-10"
           >
             <div className="flex items-center gap-3">
-              <div className="flex size-12 items-center justify-center rounded-xl border border-purple-400/30 bg-purple-400/10">
+              <div className="floating flex size-12 items-center justify-center rounded-xl border border-purple-400/30 bg-purple-400/10">
                 <span className="block size-6 rounded-full bg-gradient-to-br from-purple-300 via-sky-400 to-emerald-300" />
               </div>
               <h3 className="text-2xl font-semibold">Signal Fabric</h3>
@@ -157,7 +185,7 @@ export function TechnologySection() {
               ))}
             </div>
           </motion.div>
-        </div>
+        </motion.div>
 
         <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
           <motion.div
@@ -165,7 +193,7 @@ export function TechnologySection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            className="glass card-hover rounded-3xl p-8 sm:p-10"
+            className="glass-premium card-hover magnetic rounded-3xl p-8 sm:p-10"
           >
             <div className="mb-4 flex items-center gap-3">
               <div className="flex size-12 items-center justify-center rounded-xl border border-green-400/30 bg-green-400/10 p-2">
@@ -200,10 +228,10 @@ export function TechnologySection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            className="glass flex flex-col gap-6 rounded-3xl p-8 sm:p-10"
+            className="glass-premium magnetic flex flex-col gap-6 rounded-3xl p-8 sm:p-10"
           >
             <div className="flex items-center gap-3">
-              <div className="flex size-12 items-center justify-center rounded-xl border border-blue-500/30 bg-blue-500/10">
+              <div className="floating flex size-12 items-center justify-center rounded-xl border border-blue-500/30 bg-blue-500/10">
                 <span className="block size-6 rounded-[10px] bg-gradient-to-br from-blue-300 via-sky-400 to-cyan-500" />
               </div>
               <h3 className="text-2xl font-semibold">Execution Dispatcher</h3>

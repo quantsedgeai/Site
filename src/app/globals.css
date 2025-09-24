@@ -27,17 +27,19 @@
 }
 
 @layer components {
-  /* Glass morphism effect */
+  /* Enhanced Glass morphism effects */
   .glass {
     @apply relative overflow-hidden;
     background: linear-gradient(
-      120deg,
-      rgba(255, 255, 255, 0.03) 0%,
-      rgba(255, 255, 255, 0.01) 100%
+      135deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.02) 50%,
+      rgba(0, 255, 198, 0.02) 100%
     );
     backdrop-filter: blur(40px) saturate(150%);
     -webkit-backdrop-filter: blur(40px) saturate(150%);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .glass::before {
@@ -46,9 +48,70 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(255, 255, 255, 0.1) 50%,
+      rgba(0, 255, 198, 0.3) 50%,
       transparent 100%
     );
+  }
+
+  .glass:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.04) 50%,
+      rgba(0, 255, 198, 0.04) 100%
+    );
+    border-color: rgba(0, 255, 198, 0.15);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* Premium glass variant with animated border */
+  .glass-premium {
+    @apply relative overflow-hidden;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.03) 50%,
+      rgba(0, 255, 198, 0.03) 100%
+    );
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-premium::before {
+    @apply absolute inset-0 rounded-[inherit] pointer-events-none;
+    content: "";
+    background: linear-gradient(
+      135deg,
+      rgba(0, 255, 198, 0.1),
+      rgba(96, 165, 250, 0.05),
+      rgba(192, 132, 252, 0.05),
+      rgba(0, 255, 198, 0.1)
+    );
+    background-size: 300% 300%;
+    animation: gradient-shift 6s ease infinite;
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    padding: 1px;
+  }
+
+  .glass-premium:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.06) 50%,
+      rgba(0, 255, 198, 0.06) 100%
+    );
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.4),
+      0 0 40px rgba(0, 255, 198, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
   }
 
   /* Glow effect */
@@ -63,18 +126,67 @@
     filter: blur(40px);
   }
 
-  /* Button styles */
+  /* Enhanced Button styles with magnetic effects */
   .btn {
-    @apply relative font-semibold text-sm tracking-tighter transition-all duration-200 overflow-hidden;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    @apply relative font-semibold text-sm tracking-tighter overflow-hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, box-shadow;
+  }
+
+  .btn::before {
+    @apply absolute inset-0 opacity-0 pointer-events-none;
+    content: "";
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn:hover::before {
+    opacity: 1;
+    transform: translateX(100%);
   }
 
   .btn-primary {
-    @apply bg-accent text-black hover:bg-accent-dark hover:-translate-y-0.5 active:translate-y-0;
+    @apply bg-accent text-black;
+    box-shadow:
+      0 4px 16px rgba(0, 255, 198, 0.3),
+      0 0 0 1px rgba(0, 255, 198, 0.1);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px) scale(1.02);
+    background: linear-gradient(135deg, #00ffc6 0%, #00d4aa 100%);
+    box-shadow:
+      0 8px 32px rgba(0, 255, 198, 0.4),
+      0 0 0 1px rgba(0, 255, 198, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0) scale(1);
   }
 
   .btn-secondary {
-    @apply bg-transparent text-text-primary border border-white/10 hover:bg-white/5 hover:border-white/20;
+    @apply bg-transparent text-text-primary border border-white/10;
+    backdrop-filter: blur(20px);
+  }
+
+  .btn-secondary:hover {
+    @apply bg-white/5 border-white/20;
+    transform: translateY(-1px);
+    box-shadow:
+      0 4px 20px rgba(255, 255, 255, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* Magnetic hover effect for interactive elements */
+  .magnetic {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  .magnetic:hover {
+    transform: translateY(-2px) scale(1.02);
   }
 
   /* Navigation link styles */
@@ -124,14 +236,57 @@
     animation: gradient-shift 8s ease infinite;
   }
 
-  /* Card hover effect */
+  /* Enhanced Card hover effects */
   .card-hover {
     @apply transition-all duration-300;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, box-shadow;
   }
 
   .card-hover:hover {
-    @apply -translate-y-1;
+    transform: translateY(-4px) scale(1.01);
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.3),
+      0 0 30px rgba(0, 255, 198, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* Floating elements */
+  .floating {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Shimmer effect for loading states */
+  .shimmer {
+    @apply relative overflow-hidden;
+  }
+
+  .shimmer::after {
+    @apply absolute inset-0 pointer-events-none;
+    content: "";
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 198, 0.1), transparent);
+    animation: shimmer 3s infinite;
+  }
+
+  /* Interactive number displays */
+  .metric-card {
+    @apply relative overflow-hidden transition-all duration-300;
+    will-change: transform;
+  }
+
+  .metric-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .metric-card::before {
+    @apply absolute inset-0 opacity-0 pointer-events-none;
+    content: "";
+    background: radial-gradient(circle at center, rgba(0, 255, 198, 0.05) 0%, transparent 70%);
+    transition: opacity 0.3s ease;
+  }
+
+  .metric-card:hover::before {
+    opacity: 1;
   }
 
   /* Mobile navigation */
@@ -147,27 +302,221 @@
   .mobile-nav-link {
     @apply block py-3 text-sm font-medium text-text-secondary hover:text-accent transition-colors;
   }
+
+  /* Mobile touch optimizations */
+  .touch-target {
+    @apply relative min-h-[44px] min-w-[44px] flex items-center justify-center;
+  }
+
+  .touch-feedback {
+    @apply relative overflow-hidden;
+    -webkit-tap-highlight-color: rgba(0, 255, 198, 0.1);
+  }
+
+  .touch-feedback::before {
+    @apply absolute inset-0 bg-accent/5 opacity-0 pointer-events-none rounded-[inherit];
+    content: "";
+    transform: scale(0);
+    transition: all 0.15s ease-out;
+  }
+
+  .touch-feedback:active::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Enhanced mobile button interactions */
+  @media (max-width: 768px) {
+    .magnetic:active {
+      transform: scale(0.98);
+      transition: transform 0.1s ease-out;
+    }
+
+    .btn:active {
+      transform: scale(0.95);
+    }
+
+    .card-hover:active {
+      transform: scale(0.98);
+    }
+
+    .metric-card:active {
+      transform: scale(0.97);
+    }
+  }
+
+  /* Smooth scroll for mobile */
+  @media (max-width: 768px) {
+    html {
+      scroll-padding-top: 80px;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
 }
 
 @layer utilities {
-  /* Animation delays */
+  /* Performance-optimized animations with GPU acceleration */
+  @keyframes gradient-shift {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translate3d(0, 0px, 0);
+    }
+    50% {
+      transform: translate3d(0, -10px, 0);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translate3d(-100%, 0, 0);
+    }
+    100% {
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 0.8;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up-fade {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 30px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale3d(0.9, 0.9, 1);
+    }
+    to {
+      opacity: 1;
+      transform: scale3d(1, 1, 1);
+    }
+  }
+
+  /* Animation delays with GPU optimization */
   .stagger-1 {
     animation-delay: 0.1s;
+    will-change: transform, opacity;
   }
   .stagger-2 {
     animation-delay: 0.2s;
+    will-change: transform, opacity;
   }
   .stagger-3 {
     animation-delay: 0.3s;
+    will-change: transform, opacity;
   }
   .stagger-4 {
     animation-delay: 0.4s;
+    will-change: transform, opacity;
   }
   .stagger-5 {
     animation-delay: 0.5s;
+    will-change: transform, opacity;
   }
   .stagger-6 {
     animation-delay: 0.6s;
+    will-change: transform, opacity;
+  }
+
+  /* GPU-accelerated animation utilities */
+  .animate-gpu {
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+  }
+
+  .animate-fade-in {
+    animation: slide-up-fade 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  /* Advanced scroll reveal animations */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scroll-reveal-left {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-reveal-left.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scroll-reveal-right {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-reveal-right.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scroll-reveal-scale {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-reveal-scale.is-visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Parallax scrolling effects */
+  .parallax {
+    will-change: transform;
+  }
+
+  .parallax-slow {
+    transform: translateZ(0);
+  }
+
+  .parallax-medium {
+    transform: translateZ(0);
+  }
+
+  .parallax-fast {
+    transform: translateZ(0);
   }
 
   /* Focus styles */

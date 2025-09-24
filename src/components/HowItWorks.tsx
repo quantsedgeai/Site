@@ -16,7 +16,7 @@ const steps = [
     summary: "Rehearse fills through the very same Hyperliquid SDK.",
     bullets: [
       "Backtests and paper runs replay live market states.",
-      "Pass-fail snapshots drop into chat for the trading desk.",
+      "Pass-fail snapshots drop straight into your chat.",
     ],
   },
   {
@@ -24,7 +24,7 @@ const steps = [
     summary: "Promote only after policies, alerts, and signers lock in.",
     bullets: [
       "Dispatcher obeys caps, throttles, and kill switch rules.",
-      "Every order mirrors into logs your compliance team can audit.",
+      "Every order mirrors into logs you can track and audit.",
     ],
   },
 ];
@@ -32,15 +32,14 @@ const steps = [
 const testimonials = [
   {
     quote:
-      "Dry runs and live fills now land within a few basis points. Explaining the gap to the desk is finally simple.",
+      "Dry runs and live fills now land within a few basis points. The gap is finally predictable.",
     name: "Maya R.",
-    title: "Head of Quant Strategy, Syndicate Labs",
+    title: "Power Trader, Syndicate Labs",
   },
   {
-    quote:
-      "Built-in guardrails catch trouble before we do, and compliance still gets the logs they ask for.",
+    quote: "Built-in guardrails catch trouble before we do, and we still get every log we need.",
     name: "Carlos M.",
-    title: "CTO, Drift Collective",
+    title: "Lead Trader, Drift Collective",
   },
 ];
 
@@ -81,7 +80,7 @@ export function HowItWorks() {
                 <span className="absolute -left-10 top-0 flex size-8 items-center justify-center rounded-full border border-white/10 bg-black/60 text-sm font-semibold text-accent">
                   {index + 1}
                 </span>
-                <div className="glass rounded-3xl border border-white/10 p-6 backdrop-blur-lg">
+                <div className="glass-premium magnetic touch-feedback rounded-3xl p-6 backdrop-blur-lg">
                   <h3 className="text-lg font-semibold text-text-primary">{step.title}</h3>
                   <p className="mt-2 text-sm text-text-secondary">{step.summary}</p>
                   <ul className="mt-4 space-y-2 text-sm text-text-tertiary">
@@ -135,8 +134,7 @@ export function HowItWorks() {
             <div className="rounded-2xl border border-white/10 bg-black/40 p-6">
               <p className="text-xs uppercase tracking-[0.3em] text-text-tertiary">Trader Signal</p>
               <p className="mt-2 text-base text-text-secondary">
-                Power traders in preview average 1.7 live promotions per week once the pipeline is
-                wired into their workflow.
+                Power traders in preview average 1.7 live bot launches per week once dialed in.
               </p>
             </div>
           </motion.div>
@@ -150,7 +148,7 @@ export function HowItWorks() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
               variants={fadeUp}
-              className="glass h-full rounded-3xl border border-white/10 p-8 text-left"
+              className="glass-premium magnetic touch-feedback h-full rounded-3xl p-8 text-left"
             >
               <p className="text-lg leading-relaxed text-text-primary">“{item.quote}”</p>
               <footer className="mt-6 text-sm text-text-tertiary">
