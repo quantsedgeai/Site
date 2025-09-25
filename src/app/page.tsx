@@ -97,38 +97,38 @@ export default function Home() {
         <HowItWorks />
 
         <SectionDivider label="Proof" />
-        <LazySection rootMargin="100px">
+        <LazySection>
           <Proof />
         </LazySection>
 
         <SectionDivider label="Performance" />
-        <LazySection rootMargin="150px">
+        <LazySection>
           <PerformanceSection />
         </LazySection>
 
         <SectionDivider label="Stacks" />
-        <LazySection rootMargin="100px">
+        <LazySection>
           <TechnologySection />
         </LazySection>
 
         <SectionDivider label="Team" />
-        <LazySection rootMargin="100px">
+        <LazySection>
           <TeamSection />
         </LazySection>
 
         <SectionDivider label="Roadmap" />
-        <LazySection rootMargin="100px">
+        <LazySection>
           <RoadmapSection />
         </LazySection>
 
-        <LazySection rootMargin="50px">
+        <LazySection>
           <EarlyAccess />
         </LazySection>
       </main>
 
       <StickyCTA />
 
-      <LazySection rootMargin="0px">
+      <LazySection>
         <Footer />
       </LazySection>
     </>
