@@ -433,9 +433,9 @@ export function Hero() {
                   variants={itemVariants}
                   className="display text-5xl sm:text-7xl lg:text-display-lg"
                 >
-                  Deploy Bots At Hyperliquid
+                  Deploy Bots At
                   <br />
-                  <span className="gradient-text">Speed</span>
+                  <span className="gradient-text">Hyperliquid Speed</span>
                 </motion.h1>
 
                 <motion.div
