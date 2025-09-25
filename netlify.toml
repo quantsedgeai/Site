@@ -2,6 +2,12 @@
   publish = "out"
   command = "pnpm run build"
 
+# Environment variables
+[build.environment]
+  NODE_VERSION = "20.19.5"
+  NPM_FLAGS = "--version"
+  PNPM_VERSION = "latest"
+
 # Cache busting and security headers
 [[headers]]
   for = "/app.js"

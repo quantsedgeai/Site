@@ -1,36 +1,22 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Experimental optimizations for performance
+  // Conservative config for stable deployment
   experimental: {
-    // Optimize package imports for better tree shaking
+    // Only stable experimental features
     optimizePackageImports: [
       "framer-motion",
       "recharts",
-      "@use-gesture/react",
-      "three",
-      "@react-three/fiber",
-      "@react-three/drei"
     ],
-    // Modern output formats
-    optimizeCss: true,
-    optimizeServerReact: true,
   },
 
   // Compiler optimizations
   compiler: {
     // Remove console.log in production
     removeConsole: process.env.NODE_ENV === "production",
-    // Enable React compiler optimizations
-    reactRemoveProperties: process.env.NODE_ENV === "production" ? { properties: ["^data-testid$"] } : false,
   },
 
-  // Enable modern JavaScript features
+  // Enable SWC minification
   swcMinify: true,
-
-  // Bundle analyzer (can be enabled as needed)
-  // bundleAnalyzer: {
-  //   enabled: process.env.ANALYZE === 'true',
-  // },
 
   // Performance optimizations
   poweredByHeader: false,
@@ -44,18 +30,10 @@ const nextConfig = {
   // Image optimization config for static export
   images: {
     unoptimized: true,
-    formats: ["image/avif", "image/webp"],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 
   // Asset optimization
   assetPrefix: process.env.NODE_ENV === "production" ? "" : "",
-
-  // Modern build optimizations
-  generateBuildId: async () => {
-    return `build-${Date.now()}`;
-  },
 };
 
 export default nextConfig;
