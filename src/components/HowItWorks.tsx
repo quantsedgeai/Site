@@ -64,80 +64,35 @@ export function HowItWorks() {
           </p>
         </div>
 
-        <div className="grid gap-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-          <div className="relative pl-10">
-            <div className="absolute inset-y-0 left-4 w-px bg-white/10" />
-            <div className="absolute left-4 top-0 h-10 w-px bg-gradient-to-b from-accent/80 to-transparent" />
-            {steps.map((step, index) => (
-              <motion.div
-                key={step.title}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.4 }}
-                variants={fadeUp}
-                className="relative pb-12 last:pb-0"
-              >
-                <span className="absolute -left-10 top-0 flex size-8 items-center justify-center rounded-full border border-white/10 bg-black/60 text-sm font-semibold text-accent">
-                  {index + 1}
-                </span>
-                <div className="glass-premium magnetic touch-feedback rounded-3xl p-6 backdrop-blur-lg">
-                  <h3 className="text-lg font-semibold text-text-primary">{step.title}</h3>
-                  <p className="mt-2 text-sm text-text-secondary">{step.summary}</p>
-                  <ul className="mt-4 space-y-2 text-sm text-text-tertiary">
-                    {step.bullets.map((bullet) => (
-                      <li key={bullet} className="flex items-start gap-2">
-                        <span className="mt-1 size-1.5 rounded-full bg-accent" />
-                        <span className="leading-snug">{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.4 }}
-            variants={fadeUp}
-            className="glass space-y-6 rounded-3xl border border-white/10 p-8 backdrop-blur-xl"
-          >
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <p className="text-sm uppercase tracking-[0.35em] text-text-tertiary/80">
-                  Promotion Control
-                </p>
-                <h3 className="mt-2 text-2xl font-semibold text-text-primary">
-                  Median time to live: 58 minutes
-                </h3>
-              </div>
-              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-text-secondary">
-                Preview cohort data
+        <div className="relative pl-10">
+          <div className="absolute inset-y-0 left-4 w-px bg-white/10" />
+          <div className="absolute left-4 top-0 h-10 w-px bg-gradient-to-b from-accent/80 to-transparent" />
+          {steps.map((step, index) => (
+            <motion.div
+              key={step.title}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.4 }}
+              variants={fadeUp}
+              className="relative pb-12 last:pb-0"
+            >
+              <span className="absolute -left-10 top-0 flex size-8 items-center justify-center rounded-full border border-white/10 bg-black/60 text-sm font-semibold text-accent">
+                {index + 1}
               </span>
-            </div>
-            <ul className="space-y-4 text-sm text-text-secondary">
-              <li className="flex items-start gap-3">
-                <span className="mt-1 size-2 rounded-full bg-green-400" />
-                Drawdown &lt; 1.5%, fill variance &lt; 25 bps, and latency &lt; 50 ms must all
-                clear.
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-1 size-2 rounded-full bg-blue-400" />
-                One approval locks policy. Dispatcher enforces caps, leverage, and throttle rules.
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-1 size-2 rounded-full bg-amber-400" />
-                Every order, fill, and circuit break mirrors into Slack, PagerDuty, or your webhook.
-              </li>
-            </ul>
-            <div className="rounded-2xl border border-white/10 bg-black/40 p-6">
-              <p className="text-xs uppercase tracking-[0.3em] text-text-tertiary">Trader Signal</p>
-              <p className="mt-2 text-base text-text-secondary">
-                Power traders in preview average 1.7 live bot launches per week once dialed in.
-              </p>
-            </div>
-          </motion.div>
+              <div className="glass-premium magnetic touch-feedback rounded-3xl p-6 backdrop-blur-lg">
+                <h3 className="text-lg font-semibold text-text-primary">{step.title}</h3>
+                <p className="mt-2 text-sm text-text-secondary">{step.summary}</p>
+                <ul className="mt-4 space-y-2 text-sm text-text-tertiary">
+                  {step.bullets.map((bullet) => (
+                    <li key={bullet} className="flex items-start gap-2">
+                      <span className="mt-1 size-1.5 rounded-full bg-accent" />
+                      <span className="leading-snug">{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
         <div className="mt-20 grid gap-6 lg:grid-cols-2">

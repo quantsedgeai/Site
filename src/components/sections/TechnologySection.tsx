@@ -187,7 +187,7 @@ export function TechnologySection() {
           </motion.div>
         </motion.div>
 
-        <div className="mt-6 grid grid-cols-1 gap-6">
+        <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -220,6 +220,42 @@ export function TechnologySection() {
                   defaultOpen={index === 0}
                 />
               ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            className="glass-premium magnetic flex flex-col gap-6 rounded-3xl p-8 sm:p-10"
+          >
+            <div className="flex items-center gap-3">
+              <div className="floating flex size-12 items-center justify-center rounded-xl border border-blue-500/30 bg-blue-500/10">
+                <span className="block size-6 rounded-[10px] bg-gradient-to-br from-blue-300 via-sky-400 to-cyan-500" />
+              </div>
+              <h3 className="text-2xl font-semibold">Execution Dispatcher</h3>
+            </div>
+            <p className="text-sm text-text-secondary">
+              Promote bots with the same rules they trained on. Alerts fire the second something
+              drifts.
+            </p>
+            <div className="space-y-3">
+              {EXECUTION_FEATURES.map((feature, index) => (
+                <FeatureAccordion
+                  key={feature.title}
+                  title={feature.title}
+                  copy={feature.copy}
+                  defaultOpen={index === 0}
+                />
+              ))}
+            </div>
+            <div className="rounded-2xl border border-blue-500/20 bg-blue-500/10 p-4 text-xs text-blue-100">
+              <p className="text-sm font-semibold text-blue-200">Realtime Feed</p>
+              <p className="mt-1 leading-relaxed">
+                Hyperliquid fills, funding moves, and liquidations hit your webhooks and chat in
+                under 200 ms.
+              </p>
             </div>
           </motion.div>
         </div>
