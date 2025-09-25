@@ -102,7 +102,7 @@ export function TechnologySection() {
             <div className="space-y-4 text-left">
               <p className="text-xs uppercase tracking-[0.3em] text-accent">Snapshot</p>
               <h3 className="text-2xl font-semibold text-text-primary sm:text-3xl">
-                Research, data, wallets, execution—all in one flow.
+                Research, data, wallets, execution: all in one flow.
               </h3>
               <p className="max-w-2xl text-sm text-text-secondary sm:text-base">
                 Bots move through the same guardrails they trained on. Nothing gets lost, nothing

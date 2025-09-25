@@ -552,7 +552,7 @@ export function Hero() {
                   },
                   {
                     title: "Non-Custodial Security",
-                    copy: "Your wallet keys remain under your control—we never hold your assets.",
+                    copy: "Your wallet keys remain under your control. We never hold your assets.",
                   },
                 ].map((item) => (
                   <div key={item.title} className="glass-premium magnetic rounded-xl p-4">

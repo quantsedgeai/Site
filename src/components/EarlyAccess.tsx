@@ -61,8 +61,8 @@ export function EarlyAccess() {
               <p className="label text-accent">Partnerships & Collaborations</p>
               <h2 className="display text-3xl sm:text-4xl">Build with QuantsEdge</h2>
               <p className="text-base text-text-secondary">
-                Ecosystem teams, tooling partners, and integrations—we’d love to jam. Drop us a note
-                and we’ll carve out time to explore fit.
+                Ecosystem teams, tooling partners, and integrations: we’d love to jam. Drop us a
+                note and we’ll carve out time to explore fit.
               </p>
               <div className="grid gap-4 text-sm text-text-secondary sm:grid-cols-2">
                 <div className="glass magnetic touch-feedback group rounded-2xl p-5">

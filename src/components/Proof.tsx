@@ -65,8 +65,8 @@ export function Proof() {
               Proof before live, logs after every fill
             </h2>
             <p className="text-lg text-text-secondary">
-              Every gate emits artifacts—run logs, latency deltas, risk flags—so you can track every
-              step and stay in control.
+              Every gate emits artifacts (run logs, latency deltas, risk flags) so you can track
+              every step and stay in control.
             </p>
           </motion.div>
 
