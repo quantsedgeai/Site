@@ -110,7 +110,7 @@ const HERO_HIGHLIGHTS = [
   },
   {
     title: "Unified Pipeline",
-    copy: "Seamless progression from paper trading to live execution.",
+    copy: "Seamless progression from backtesting to paper trading to live execution.",
   },
   {
     title: "Enterprise Safeguards",
