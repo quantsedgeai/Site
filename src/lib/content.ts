@@ -80,73 +80,73 @@ export const PERFORMANCE_METRICS: PerformanceMetric[] = [
 
 export const RESEARCH_CARDS: ResearchCard[] = [
   {
-    title: "Optuna Hyperparameter Grid",
-    copy: "Optuna sweeps backtest leverage, windows, and risk caps without manual wiring.",
+    title: "Optuna Hyperparameter Optimization",
+    copy: "Advanced Bayesian optimization automatically finds optimal strategy parameters—leverage, windows, risk caps—by intelligently sampling the parameter space instead of brute-force grid search.",
   },
   {
     title: "Unified Backtesting",
-    copy: "Replay identical data + features so research matches live behavior.",
+    copy: "Test strategies with identical live market data and feature sets for accurate performance prediction.",
   },
   {
     title: "Paper Trading Sandbox",
-    copy: "Hyperliquid feeds and your guardrails for no-risk proving grounds.",
+    copy: "Risk-free validation using real Hyperliquid market conditions and latency.",
   },
   {
-    title: "Telemetry & Scoring",
-    copy: "Run logs flag anomalies and highlight bots ready to ship.",
+    title: "Performance Analytics",
+    copy: "Comprehensive metrics tracking and bot readiness validation.",
   },
 ];
 
 export const EXECUTION_FEATURES: ExecutionFeature[] = [
   {
-    title: "Deterministic state",
-    copy: "Position, PnL, and order books stay in sync with instant rollbacks.",
+    title: "Deterministic State",
+    copy: "Positions, PnL, and order books maintain perfect synchronization with instant rollback capability.",
   },
   {
-    title: "Native Hyperliquid",
-    copy: "Native SDK signing handles fills so bots fire without wallet pop-ups.",
+    title: "Native Integration",
+    copy: "Direct Hyperliquid SDK integration enables seamless execution without wallet interruptions.",
   },
   {
-    title: "Data fused",
-    copy: "DEX + CEX liquidity and intel feed one routing brain.",
+    title: "Unified Data Layer",
+    copy: "Combined DEX and CEX liquidity feeds power intelligent order routing decisions.",
   },
   {
-    title: "Guardrails on",
-    copy: "Kill-switches, throttles, and leverage bands stick per market.",
+    title: "Built-in Safeguards",
+    copy: "Automated kill switches, rate limits, and leverage controls enforce risk management per market.",
   },
 ];
 
 export const WALLET_FEATURES: WalletFeature[] = [
   {
-    title: "Automated Sub-Orgs",
-    copy: "Turnkey spins up per-user orgs instantly, keeping keys and environments separated.",
+    title: "Isolated Environments",
+    copy: "Turnkey automatically provisions secure, isolated sub-organizations for each user with separated keys and environments.",
   },
   {
-    title: "Permissioned Signing",
-    copy: "Turnkey policy engine signs on your behalf while respecting the limits you set.",
+    title: "Policy-Based Signing",
+    copy: "Advanced policy engine executes trades within your predefined risk parameters while maintaining full custody control.",
   },
   {
-    title: "API-First Automation",
-    copy: "Quick onboarding with REST hooks for bots, monitoring, and alerting.",
+    title: "API-First Integration",
+    copy: "Streamlined REST APIs enable rapid bot deployment, real-time monitoring, and instant alerting.",
   },
   {
-    title: "Resilience & Backoff",
-    copy: "Retries and backoff absorb vendor hiccups, keeping execution predictable.",
+    title: "Enterprise Reliability",
+    copy: "Built-in retry logic and exponential backoff ensure consistent execution despite network volatility.",
   },
 ];
 
 export const DATA_FABRIC_BULLETS: DataFabricBullet[] = [
   {
-    title: "Cross-venue coverage",
-    copy: "Uniswap spot, PancakeSwap spot, and Hyperliquid perps unify for fast cross-market plays.",
+    title: "Multi-Venue Coverage",
+    copy: "Unified data streams from Uniswap, PancakeSwap, and Hyperliquid enable sophisticated cross-market arbitrage strategies.",
   },
   {
-    title: "Latency engineered",
-    copy: "Edge caches + RPC mesh keep signals under 200 ms end-to-end.",
+    title: "Ultra-Low Latency",
+    copy: "Advanced edge caching and optimized RPC mesh architecture maintain sub-200ms signal processing.",
   },
   {
-    title: "Explainable tooling",
-    copy: "Feature attribution and scenario replays show why a model changed.",
+    title: "Model Transparency",
+    copy: "Complete feature attribution and scenario replay capabilities provide full insight into model decision-making.",
   },
 ];
 
@@ -160,21 +160,21 @@ export const TEAM: TeamMember[] = [
   {
     name: "Harrison",
     role: "Founder",
-    bio: "Pioneered account abstraction and gasless transactions ahead of the Ethereum merge, laying the groundwork for our custody-free architecture.",
+    bio: "Architect of account abstraction and gasless transaction systems pre-Ethereum merge. Pioneered the custody-free infrastructure powering QuantsEdge.",
     image: "/images/team-harrison.jpg",
     accentRing: "ring-accent/20",
   },
   {
     name: "Dmitry",
     role: "Lead Engineer",
-    bio: "Built high-frequency trading engines for top crypto traders and keeps QuantsEdge execution lightning fast.",
+    bio: "Former HFT systems architect for institutional crypto funds. Delivers microsecond-precision execution infrastructure.",
     image: "/images/team-dmitry.jpg",
     accentRing: "ring-purple-400/20",
   },
   {
     name: "Dan",
     role: "Head of AI",
-    bio: "Former IBM TJ Watson researcher and UCLA PhD guiding our AI stack from signal ideas to production bots.",
+    bio: "IBM TJ Watson Research alumnus, UCLA PhD. Transforms cutting-edge ML research into production-ready trading algorithms.",
     image: "/images/team-dan.jpg",
     accentRing: "ring-blue-400/20",
   },
@@ -182,30 +182,30 @@ export const TEAM: TeamMember[] = [
 
 export const ROADMAP_MILESTONES: RoadmapMilestone[] = [
   {
-    title: "Hyperliquid Live Launch",
-    eta: "Shipping now",
+    title: "Production Launch",
+    eta: "Live Now",
     status: "Released",
     points: [
-      "Production bots and risk guards now live on Hyperliquid perpetuals.",
-      "Monitoring dashboards stream fills and guardrail signals in real time.",
+      "Full production environment with enterprise-grade risk management on Hyperliquid perpetuals.",
+      "Real-time monitoring dashboards with comprehensive fill tracking and risk alert systems.",
     ],
   },
   {
     title: "Strategy Marketplace",
     eta: "Q4 2025",
-    status: "In QA",
+    status: "In Development",
     points: [
-      "Discover and fork crowd-vetted alpha packs in one hub.",
-      "Revenue splits unlock only when live performance clears benchmarks.",
+      "Curated marketplace for discovering and licensing proven trading strategies.",
+      "Performance-based revenue sharing with transparent benchmark validation.",
     ],
   },
   {
-    title: "On-Chain Options Support",
+    title: "Options Infrastructure",
     eta: "Q1 2026",
-    status: "Design",
+    status: "Design Phase",
     points: [
-      "Automate delta neutral and volatility surfaces end to end.",
-      "Cover the leading on-chain options venues with shared tooling.",
+      "Native support for delta-neutral strategies and automated volatility surface trading.",
+      "Integration with leading on-chain options protocols through unified API layer.",
     ],
   },
 ];

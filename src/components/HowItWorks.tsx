@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 const steps = [
   {
     title: "Explore Ideas",
-    summary: "Spin up a Hyperliquid-ready research lane in seconds.",
+    summary: "Spin up a Hyperliquid-ready research environment in seconds.",
     bullets: [
-      "Optuna starter templates cover the core alpha patterns.",
-      "Data, features, and notes auto-log for every experiment.",
+      "Optuna-powered templates intelligently optimize strategy parameters using advanced Bayesian sampling.",
+      "Data, features, and experiment results automatically log for complete research traceability.",
     ],
   },
   {

@@ -105,16 +105,16 @@ const itemVariants = fadeUp;
 
 const HERO_HIGHLIGHTS = [
   {
-    title: "60m to Live",
-    copy: "Prebuilt templates keep bot launches fast and clean.",
+    title: "60-Minute Deployment",
+    copy: "Production-ready templates accelerate bot development and deployment.",
   },
   {
-    title: "One Hyperliquid Lane",
-    copy: "Paper and production share the exact SDK flow.",
+    title: "Unified Pipeline",
+    copy: "Seamless progression from paper trading to live execution.",
   },
   {
-    title: "Safeguards On",
-    copy: "Policies, alerts, and kill switches stay enforced at launch.",
+    title: "Enterprise Safeguards",
+    copy: "Built-in risk controls, monitoring, and emergency stops.",
   },
 ];
 
@@ -221,10 +221,10 @@ function RequestAccessModal({ open, onClose }: RequestAccessModalProps) {
         </button>
         <div className="mb-6 space-y-2">
           <p className="text-xs uppercase tracking-[0.35em] text-text-tertiary">Request Access</p>
-          <h3 className="text-2xl font-semibold text-text-primary">Tap into the preview cohort</h3>
+          <h3 className="text-2xl font-semibold text-text-primary">Join Early Access Program</h3>
           <p className="text-sm text-text-secondary">
-            We prioritize active Hyperliquid traders. Share your setup so we can fast-track your
-            access.
+            Priority access for active Hyperliquid traders. Share your trading profile to expedite
+            approval.
           </p>
         </div>
         <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
@@ -433,9 +433,9 @@ export function Hero() {
                   variants={itemVariants}
                   className="display text-5xl sm:text-7xl lg:text-display-lg"
                 >
-                  Ship Bots At
+                  Deploy Trading Bots
                   <br />
-                  <span className="gradient-text">Hyperliquid Speed</span>
+                  <span className="gradient-text">At Scale</span>
                 </motion.h1>
 
                 <motion.div
@@ -443,12 +443,12 @@ export function Hero() {
                   className="mx-auto flex max-w-2xl flex-col gap-4 text-left text-base text-text-secondary sm:text-lg lg:mx-0"
                 >
                   <div className="leading-relaxed">
-                    Build, test, and deploy{" "}
+                    Enterprise-grade platform for developing, testing, and deploying{" "}
                     <TechTooltip
                       definition="Automated trading algorithms that execute strategies without human intervention"
                       example="Market-making bots, arbitrage bots, momentum bots"
                     >
-                      bots
+                      automated trading strategies
                     </TechTooltip>{" "}
                     on{" "}
                     <TechTooltip
@@ -456,8 +456,8 @@ export function Hero() {
                       example="Trade perpetuals with up to 50x leverage"
                     >
                       Hyperliquid
-                    </TechTooltip>{" "}
-                    in one smooth flow.
+                    </TechTooltip>
+                    .
                   </div>
                   <div className="flex flex-wrap gap-3">
                     {HERO_HIGHLIGHTS.map((item) => (
@@ -543,16 +543,16 @@ export function Hero() {
               >
                 {[
                   {
-                    title: "Locked-In Testing",
-                    copy: "Lock data snapshots, compare diffs, and export battle-tested run logs.",
+                    title: "Deterministic Testing",
+                    copy: "Locked data environments ensure reproducible backtesting and performance validation.",
                   },
                   {
-                    title: "Proof Before Live",
-                    copy: "Paper trades route through the Hyperliquid SDK with real latency.",
+                    title: "Production Parity",
+                    copy: "Paper trading uses identical Hyperliquid SDK with realistic execution latency.",
                   },
                   {
-                    title: "Your Keys, Your Control",
-                    copy: "We automate logic only—wallets stay yours, custody-free forever.",
+                    title: "Non-Custodial Security",
+                    copy: "Your wallet keys remain under your control—we never hold your assets.",
                   },
                 ].map((item) => (
                   <div key={item.title} className="glass-premium magnetic rounded-xl p-4">
