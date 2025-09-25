@@ -105,8 +105,8 @@ const itemVariants = fadeUp;
 
 const HERO_HIGHLIGHTS = [
   {
-    title: "60-Minute Deployment",
-    copy: "Production-ready templates accelerate bot development and deployment.",
+    title: "Multi-Venue Coverage",
+    copy: "Deploy strategies across Hyperliquid perpetuals and major DEX spot markets.",
   },
   {
     title: "Unified Pipeline",
@@ -423,7 +423,7 @@ export function Hero() {
                   <span className="relative inline-flex size-2 rounded-full bg-green-400"></span>
                 </span>
                 <span className="label text-text-secondary">
-                  Preview Access • Hyperliquid Ready
+                  Preview Access • Multi-Market Ready
                 </span>
               </motion.div>
 
@@ -433,9 +433,9 @@ export function Hero() {
                   variants={itemVariants}
                   className="display text-5xl sm:text-7xl lg:text-display-lg"
                 >
-                  Deploy Trading Bots
+                  Deploy Bots At
                   <br />
-                  <span className="gradient-text">At Scale</span>
+                  <span className="gradient-text">Hyperliquid Speed</span>
                 </motion.h1>
 
                 <motion.div
@@ -450,12 +450,12 @@ export function Hero() {
                     >
                       automated trading strategies
                     </TechTooltip>{" "}
-                    on{" "}
+                    across{" "}
                     <TechTooltip
-                      definition="A decentralized derivatives exchange with native order matching and liquidation engine"
-                      example="Trade perpetuals with up to 50x leverage"
+                      definition="Perpetuals on Hyperliquid and spot trading on Uniswap, PancakeSwap, and other DEXs"
+                      example="Trade perpetuals with leverage or spot tokens across multiple chains"
                     >
-                      Hyperliquid
+                      DeFi markets
                     </TechTooltip>
                     .
                   </div>
@@ -548,7 +548,7 @@ export function Hero() {
                   },
                   {
                     title: "Production Parity",
-                    copy: "Paper trading uses identical Hyperliquid SDK with realistic execution latency.",
+                    copy: "Paper trading uses production SDKs for each venue with realistic execution latency.",
                   },
                   {
                     title: "Non-Custodial Security",

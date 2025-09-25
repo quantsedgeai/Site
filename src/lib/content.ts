@@ -88,8 +88,8 @@ export const RESEARCH_CARDS: ResearchCard[] = [
     copy: "Test strategies with identical live market data and feature sets for accurate performance prediction.",
   },
   {
-    title: "Paper Trading Sandbox",
-    copy: "Risk-free validation using real Hyperliquid market conditions and latency.",
+    title: "Multi-Venue Paper Trading",
+    copy: "Risk-free validation using real market conditions across Hyperliquid, Uniswap, PancakeSwap, and more.",
   },
   {
     title: "Performance Analytics",
@@ -186,7 +186,7 @@ export const ROADMAP_MILESTONES: RoadmapMilestone[] = [
     eta: "Live Now",
     status: "Released",
     points: [
-      "Full production environment with enterprise-grade risk management on Hyperliquid perpetuals.",
+      "Full production environment with enterprise-grade risk management across Hyperliquid perpetuals and major DEX spot markets.",
       "Real-time monitoring dashboards with comprehensive fill tracking and risk alert systems.",
     ],
   },

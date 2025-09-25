@@ -5,18 +5,18 @@ import { motion } from "framer-motion";
 const steps = [
   {
     title: "Explore Ideas",
-    summary: "Spin up a Hyperliquid-ready research environment in seconds.",
+    summary: "Spin up multi-market research environments in seconds.",
     bullets: [
       "Optuna-powered templates intelligently optimize strategy parameters using advanced Bayesian sampling.",
-      "Data, features, and experiment results automatically log for complete research traceability.",
+      "Data, features, and experiment results automatically log for complete research traceability across perpetuals and spot markets.",
     ],
   },
   {
     title: "Prove It Safely",
-    summary: "Rehearse fills through the very same Hyperliquid SDK.",
+    summary: "Rehearse fills through production-grade SDKs for each venue.",
     bullets: [
-      "Backtests and paper runs replay live market states.",
-      "Pass-fail snapshots drop straight into your chat.",
+      "Backtests and paper runs replay live market states from Hyperliquid, Uniswap, and PancakeSwap.",
+      "Pass-fail snapshots drop straight into your chat with venue-specific performance metrics.",
     ],
   },
   {
