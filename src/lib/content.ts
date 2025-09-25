@@ -81,7 +81,7 @@ export const PERFORMANCE_METRICS: PerformanceMetric[] = [
 export const RESEARCH_CARDS: ResearchCard[] = [
   {
     title: "Optuna Hyperparameter Optimization",
-    copy: "Advanced Bayesian optimization automatically finds optimal strategy parameters (leverage, windows, risk caps) by intelligently sampling the parameter space instead of brute-force grid search.",
+    copy: "AI-driven Bayesian optimization learns from each test to intelligently suggest the next best parameters to try. Instead of testing every combination randomly, this machine learning approach finds optimal strategy settings (leverage, windows, risk caps) faster by building a probabilistic model of what works.",
   },
   {
     title: "Unified Backtesting",
