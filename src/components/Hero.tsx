@@ -423,7 +423,7 @@ export function Hero() {
                   <span className="relative inline-flex size-2 rounded-full bg-green-400"></span>
                 </span>
                 <span className="label text-text-secondary">
-                  Preview Access • Multi-Market Ready
+                  Preview Access • Hyperliquid Ready
                 </span>
               </motion.div>
 
