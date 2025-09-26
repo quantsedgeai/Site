@@ -7,7 +7,7 @@ Host github.com
 
 Host gitlab.com
   HostName gitlab.com
-  User gitx
-  AddKeysToAgent yesx
+  User git
+  AddKeysToAgent yes
   UseKeychain yes
   IdentityFile ~/.ssh/SKEY
