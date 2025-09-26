@@ -32,14 +32,15 @@ const steps = [
 const testimonials = [
   {
     quote:
-      "Dry runs and live fills now land within a few basis points. The gap is finally predictable.",
-    name: "Maya R.",
-    title: "Power Trader, Syndicate Labs",
+      "All my exchange feeds land in one place, so I spot moves early and trade without hopping tabs.",
+    name: 'Alex "Volt" Kim',
+    title: "Retail Trader",
   },
   {
-    quote: "Built-in guardrails catch trouble before we do, and we still get every log we need.",
-    name: "Carlos M.",
-    title: "Lead Trader, Drift Collective",
+    quote:
+      "If a bot slips, the guardrails pause it. I sleep fine knowing it won't drain my account overnight.",
+    name: "Jordan H.",
+    title: "Self-Directed Investor",
   },
 ];
 

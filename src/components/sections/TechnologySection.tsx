@@ -166,8 +166,14 @@ export function TechnologySection() {
             className="glass flex flex-col gap-6 rounded-3xl p-8 sm:p-10"
           >
             <div className="flex items-center gap-3">
-              <div className="floating flex size-12 items-center justify-center rounded-xl border border-purple-400/30 bg-purple-400/10">
-                <span className="block size-6 rounded-full bg-gradient-to-br from-purple-300 via-sky-400 to-emerald-300" />
+              <div className="floating flex size-12 items-center justify-center rounded-xl border border-sky-400/30 bg-sky-400/10 p-2">
+                <Image
+                  src="/technology/signal-fabric.svg"
+                  alt="Signal Fabric streaming network"
+                  width={36}
+                  height={36}
+                  className="h-auto w-full"
+                />
               </div>
               <h3 className="text-2xl font-semibold">Signal Fabric</h3>
             </div>
@@ -231,8 +237,14 @@ export function TechnologySection() {
             className="glass-premium magnetic flex flex-col gap-6 rounded-3xl p-8 sm:p-10"
           >
             <div className="flex items-center gap-3">
-              <div className="floating flex size-12 items-center justify-center rounded-xl border border-blue-500/30 bg-blue-500/10">
-                <span className="block size-6 rounded-[10px] bg-gradient-to-br from-blue-300 via-sky-400 to-cyan-500" />
+              <div className="floating flex size-12 items-center justify-center rounded-xl border border-blue-500/30 bg-blue-500/10 p-2">
+                <Image
+                  src="/technology/execution-dispatcher.svg"
+                  alt="Execution Dispatcher control hub"
+                  width={36}
+                  height={36}
+                  className="h-auto w-full"
+                />
               </div>
               <h3 className="text-2xl font-semibold">Execution Dispatcher</h3>
             </div>

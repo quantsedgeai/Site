@@ -288,10 +288,10 @@ function RequestAccessModal({ open, onClose }: RequestAccessModalProps) {
                   : "Submit Request"}
             </button>
             <a
-              href="mailto:admin@quantsedge.ai"
+              href="mailto:partners@quantsedge.ai"
               className="text-sm text-text-secondary transition hover:text-text-primary"
             >
-              Prefer email? admin@quantsedge.ai
+              Prefer email? partners@quantsedge.ai
             </a>
           </div>
           {message && (
@@ -626,16 +626,16 @@ export function Hero() {
               },
               {
                 label: "Bots Live Right Now",
-                value: <AnimatedCounter end={18} suffix="" />,
+                value: <AnimatedCounter end={6} suffix="" />,
                 accent: "text-accent",
                 tooltip: {
-                  value: "18",
+                  value: "6",
                   breakdown: [
-                    { label: "Market Making", value: "7", color: "#00FFC6" },
-                    { label: "Arbitrage", value: "6", color: "#60A5FA" },
-                    { label: "Momentum", value: "5", color: "#C084FC" },
+                    { label: "Market Making", value: "2", color: "#00FFC6" },
+                    { label: "Arbitrage", value: "2", color: "#60A5FA" },
+                    { label: "Momentum", value: "2", color: "#C084FC" },
                   ],
-                  trend: "Peak was 24 during NY session",
+                  trend: "Peak was 9 during NY session",
                 },
               },
             ].map((stat) => (

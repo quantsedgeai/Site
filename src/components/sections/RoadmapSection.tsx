@@ -111,9 +111,38 @@ export function RoadmapSection() {
             <div className="glass rounded-2xl border border-accent/20 bg-accent/5 p-5">
               <p className="text-sm font-semibold text-text-primary">Have feedback?</p>
               <p className="mt-2 text-xs text-text-secondary">
-                Drop feature requests in our Telegram or submit a pull request to the docs. The
-                roadmap reshuffles every sprint based on your votes.
+                Drop feature requests in our Telegram. The roadmap reshuffles every sprint based on
+                your votes.
               </p>
+              <a
+                href="https://t.me/quantsedge"
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-xs font-semibold text-accent transition-colors duration-200 hover:border-accent/60 hover:bg-accent/20"
+              >
+                <span>Join Telegram</span>
+                <svg
+                  className="h-3.5 w-3.5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M21 3L10 14"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M21 3L14 21L10 14L3 10L21 3Z"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
             </div>
           </motion.div>
         </div>

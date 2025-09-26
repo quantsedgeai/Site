@@ -13,19 +13,19 @@ const containerVariants = {
 
 const proofStats = [
   {
-    label: "Live Promotions (60d)",
-    value: "146",
-    detail: "Bots cleared the launch gates",
-  },
-  {
     label: "Latency Delta",
     value: "12ms",
     detail: "Paper to live gap on fills",
   },
   {
-    label: "Guardrail Triggers",
-    value: "41",
-    detail: "Circuit breakers fired pre-threshold",
+    label: "Guardrail Coverage",
+    value: "Core flows",
+    detail: "Automated checks on launch-critical paths",
+  },
+  {
+    label: "Venues actively streaming",
+    value: "12",
+    detail: "Exchanges feeding realtime order flow",
   },
 ];
 

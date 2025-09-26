@@ -127,7 +127,7 @@ export const WALLET_FEATURES: WalletFeature[] = [
   },
   {
     title: "API-First Integration",
-    copy: "Streamlined REST APIs enable rapid bot deployment, real-time monitoring, and instant alerting.",
+    copy: "Cloud-based fast APIs enable rapid bot deployment, real-time monitoring, and instant alerting.",
   },
   {
     title: "Enterprise Reliability",
@@ -138,7 +138,7 @@ export const WALLET_FEATURES: WalletFeature[] = [
 export const DATA_FABRIC_BULLETS: DataFabricBullet[] = [
   {
     title: "Multi-Venue Coverage",
-    copy: "Unified data streams from Uniswap, PancakeSwap, and Hyperliquid enable sophisticated cross-market arbitrage strategies.",
+    copy: "Unified data streams from Uniswap, PancakeSwap, and Hyperliquid keep automated strategies synchronized across venues.",
   },
   {
     title: "Ultra-Low Latency",
@@ -153,7 +153,7 @@ export const DATA_FABRIC_BULLETS: DataFabricBullet[] = [
 export const DATA_FABRIC_STATS: DataFabricStat[] = [
   { label: "Data uptime last 30d", value: "98.4%" },
   { label: "Median event latency", value: "42ms" },
-  { label: "Venues actively streaming", value: "12" },
+  { label: "Venues actively streaming", value: "3" },
 ];
 
 export const TEAM: TeamMember[] = [
@@ -182,12 +182,12 @@ export const TEAM: TeamMember[] = [
 
 export const ROADMAP_MILESTONES: RoadmapMilestone[] = [
   {
-    title: "Production Launch",
-    eta: "Live Now",
-    status: "Released",
+    title: "Beta Launch Preparation",
+    eta: "Beta coming soon",
+    status: "Coming Soon",
     points: [
-      "Full production environment with enterprise-grade risk management across Hyperliquid perpetuals and major DEX spot markets.",
-      "Real-time monitoring dashboards with comprehensive fill tracking and risk alert systems.",
+      "Closed beta with design partners kicks off ahead of public access.",
+      "Final guardrails, telemetry, and onboarding flows wrapping up for go-live.",
     ],
   },
   {
@@ -200,12 +200,12 @@ export const ROADMAP_MILESTONES: RoadmapMilestone[] = [
     ],
   },
   {
-    title: "Options Infrastructure",
-    eta: "Q1 2026",
-    status: "Design Phase",
+    title: "QuantsEdge Community PAMM Fund",
+    eta: "Q4 2025",
+    status: "Planned",
     points: [
-      "Native support for delta-neutral strategies and automated volatility surface trading.",
-      "Integration with leading on-chain options protocols through unified API layer.",
+      "Community-governed PAMM pools let allocators follow top-performing automated strategies.",
+      "Shared performance disclosures and scheduled withdrawal windows managed with on-chain transparency.",
     ],
   },
 ];

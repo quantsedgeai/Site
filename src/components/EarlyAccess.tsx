@@ -2,15 +2,10 @@
 
 import { motion } from "framer-motion";
 import type { FormEvent } from "react";
-import { useRef, useState } from "react";
-
-import { submitRequestAccess } from "@/lib/requestAccess";
+import { useRef } from "react";
 
 export function EarlyAccess() {
   const formRef = useRef<HTMLFormElement>(null);
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [message, setMessage] = useState<string>("");
-
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -19,30 +14,22 @@ export function EarlyAccess() {
     const notes = formData.get("notes")?.toString().trim() ?? undefined;
 
     if (!name || !email) {
-      setStatus("error");
-      setMessage("Name and email are required.");
       return;
     }
 
-    void (async () => {
-      setStatus("loading");
-      setMessage("");
-      const response = await submitRequestAccess({
-        name,
-        email,
-        notes,
-        source: "partnerships",
-      });
+    const subject = encodeURIComponent("QuantsEdge partnership inquiry");
+    const lines = [
+      `Name or Team: ${name}`,
+      `Email: ${email}`,
+      notes ? `Notes: ${notes}` : undefined,
+    ].filter(Boolean);
+    const body = encodeURIComponent(lines.join("\n"));
 
-      if (response.success) {
-        setStatus("success");
-        setMessage(response.message);
-        formRef.current?.reset();
-      } else {
-        setStatus("error");
-        setMessage(response.message);
-      }
-    })();
+    if (typeof window !== "undefined") {
+      window.location.href = `mailto:partners@quantsedge.ai?subject=${subject}&body=${body}`;
+    }
+
+    formRef.current?.reset();
   };
 
   return (
@@ -67,39 +54,39 @@ export function EarlyAccess() {
               <div className="grid gap-4 text-sm text-text-secondary sm:grid-cols-2">
                 <div className="glass magnetic touch-feedback group rounded-2xl p-5">
                   <p className="text-xs uppercase tracking-[0.25em] text-text-tertiary transition-colors group-hover:text-accent">
-                    What partners unlock
+                    For project teams
                   </p>
                   <ul className="mt-3 space-y-2">
                     <li className="flex items-start gap-2">
                       <span className="mt-1 size-1.5 rounded-full bg-accent" />
-                      Product co-design sessions with the QuantsEdge engineering team.
+                      Co-launch trading bots or tooling with hands-on support from our engineers.
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="mt-1 size-1.5 rounded-full bg-blue-400" />
-                      Early access to new execution rails and custody workflows.
+                      Integrate data, custody, or execution rails through shared roadmaps.
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="mt-1 size-1.5 rounded-full bg-purple-400" />
-                      Joint GTM moments across shared communities.
+                      Plan co-marketing drops for new features or market launches.
                     </li>
                   </ul>
                 </div>
                 <div className="glass magnetic touch-feedback group rounded-2xl p-5">
                   <p className="text-xs uppercase tracking-[0.25em] text-text-tertiary transition-colors group-hover:text-accent">
-                    How we move fast
+                    For KOLs & communities
                   </p>
                   <ul className="mt-3 space-y-2">
                     <li className="flex items-start gap-2">
                       <span className="mt-1 size-1.5 rounded-full bg-green-400" />
-                      Dedicated point of contact with 24-hour feedback loops.
+                      Host strategy walkthroughs or AMAs with access to curated dashboards.
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="mt-1 size-1.5 rounded-full bg-amber-400" />
-                      Lightweight integration checklist tailored to your stack.
+                      Share partner links tied to performance-based rewards for your audience.
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="mt-1 size-1.5 rounded-full bg-red-400" />
-                      Transparent telemetry so your team knows what’s shipping when.
+                      <span className="mt-1 size-1.5 rounded-full bg-pink-400" />
+                      Spin up exclusive bot templates for your community to clone and iterate.
                     </li>
                   </ul>
                 </div>
@@ -146,28 +133,16 @@ export function EarlyAccess() {
                   <button
                     type="submit"
                     className="btn btn-primary magnetic touch-feedback touch-target w-full rounded-xl px-8 py-3 font-semibold sm:w-auto"
-                    disabled={status === "loading"}
                   >
-                    {status === "loading"
-                      ? "Opening Email…"
-                      : status === "success"
-                        ? "Email Draft Ready"
-                        : "Start the Conversation"}
+                    Start the Conversation
                   </button>
                   <a
-                    href="mailto:admin@quantsedge.ai"
+                    href="mailto:partners@quantsedge.ai"
                     className="text-sm text-text-secondary hover:text-text-primary"
                   >
-                    Email us directly: admin@quantsedge.ai
+                    Email us directly: partners@quantsedge.ai
                   </a>
                 </div>
-                {message && (
-                  <p
-                    className={`text-xs ${status === "success" ? "text-green-400" : "text-amber-400"}`}
-                  >
-                    {message}
-                  </p>
-                )}
               </form>
             </div>
           </div>
