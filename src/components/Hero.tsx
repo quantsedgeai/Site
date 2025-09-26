@@ -535,32 +535,6 @@ export function Hero() {
                   className="h-5 w-auto opacity-80"
                 />
               </motion.div>
-
-              {/* Proof Bar */}
-              <motion.div
-                variants={itemVariants}
-                className="grid gap-4 text-left sm:grid-cols-3 lg:gap-6"
-              >
-                {[
-                  {
-                    title: "Deterministic Testing",
-                    copy: "Locked data environments ensure reproducible backtesting and performance validation.",
-                  },
-                  {
-                    title: "Production Parity",
-                    copy: "Paper trading uses production SDKs for each venue with realistic execution latency.",
-                  },
-                  {
-                    title: "Non-Custodial Security",
-                    copy: "Your wallet keys remain under your control. We never hold your assets.",
-                  },
-                ].map((item) => (
-                  <div key={item.title} className="glass-premium magnetic rounded-xl p-4">
-                    <p className="text-sm font-semibold text-text-primary">{item.title}</p>
-                    <p className="mt-1 text-xs leading-relaxed text-text-tertiary">{item.copy}</p>
-                  </div>
-                ))}
-              </motion.div>
             </div>
 
             {/* Hero Media */}
