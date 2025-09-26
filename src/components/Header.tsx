@@ -185,9 +185,9 @@ export function Header() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="mobile-menu lg:hidden"
+              className="mobile-menu lg:hidden left-0 right-0 top-full mt-3 px-4"
             >
-              <div className="glass border-t border-white/5">
+              <div className="rounded-2xl border border-white/10 bg-[rgba(4,8,20,0.92)] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.45)] backdrop-blur-2xl">
                 <div className="mx-auto max-w-7xl px-6 py-4">
                   <div className="space-y-4">
                     {/* Navigation Links */}
